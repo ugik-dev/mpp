@@ -1,19 +1,104 @@
-/.phpunit.cache
-/node_modules
-/public/build
-/public/hot
-/public/storage
-/storage/*.key
-/vendor
-.env
-.env.backup
-.env.production
-.phpunit.result.cache
-Homestead.json
-Homestead.yaml
-auth.json
-npm-debug.log
-yarn-error.log
-/.fleet
+#-------------------------
+# Operating Specific Junk Files
+#-------------------------
+
+# OS X
+**.DS_Store
+.AppleDouble
+.LSOverride
+
+# OS X Thumbnails
+._*
+
+# Windows image file caches
+Desktop.ini
+Thumbs.db
+ehthumbs.db
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+#-------------------------
+# Development
+#-------------------------
+
+# IDEs and editors
+.vscode
 /.idea
 /.vscode
+
+# Configurations
+.env
+.env.backup
+.npm/
+/.env.local
+/.env.production
+/.env.staging
+/nginx/conf.d/app.conf
+/node_modules
+/public/hot
+/public/storage
+/public/document
+
+#-------------------------
+# Logs and databases
+#-------------------------
+
+# Ignore all log files.
+*.log
+
+# Ignore database files
+/mysql/docker-entrypoint-initdb.d/**.sql
+init_db.sql
+
+#-------------------------
+# Dependencies
+#-------------------------
+
+# Composer dependencies
+/vendor/
+composer.lock
+
+#-------------------------
+# Caches
+#-------------------------
+
+#-------------------------
+# Files
+#-------------------------
+
+# Ignore documentation files
+!.gitignore
+!storage/framework/cache/.gitignore
+Manual Book.pdf
+
+# Ignore all .nupkg files and the packages directory.
+*.nupkg
+packages/
+
+# Excluding temporary files
+*.swp
+*.temp
+*.tmp
+
+# Other
+.composer
+.config/configstore
+.phpunit.result.cache
+.zshrc
+/bootstrap/cache/*
+/composer.phar
+/storage/*.key
+/storage/framework/cache/data/*
+/storage/framework/sessions/*
+/storage/framework/views/*
+/vendor
+Homestead.json
+Homestead.yaml
+LICENSE
+npm-debug.log
+package-lock.json
+psysh_history
+public/images/
+yarn-error.log
+ids.json
