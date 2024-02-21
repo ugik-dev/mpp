@@ -12,6 +12,9 @@ class LoginController extends Controller
     //
     public function index()
     {
+        if (Auth::check()) {
+            return redirect('panel/dashboard');
+        }
         return view('panel/login');
     }
 
@@ -26,9 +29,11 @@ class LoginController extends Controller
         if ($user && Hash::check($credentials['password'], $user->password)) {
             Auth::attempt(['username' => $credentials['username'], 'password' => $credentials['password']]);
             if (Auth::check() == true) {
-                return redirect()->route('dashboard');
+                return $this->responseSuccess(['success', 'data' => Auth::user()]);
+            } else {
+                return  $this->responseError("Password salah");
             }
-            Auth::login($user);
+            // Auth::login($user);
             return $this->responseSuccess(['success', 'data' => Auth::user()]);
         }
 

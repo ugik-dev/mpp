@@ -1,14 +1,24 @@
 <?php
 $menus = [
-    1 => [
+    [
         'label' => 'Management User',
         'url' => route('manage.user.index'),
         'dropdown' => false,
     ],
-    2 => [
+    [
+        'label' => 'Kontent',
+        'url' => route('manage.content.index'),
+        'dropdown' => false,
+    ],
+    [
         'label' => 'Layout',
         'dropdown' => true,
-        'children' => ['label' => 'Hero', 'url' => route('manage.hero.index')],
+        'children' => [['label' => 'Hero', 'url' => route('manage.hero.index')], ['label' => 'Hero2', 'url' => route('manage.hero.index')], ['label' => 'Hero3', 'url' => route('manage.hero.index')]],
+    ],
+    [
+        'label' => 'Pengaturan',
+        'dropdown' => true,
+        'children' => [['label' => 'Jenis', 'url' => route('manage.hero.index')], ['label' => 'Hero2', 'url' => route('manage.hero.index')], ['label' => 'Hero3', 'url' => route('manage.hero.index')]],
     ],
 ];
 ?>
@@ -39,19 +49,22 @@ $menus = [
         Addons
     </div>
 
-    @foreach ($menus as $menu)
+    @foreach ($menus as $key => $menu)
         <li class="nav-item">
             <a class="nav-link {{ $menu['dropdown'] ? 'collapsed' : '' }}" {!! $menu['dropdown']
-                ? 'href="/#" data-toggle="collapse" data-target="#collapsePages"'
+                ? 'href="/#" data-toggle="collapse" data-target="#collapseMenu_' . $key . '"'
                 : "href='{$menu['url']}'" !!}>
                 <i class="fas fa-fw fa-chart-area"></i>
                 <span>{{ $menu['label'] }}</span>
             </a>
 
             @if ($menu['dropdown'])
-                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                <div id="collapseMenu_{{ $key }}" class="collapse" aria-labelledby="headingPages"
+                    data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="404.html">404 Page</a>
+                        @foreach ($menu['children'] as $child)
+                            <a class="collapse-item" href="{{ $child['url'] }}">{{ $child['label'] }}</a>
+                        @endforeach
                         <a class="collapse-item" href="blank.html">Blank Page</a>
                     </div>
                 </div>

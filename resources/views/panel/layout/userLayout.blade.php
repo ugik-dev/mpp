@@ -3,6 +3,9 @@
 
 <head>
     @include('panel/layout/headerLayout')
+
+    @yield('vendor-style')
+
 </head>
 
 <body class="bg-gradient-primary">
@@ -27,6 +30,10 @@
             @include('panel/layout/fragment/modalLogout')
         </div>
     </div>
+    @include('panel/layout/footerLayout')
+    @yield('vendor-script')
+    @stack('pricing-script')
+    @stack('scripts')
 </body>
 
 </html>

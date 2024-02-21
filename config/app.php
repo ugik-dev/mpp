@@ -170,8 +170,9 @@ return [
         App\Providers\RouteServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
-        // Yajra\DataTables\DataTablesServiceProvider::class,
+        Yajra\DataTables\DataTablesServiceProvider::class,
         // Barryvdh\DomPDF\ServiceProvider::class
+
     ])->toArray(),
 
     /*
@@ -186,7 +187,7 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
-        // 'DataStructur' =>         App\Helpers\DataStructure::class,
+        'DataStructur' =>         App\Helpers\DataStructure::class,
         // 'Helper' => App\Helpers\Helpers::class,
     ])->toArray(),
 

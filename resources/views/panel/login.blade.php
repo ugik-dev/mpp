@@ -85,7 +85,7 @@
                 Swal.fire({
                     title: 'Please Wait !',
                     html: 'Loggin ..', // add html attribute if you want or remove
-                    // allowOutsideClick: false,
+                    allowOutsideClick: false,
                     allowEscapeKey: false,
                     customClass: {
                         confirmButton: 'btn btn-primary waves-effect waves-light d-none'
@@ -116,7 +116,7 @@
                             });
                             return;
                         }
-                        // $(location).attr('href', "{{ route('panel.dashboard') }}");
+                        $(location).attr('href', "{{ route('panel.dashboard') }}");
                     },
                     error: () => {
                         // buttonIdle(submitBtn);
