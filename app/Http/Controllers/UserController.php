@@ -13,7 +13,7 @@ use Illuminate\Database\QueryException;
 
 class UserController extends Controller
 {
-    public function datatable(Request $request)
+    public function index(Request $request)
     {
         if ($request->ajax()) {
             $data =  User::latest()
@@ -48,15 +48,6 @@ class UserController extends Controller
             'refRole' => Role::get(),
         ];
         return view('panel.user.index', compact('request', 'dataContent'));
-    }
-
-    public function index(Request $request)
-
-    {
-        $dataContent =  [
-            'refRole' => Role::get(),
-        ];
-        return view('page.agent.index', compact('request', 'dataContent'));
     }
 
     public function get(Request $request)

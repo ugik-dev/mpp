@@ -6,10 +6,17 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
-class Content extends Model
+class Menu extends Model
 {
     use HasFactory;
-    protected $fillable = ['judul', 'slug', 'content', 'tanggal', 'ref_content_id', 'sampul'];
+    protected $fillable = [
+        'name',
+        'parent_id',
+        'jenis',
+        'slug',
+        'key',
+        'content',
+    ];
 
     public function scopeCreateUniqueSlug($query, $title)
     {
@@ -25,10 +32,5 @@ class Content extends Model
     private function slugExists($slug)
     {
         return Content::where('slug', $slug)->exists();
-    }
-
-    public function ref_content()
-    {
-        return $this->belongsTo(RefContent::class, 'ref_content_id');
     }
 }

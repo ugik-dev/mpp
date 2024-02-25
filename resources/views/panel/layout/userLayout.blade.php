@@ -8,7 +8,7 @@
 
 </head>
 
-<body class="bg-gradient-primary">
+<body class="bg-gradient-primary" id="page-top">
     <div id="wrapper">
         @include('panel/layout/fragment/menuFragment')
         <div id="content-wrapper" class="d-flex flex-column">
@@ -16,7 +16,6 @@
             <div id="content">
                 @yield('content')
             </div>
-            @include('panel/layout/footerLayout')
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
@@ -24,13 +23,15 @@
                     </div>
                 </div>
             </footer>
-            <a class="scroll-to-top rounded" href="#page-top">
-                <i class="fas fa-angle-up"></i>
-            </a>
-            @include('panel/layout/fragment/modalLogout')
+
         </div>
     </div>
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+    @include('panel/layout/fragment/modalLogout')
     @include('panel/layout/footerLayout')
+
     @yield('vendor-script')
     @stack('pricing-script')
     @stack('scripts')

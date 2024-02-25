@@ -1,0 +1,9 @@
+<script src="assets/vendor/jquery/jquery.min.js"></script>
+<script src="assets/vendor/bootstrap/bootstrap.bundle.min.js"></script>
+<script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+<script src="assets/vendor/owl-carousel/owl.carousel.min.js"></script>
+<script src="assets/vendor/waypoints/jquery.waypoints.min.js"></script>
+<script src="assets/vendor/counter-up/jquery.counterup.min.js"></script>
+<script src="assets/vendor/youtube-popup/youtube-popup.jquery.js"></script>
+<script src="assets/vendor/jquery-validation/jquery.validate.min.js"></script>
+<script src="assets/js/theme.js"></script>

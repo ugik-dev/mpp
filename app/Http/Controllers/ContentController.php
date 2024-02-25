@@ -19,7 +19,6 @@ class ContentController extends Controller
      * Display a listing of the resource.
      */
     public function index(Request $request)
-
     {
         if ($request->ajax()) {
             $data =  Content::latest()
@@ -143,7 +142,7 @@ class ContentController extends Controller
                 $data->sampul = $originalFilename;
                 $data->save();
             }
-            $img = $this->extractImageNames($request->content);
+            $img = extractImageNames($request->content);
             MediaUpload::whereIn('filename', $img)->update(['status' => 'posted', 'content_id' => $data->id]);
 
 
@@ -204,7 +203,7 @@ class ContentController extends Controller
                 $att['sampul']  = $originalFilename;
             }
 
-            $use_img = $this->extractImageNames($request->content);
+            $use_img = extractImageNames($request->content);
             $old_img = MediaUpload::where('content_id', '=', $request->id)->get();
             $old_img_list = [];
             $filePath = 'upload/content_image/';
@@ -242,19 +241,7 @@ class ContentController extends Controller
         }
         MediaUpload::where('status', '=', 'draft')->delete();
     }
-    function extractImageNames($content)
-    {
-        $pattern = '/<img[^>]+src="([^"]+)"/';
-        preg_match_all($pattern, $content, $matches);
 
-        $imageNames = [];
-        foreach ($matches[1] as $src) {
-            $imageName = basename(parse_url($src, PHP_URL_PATH));
-            $imageNames[] = $imageName;
-        }
-
-        return $imageNames;
-    }
 
 
     public function delete(Request $request)

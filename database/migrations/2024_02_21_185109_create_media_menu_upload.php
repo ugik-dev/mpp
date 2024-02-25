@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('media_uploads', function (Blueprint $table) {
+        Schema::create('media_menu_uploads', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('content_id')->nullable();
-            $table->foreign('content_id')
+            $table->unsignedBigInteger('menu_id')->nullable();
+            $table->foreign('menu_id')
                 ->references('id')
-                ->on('contents')
+                ->on('menus')
                 ->onDelete('cascade');
             $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')
@@ -29,11 +29,8 @@ return new class extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
-        Schema::dropIfExists('media_uploads');
+        Schema::dropIfExists('media_menu_uploads');
     }
 };

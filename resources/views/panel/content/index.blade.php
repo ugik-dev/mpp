@@ -1,7 +1,9 @@
-@extends('panel/layout/userLayout');
+@extends('panel/layout/userLayout')
 @section('vendor-style')
     <link href="{{ asset('admin/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
 @endsection
+
+
 @section('content')
     <div class="container-fluid">
         <div class="d-sm-flex align-items-center justify-content-between mb-4">

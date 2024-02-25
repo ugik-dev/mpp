@@ -2,8 +2,10 @@
 
 use App\Http\Controllers\ContentController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\HeroController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\MenuController;
 use App\Http\Controllers\UserController;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
@@ -14,12 +16,21 @@ Route::middleware(['auth'])->group(function () {
 });
 Route::middleware(['auth', 'checkRole:admin,super'])->group(function () {
     Route::prefix('manage/user')->name('manage.user.')->group(function () {
-        Route::get('/', [UserController::class, 'datatable'])->name('index');
+        Route::get('/', [UserController::class, 'index'])->name('index');
         Route::post('', [UserController::class, 'create'])->name('create');
         Route::put('', [UserController::class, 'update'])->name('update');
         Route::delete('/', [UserController::class, 'delete'])->name('delete');
     });
-
+    Route::prefix('manage/struktur-menu')->name('manage.menu.')->group(function () {
+        Route::get('/', [MenuController::class, 'index'])->name('index');
+        Route::get('/create-new', [MenuController::class, 'form'])->name('createnew');
+        Route::post('store-image', [MenuController::class, 'store_media'])->name('storeimage');
+        Route::get('/get', [MenuController::class, 'get'])->name('get');
+        Route::post('', [MenuController::class, 'create'])->name('create');
+        Route::get('edit/{id}', [MenuController::class, 'edit'])->name('edit');
+        Route::post('update', [MenuController::class, 'update'])->name('update');
+        Route::delete('/', [MenuController::class, 'delete'])->name('delete');
+    });
     Route::prefix('manage/content')->name('manage.content.')->group(function () {
         Route::get('/', [ContentController::class, 'index'])->name('index');
         Route::get('add', [ContentController::class, 'form'])->name('add');
@@ -32,11 +43,11 @@ Route::middleware(['auth', 'checkRole:admin,super'])->group(function () {
     });
 
     Route::prefix('manage/hero')->name('manage.hero.')->group(function () {
-        Route::get('/', [UserController::class, 'index'])->name('index');
-        // Route::post('/create', [UserController::class, 'create'])->name('create');
-        // Route::get('/edit/{id}', [UserController::class, 'edit'])->name('edit');
-        // Route::put('/update/{id}', [UserController::class, 'update'])->name('update');
-        // Route::delete('/delete/{id}', [UserController::class, 'delete'])->name('delete');
+        Route::get('/', [HeroController::class, 'index'])->name('index');
+        Route::get('/search-key', [HeroController::class, 'search_key'])->name('search-key');
+        Route::post('', [HeroController::class, 'create'])->name('create');
+        Route::post('update', [HeroController::class, 'update'])->name('update');
+        Route::delete('/', [HeroController::class, 'delete'])->name('delete');
     });
     // Rute untuk panel admin
     Route::get('/panel/users', [DashboardController::class, 'index'])->name('panel.admin.index');

@@ -17,7 +17,6 @@ class ReferanceSeeder extends Seeder
      */
     public function run(): void
     {
-        //
         RefContent::updateOrCreate(['name' => 'Informasi', 'prefix' => 'informasi']);
         RefContent::updateOrCreate(['name' => 'Berita', 'prefix' => 'berita']);
         RefContent::updateOrCreate(['name' => 'Pengumuman', 'prefix' => 'pengumuman']);

@@ -7,8 +7,6 @@
 
 <body class="bg-gradient-primary">
     @yield('content')
-
-
     @include('panel/layout/footerLayout')
 </body>
 

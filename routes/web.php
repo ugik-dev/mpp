@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,7 +19,4 @@ use Illuminate\Support\Facades\Route;
 require __DIR__ . '/panel.php';
 
 Route::get('/login', [LoginController::class, 'index'])->name('login');
-
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [HomeController::class, 'index'])->name('home');
