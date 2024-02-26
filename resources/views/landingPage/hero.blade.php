@@ -1,33 +1,39 @@
 <section class="main-slider">
     <div class="main-slider-swiper owl-carousel owl-theme">
-        <div class="item">
-            <div class="item-slider-bg" style="background-image: url(assets/image/bg/slider-bg-1.png)"></div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="slider-content">
-                            <div class="slider-tagline">City Goverment Online Services</div>
-                            <h1 class="section-title">Fastest Growing<br> City Rome</h1>
-                            <a href="index-2.html" class="btn btn-primary">Discover More</a>
-                        </div><!-- slider-content -->
-                    </div><!-- col-md-12 -->
-                </div><!-- row -->
-            </div><!-- container -->
-        </div><!--item-->
-        <div class="item">
-            <div class="item-slider-bg" style="background-image: url(assets/image/bg/slider-two-bg-1.png)">
+        @foreach ($heroes as $hero)
+            <div class="item">
+                <div class="item-slider-bg"
+                    style="background-image: url({{ url('/storage/upload/hero/' . $hero->image) }});background-repeat:no-repeat !important;
+                    background-position: center center !important;">
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="slider-content">
+                                <div class="slider-tagline">{{ $hero->text_1 }}</div>
+                                <h3 class="section-title">{!! $hero->text_2 !!}</h3>
+                                @if ($hero->button == 'Y')
+                                    @php
+                                        if ($hero->button == 'Y') {
+                                            if ($hero->button_type == 'content') {
+                                                $link = url('content/' . $hero->key);
+                                            } elseif ($hero->button_type == 'link') {
+                                                $link = $hero->link;
+                                            } else {
+                                                $link = '#';
+                                            }
+                                        } else {
+                                            $link = '#';
+                                        }
+                                    @endphp
+                                    <a href="{{ $link }}"
+                                        class="btn btn-primary">{{ !empty($hero->button_text) ? $hero->button_text : 'Klik disini!' }}</a>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="slider-content">
-                            <div class="slider-tagline">City Goverment Online Services</div>
-                            <h1 class="section-title">Fastest Growing <br>City Rome</h1>
-                            <a href="index-2.html" class="btn btn-primary">Discover More</a>
-                        </div><!-- slider-content -->
-                    </div><!-- col-md-12 -->
-                </div><!-- row -->
-            </div><!-- container -->
-        </div><!--item-->
-    </div><!-- main-slider-swiper -->
-</section><!--main-slider-->
+        @endforeach
+    </div>
+</section>

@@ -78,7 +78,7 @@ class MenuController extends Controller
     {
         $dataContent =  [
             'parentData' => Menu::get(),
-            'jenis_menu' => ['route' => 'Route', 'pages' => "Halaman", "link" => "Link", "N" => "Hanya Parent / Parent dari sub menu"],
+            'jenis_menu' => ['page' => "Halaman", "link" => "Link", "N" => "Hanya Parent / Parent dari sub menu"],
         ];
         return view('panel.menu.form', compact('request', 'dataContent'));
     }
@@ -87,7 +87,7 @@ class MenuController extends Controller
     {
         $dataContent =  [
             'parentData' => Menu::get(),
-            'jenis_menu' => ['route' => 'Route', 'pages' => "Halaman", "link" => "Link", "N" => "Hanya Parent / Parent dari sub menu"],
+            'jenis_menu' => ['page' => "Halaman", "link" => "Link", "N" => "Hanya Parent / Parent dari sub menu"],
         ];
         $dataEdit = Menu::findOrFail($id);
         if ($dataEdit->editable == true)
@@ -123,8 +123,6 @@ class MenuController extends Controller
             }
             $img = extractImageNames($request->content);
             MediaMenuUpload::whereIn('filename', $img)->update(['status' => 'posted', 'menu_id' => $data->id]);
-
-
             $this->clearImgDraft();
             return  $this->responseSuccess($data);
         } catch (QueryException $ex) {

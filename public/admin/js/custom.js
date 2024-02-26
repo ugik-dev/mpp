@@ -6,7 +6,11 @@ function decoderValue(string) {
         return String.fromCharCode(dec);
     });
 }
-
+function decodeHTML(html) {
+    var txt = document.createElement("textarea");
+    txt.innerHTML = html;
+    return txt.innerText;
+}
 function validateForm(validationRules, activeBtn) {
     var isValid = true;
     // Iterate over validation rules for each input field

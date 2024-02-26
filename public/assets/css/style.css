@@ -38,7 +38,7 @@
 * Variable
 ***********************/
 :root {
-    --thm-primary: #2dcd7c;
+    --thm-primary: #1aa2f1;
     --thm-primary-rgb: 45, 205, 124;
     --thm-secondary: #9cb7bd;
     --thm-secondary-rgb: 156, 183, 189;
@@ -1911,6 +1911,19 @@ a.search-toggler {
 .department-details-box {
     margin-bottom: 45px;
 }
+
+.department-details-box p,
+.department-details-box h1,
+.department-details-box h2,
+.department-details-box h3,
+.department-details-box h4,
+.department-details-box h5,
+.department-details-box h6,
+.department-details-box span,
+.department-details-box strong {
+    color: var(--thm-black);
+}
+
 
 .department-details-policy {
     padding: 25px 25px;

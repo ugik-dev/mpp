@@ -4,7 +4,8 @@
             <div class="row">
                 <div class="col-lg-4">
                     <div class="footer-widget-logo">
-                        <a href="index.html"><img src="assets/image/logo-light.png" class="img-fluid" alt="img-25"></a>
+                        <a href="index.html"><img src="{{ asset('assets/image/logo.png') }}" class="img-fluid"
+                                alt="img-25"></a>
                     </div><!-- footer-widget-logo -->
                     <div class="footer-widget-text">
                         <p>The gowrnx official guide to living, working, visiting and investing in the Texas</p>
@@ -81,7 +82,7 @@
             <span></span>
         </a><!-- mobile-nav-close -->
         <div class="logo-box">
-            <a href="index.html"><img src="assets/image/logo-light.png" width="160" height="40"
+            <a href="index.html"><img src="{{ asset('assets/image/logo-light.png') }}" width="160" height="40"
                     alt="26"></a>
         </div><!-- logo-box -->
         <div class="mobile-nav-container"></div><!-- mobile-nav-container -->

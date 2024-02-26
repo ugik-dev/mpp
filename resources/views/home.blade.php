@@ -3,148 +3,14 @@
     <!--header-->
     <div class="page-wrapper">
         @include('landingPage.hero')
-        <section class="department-section">
-            <div class="container">
-                <div class="department-section-inner">
-                    <div class="row row-gutter-y-40">
-                        <div class="col-xl-2 col-lg-4 col-md-6">
-                            <div class="department-card">
-                                <div class="department-card-icon">
-                                    <a href="departments.html"><i class="flaticon-parthenon"></i></a>
-                                </div><!-- department-card-icon -->
-                                <div class="department-card-content">
-                                    <h5><a href="department-details.html">Your Government</a></h5>
-                                </div><!-- department-card-content -->
-                            </div><!--department-card-->
-                        </div><!--col-xl-2 col-lg-4 col-md-6-->
-                        <div class="col-xl-2 col-lg-4 col-md-6">
-                            <div class="department-card">
-                                <div class="department-card-icon">
-                                    <a href="departments.html"><i class="flaticon-suitcase"></i></a>
-                                </div><!-- department-card-icon -->
-                                <div class="department-card-content">
-                                    <h5><a href="department-details.html">Jobs & Unemployment</a></h5>
-                                </div><!-- department-card-content -->
-                            </div><!--department-card-->
-                        </div><!--col-xl-2 col-lg-4 col-md-6-->
-                        <div class="col-xl-2 col-lg-4 col-md-6">
-                            <div class="department-card">
-                                <div class="department-card-icon">
-                                    <a href="departments.html"><i class="flaticon-industry"></i></a>
-                                </div><!-- department-card-icon -->
-                                <div class="department-card-content">
-                                    <h5><a href="department-details.html">Business & Industry</a></h5>
-                                </div><!-- department-card-content -->
-                            </div><!--department-card-->
-                        </div><!--col-xl-2 col-lg-4 col-md-6-->
-                        <div class="col-xl-2 col-lg-4 col-md-6">
-                            <div class="department-card">
-                                <div class="department-card-icon">
-                                    <a href="departments.html"><i class="flaticon-bus"></i></a>
-                                </div><!-- department-card-icon -->
-                                <div class="department-card-content">
-                                    <h5><a href="department-details.html">Roads & Transport</a></h5>
-                                </div><!-- department-card-content -->
-                            </div><!--department-card-->
-                        </div><!--col-xl-2 col-lg-4 col-md-6-->
-                        <div class="col-xl-2 col-lg-4 col-md-6">
-                            <div class="department-card">
-                                <div class="department-card-icon">
-                                    <a href="departments.html"><i class="flaticon-lotus"></i></a>
-                                </div><!-- department-card-icon -->
-                                <div class="department-card-content">
-                                    <h5><a href="department-details.html">Culture & Recreation</a></h5>
-                                </div><!-- department-card-content -->
-                            </div><!--department-card-->
-                        </div><!--col-xl-2 col-lg-4 col-md-6-->
-                        <div class="col-xl-2 col-lg-4 col-md-6">
-                            <div class="department-card">
-                                <div class="department-card-icon">
-                                    <a href="departments.html"><i class="flaticon-balance-1"></i></a>
-                                </div><!-- department-card-icon -->
-                                <div class="department-card-content">
-                                    <h5><a href="department-details.html">Justice, Safety Law</a></h5>
-                                </div><!-- department-card-content -->
-                            </div><!--department-card-->
-                        </div><!--col-xl-2 col-lg-4 col-md-6-->
-                    </div><!-- row -->
-                </div><!--department-section-inner-->
-            </div><!-- container -->
-            <div class="department-search-section">
-                <div class="container">
-                    <form class="department-search-form">
-                        <input type="text" placeholder="Get our quick services from the city municipal" name="search">
-                        <button type="submit">View All Services</button>
-                    </form><!-- department-search-form -->
-                </div><!-- container -->
-            </div><!-- department-search-section -->
-        </section><!--department-section-->
-        <section class="about-section">
-            <div class="container">
-                <div class="row justify-content-between">
-                    <div class="col-lg-6">
-                        <div class="about-image">
-                            <div class="about-image-inner img-one">
-                                <img src="assets/image/gallery/about-1.jpg" class="img-fluid" alt="img-2">
-                                <div class="sign-text">Kevin Martin</div><!-- sign-text -->
-                                <div class="about-image-caption">
-                                    <div class="about-image-caption-inner">
-                                        <span class="about-caption-number">18</span>
-                                        <span class="about-caption-text">Years of<br>experience</span>
-                                    </div><!-- about-image-caption-inner -->
-                                </div><!--about-image-caption-->
-                            </div><!--about-image-inner img-one-->
-                            <div class="about-image-inner img-two">
-                                <img src="assets/image/shapes/about-3.jpg" class="floated-image" alt="img-3">
-                                <img src="assets/image/gallery/about-2.jpg" class="img-fluid" alt="img-4">
-                            </div><!--about-image-inner img-two-->
-                        </div><!--about-image-->
-                    </div><!--col-lg-6-->
-                    <div class="col-lg-6">
-                        <div class="about-inner">
-                            <div class="section-title-box">
-                                <div class="section-tagline">Our introductions</div><!-- section-tagline -->
-                                <h2 class="section-title">Welcome & Support to City Municipal</h2>
-                                <p>Aliquam viverra arcu. Donec aliquet blandit enim feugiat. Suspendisse id quam sed
-                                    eros tincidunt luctus sit amet eu nibh egestas tempus turpis, sit amet mattis magna
-                                    varius non.</p>
-                            </div><!-- section-title-box -->
-                            <div class="row">
-                                <div class="col-xl-6 col-lg-12 col-md-6">
-                                    <div class="about-card">
-                                        <h4 class="about-title"><i class="fa-solid fa-circle-check"></i>Business &
-                                            Economy</h4>
-                                        <p class="about-text">Lorem ipsum dolor sited amet consectetur notted.</p>
-                                    </div><!-- about-card -->
-                                </div><!-- col-xl-6 col-lg-12 col-md-6 -->
-                                <div class="col-xl-6 col-lg-12 col-md-6">
-                                    <div class="about-card">
-                                        <h4 class="about-title"><i class="fa-solid fa-circle-check"></i>Health &
-                                            Education</h4>
-                                        <p class="about-text">Lorem ipsum dolor sited amet consectetur notted.</p>
-                                    </div><!-- about-card -->
-                                </div><!-- col-xl-6 col-lg-12 col-md-6 -->
-                            </div><!--row-->
-                            <div class="about-author-box">
-                                <div class="about-author-image">
-                                    <img src="assets/image/gallery/about-4.png" class="img-fluid" alt="img-5">
-                                </div><!-- about-author-image -->
-                                <div class="about-author-box-meta">
-                                    <h5>Mr. Kevin Martin</h5>
-                                    <span>City Mayor</span>
-                                </div><!-- about-author-box-meta -->
-                            </div><!--about-author-box-->
-                        </div><!-- about-inner -->
-                    </div><!--col-lg-6-->
-                </div><!-- row -->
-            </div><!-- container -->
-        </section><!--about-section-->
+        @include('landingPage.hero_icon')
+        <!--about-section-->
         <section class="service-section">
             <div class="container">
                 <div class="row justify-content-between">
                     <div class="col-lg-6">
                         <div class="section-title-box">
-                            <div class="section-tagline">Government Service</div><!-- section-tagline -->
+                            <div class="section-tagline">Pelayanan</div><!-- section-tagline -->
                             <h2 class="section-title text-white">Explore our Online<br> Governmet Services <br> &
                                 Resources</h2>
                             <div class="section-text">
@@ -165,18 +31,18 @@
                                 </a><!-- video-popup -->
                             </div><!-- service-card-video -->
                             <ul class="list-unstyled">
-                                <li><a href="department-details.html">Parking Permission <i
+                                <li><a href="department-details.html">Perizinan OSS <i
                                             class="fa-solid fa-chevron-right"></i></a></li>
-                                <li><a href="department-details.html">File a Tax Return <i
+                                <li><a href="department-details.html">Pembuakaan lahan <i
                                             class="fa-solid fa-chevron-right"></i></a></li>
-                                <li><a href="department-details.html">Order Birth Certificate <i
+                                <li><a href="department-details.html">Bantuan Sosial <i
                                             class="fa-solid fa-chevron-right"></i></a></li>
-                                <li><a href="department-details.html">Get Building Permission <i
-                                            class="fa-solid fa-chevron-right"></i></a></li>
-                                <li><a href="department-details.html">Apply for Driving License <i
-                                            class="fa-solid fa-chevron-right"></i></a></li>
-                                <li><a href="department-details.html">Report Polution <i
-                                            class="fa-solid fa-chevron-right"></i></a></li>
+                                <li><a href="department-details.html">BPJS <i class="fa-solid fa-chevron-right"></i></a>
+                                </li>
+                                <li><a href="department-details.html">Samsat <i class="fa-solid fa-chevron-right"></i></a>
+                                </li>
+                                <li><a href="department-details.html">TASPEN <i class="fa-solid fa-chevron-right"></i></a>
+                                </li>
                             </ul><!-- list-unstyled -->
                             <div class="service-button">
                                 <a href="department-details.html" class="btn btn-primary">Discover More</a>
@@ -200,7 +66,7 @@
                                     <span class="funfact-counter-number-postfix">k</span>
                                 </div><!-- funfact-counter-number -->
                             </div><!-- funfact-counter-box -->
-                            <p class="funfact-text">Total People Lived<br>in our City</p>
+                            <p class="funfact-text">Total Masyarakat<br>di Kabupaten Bangka</p>
                         </div><!--funfact-counter-item-->
                     </div><!--col-xl-3 col-md-6-->
                     <div class="col-xl-3 col-md-6">
@@ -214,7 +80,7 @@
                                     <span class="funfact-counter-number-postfix">k</span>
                                 </div><!-- funfact-counter-number -->
                             </div><!-- funfact-counter-box -->
-                            <p class="funfact-text">Square kilometres<br> Region Covers</p>
+                            <p class="funfact-text">Cakupan kilometre<br>yang di Cover</p>
                         </div><!--funfact-counter-item-->
                     </div><!--col-xl-3 col-md-6-->
                     <div class="col-xl-3 col-md-6">
@@ -224,11 +90,11 @@
                                     <i class="flaticon-landscape"></i>
                                 </div><!-- funfact-counter-icon -->
                                 <div class="funfact-counter-number">
-                                    <h3 class="counter-number">26</h3>
+                                    <h3 class="counter-number">89</h3>
                                     <span class="funfact-counter-number-postfix">%</span>
                                 </div><!-- funfact-counter-number -->
                             </div><!-- funfact-counter-box -->
-                            <p class="funfact-text">Private & Domestic <br>Garden Land</p>
+                            <p class="funfact-text">Legatitas <br>yang dicover</p>
                         </div><!--funfact-counter-item-->
                     </div><!--col-xl-3 col-md-6-->
                     <div class="col-xl-3 col-md-6">
@@ -238,11 +104,11 @@
                                     <i class="flaticon-barn-3"></i>
                                 </div><!-- funfact-counter-icon -->
                                 <div class="funfact-counter-number">
-                                    <h3 class="counter-number">4</h3>
-                                    <span class="funfact-counter-number-postfix">th</span>
+                                    <h3 class="counter-number">100</h3>
+                                    <span class="funfact-counter-number-postfix">%</span>
                                 </div><!-- funfact-counter-number -->
                             </div><!-- funfact-counter-box -->
-                            <p class="funfact-text">Average Costs of Home <br> Ownership</p>
+                            <p class="funfact-text">Gratis Biaya</p>
                         </div><!--funfact-counter-item-->
                     </div><!--col-xl-3 col-md-6-->
                 </div><!-- row -->
@@ -286,7 +152,7 @@
                             <img src="assets/image/shapes/shape-1.png" class="floated-image-one" alt="img-7">
                             <img src="assets/image/gallery/mayor-2.jpg" alt="img-8">
                             <div class="mayor-name">
-                                Mr. Kevin Martin
+                                Dian Firnandy, SE
                             </div><!-- mayor-name -->
                         </div><!--mayor-img-->
                     </div><!--col-lg-6"-->
@@ -364,7 +230,7 @@
         </section><!--client-section-->
         <section class="testimonial-section">
             <div class="container">
-                <div class="testimonial-name">TESTIMONIALS</div>
+                <div class="testimonial-name">Apa tanggapan Masyarakat</div>
                 <div class="testimonial-slider">
                     <div class="swiper testimonial-reviews">
                         <div class="swiper-wrapper">
@@ -423,7 +289,7 @@
                                         ipsum is simply free text irure dolor in reprehenderit in esse nulla pariatur.
                                     </div><!-- testimonial-text -->
                                     <div class="testimonial-thumb-card">
-                                        <h5>Kevin Martin</h5>
+                                        <h5>Dian Firnandy, SE</h5>
                                         <span>Member</span>
                                     </div><!-- testimonial-thumb-card -->
                                 </div><!--testimonial-content-->
@@ -696,6 +562,8 @@
             </div><!-- container -->
         </section><!--cta-two-section-->
     </div><!--page-wrapper-->
-
+    <script>
+        document.getElementById("menu_home").classList.add("active")
+    </script>
     <!-- plugins js -->
 @endsection

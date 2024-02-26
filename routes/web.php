@@ -20,3 +20,6 @@ require __DIR__ . '/panel.php';
 
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/layanan/{slug2?}/{slug3?}', [HomeController::class, 'layanan'])->name('layanan');
+Route::get('/informasi/{slug2?}/{slug3?}', [HomeController::class, 'informasi'])->name('informasi');
+Route::get('/page/{slug1?}/{slug2?}/{slug3?}', [HomeController::class, 'menus'])->name('pages');

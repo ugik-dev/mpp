@@ -17,6 +17,15 @@ class Menu extends Model
         'key',
         'content',
     ];
+    public function parent()
+    {
+        return $this->belongsTo(self::class, 'parent_id')->with('parent');
+    }
+
+    public function children()
+    {
+        return $this->hasMany(self::class, 'parent_id');
+    }
 
     public function scopeCreateUniqueSlug($query, $title)
     {

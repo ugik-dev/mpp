@@ -23,7 +23,7 @@
 @section('content')
     <div class="container-fluid">
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Management Hero</h1>
+            <h1 class="h3 mb-0 text-gray-800">Management Hero Icon</h1>
         </div>
         <div class="card shadow mb-4">
             <div class="card-header py-3 d-flex justify-content-between align-items-center">
@@ -32,7 +32,7 @@
                     <span class="icon text-white-50">
                         <i class="fas fa-plus"></i>
                     </span>
-                    <span class="text">Tambah Hero</span>
+                    <span class="text">Tambah Hero Icon</span>
                 </button>
             </div>
             <div class="card-body">
@@ -44,10 +44,9 @@
                                     <thead>
                                         <tr>
                                             <th>No</th>
-                                            <th>Waktu Login</th>
-                                            <th>Nama</th>
-                                            <th>Phone</th>
-                                            <th>Role</th>
+                                            <th>Icon</th>
+                                            <th>Text</th>
+                                            <th>Tombol</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
@@ -66,20 +65,21 @@
             <div class="modal-content">
                 <form class="" id="form-hero" novalidate="novalidate">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Form Hero</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Form Hero Icon</h5>
                         <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">x</button>
                     </div>
                     <div class="modal-body">
                         @csrf
                         <input type="text" id="id" class="" name="id" />
                         <div class="col-sm-12 mb-3">
-                            <label for="basicFullname" class="form-label">Text 1:</label>
-                            <input type="text" id="text_1" class="form-control" name="text_1" placeholder=""
+                            <label for="basicFullname" class="form-label">Text:</label>
+                            <input type="text" id="text" class="form-control" name="text" placeholder=""
                                 required>
                         </div>
                         <div class="col-md-12 mb-3">
-                            <label for="basicFullname" class="form-label">Text 2:</label>
-                            <input type="text" id="text_2" class="form-control" name="text_2" placeholder=""
+                            <label for="basicFullname" class="form-label">Icon (silahkan lihat di <a
+                                    href="https://www.flaticon.com/" target="_blank">flaticon.com</a>):</label>
+                            <input type="text" id="icon" class="form-control" name="icon" placeholder=""
                                 required>
                             <div class="invalid-feedback">
                             </div>
@@ -140,13 +140,6 @@
                             <div class="invalid-feedback">
                             </div>
                         </div>
-                        <div class="col-sm-12 mb-3">
-                            <label for="basicFullname" class="form-label">Gambar (rekomendasi 1894x731px) :</label>
-                            <input type="file" id="image_hero" name="image_hero_upload" accept="image/*"
-                                class="form-control">
-                            <div class="invalid-feedback">
-                            </div>
-                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary data-submit me-sm-3 me-1 text-white" id="insertBtn"
@@ -177,7 +170,7 @@
                 searching: true,
                 ordering: true,
                 ajax: {
-                    url: "{{ route('manage.hero.index') }}",
+                    url: "{{ route('manage.hero-icon.index') }}",
                     dataSrc: function(response) {
                         dataRes = response.data;
                         dataRow = [];
@@ -192,17 +185,14 @@
                     data: "number",
                     name: "number"
                 }, {
-                    data: "text_2",
-                    name: "text_2"
+                    data: "icon",
+                    name: "icon"
                 }, {
-                    data: "text_1",
-                    name: "text_1"
+                    data: "text",
+                    name: "text"
                 }, {
                     data: "button",
                     name: "button"
-                }, {
-                    data: "img",
-                    name: "img"
                 }, {
                     data: "aksi",
                     name: "aksi"
@@ -210,10 +200,10 @@
             });
             var activeBtn;
             var validationRules = {
-                text_1: {
+                text: {
                     required: false
                 },
-                text_2: {
+                icon: {
                     required: false,
                 },
                 button: {
@@ -233,7 +223,7 @@
                 'insertBtn': $('#form-hero').find('#insertBtn'),
                 'updateBtn': $('#form-hero').find('#updateBtn'),
                 'id': $('#form-hero').find('#id'),
-                'text_1': $('#form-hero').find('#text_1'),
+                'text': $('#form-hero').find('#text'),
                 'button': $('#form-hero').find('#button'),
                 'button_type': $('#form-hero').find('#button_type'),
                 'number': $('#form-hero').find('#number'),
@@ -241,8 +231,7 @@
                 'span_cp': $('#form-hero').find('#span_cp'),
                 'key': $('#form-hero').find('#key'),
                 'button_text': $('#form-hero').find('#button_text'),
-                'image_hero': $('#form-hero').find('#image_hero'),
-                'text_2': $('#form-hero').find('#text_2'),
+                'icon': $('#form-hero').find('#icon'),
             }
 
             datatable.on('click', '.edit-btn', (ev) => {
@@ -252,15 +241,14 @@
                 HeroForm.insertBtn.attr('style', 'display: none !important');
                 HeroForm.updateBtn.attr('style', 'display: ""');
                 activeBtn = HeroForm.updateBtn;
-                HeroForm.image_hero.prop('required', false);
                 HeroForm.modal.modal('show');
                 HeroForm.span_cp.show();
                 HeroForm.id.val(currentData['id']);
-                HeroForm.text_1.val(decodeHTML(currentData['text_1']));
-                HeroForm.text_2.val(decodeHTML(currentData['text_2']));
+                HeroForm.text.val(decodeHTML(currentData['text']));
                 HeroForm.button.val(currentData['button']).trigger('change');
                 HeroForm.button_type.val(currentData['button_type']).trigger('change');
                 HeroForm.button_text.val(currentData['button_text']);
+                HeroForm.icon.val(currentData['icon']);
                 HeroForm.number.val(currentData['number']);
                 HeroForm.link.val(currentData['link']);
                 // HeroForm.key.select2(currentData['key'], currentData['key_label']);
@@ -303,7 +291,7 @@
                 HeroForm.key.select2({
                     dropdownParent: HeroForm.modal,
                     ajax: {
-                        url: '{{ route('manage.hero.search-key') }}',
+                        url: '{{ route('manage.hero-icon.search-key') }}',
                         dataType: 'json',
                         delay: 250,
                         data: function(params) {
@@ -345,7 +333,7 @@
                         return;
                     }
                     $.ajax({
-                        url: "<?= route('manage.hero.delete') ?>/",
+                        url: "<?= route('manage.hero-icon.delete') ?>/",
                         'type': 'DELETE',
                         data: {
                             '_token': token,
@@ -366,12 +354,9 @@
 
             $('#addBtn').on('click', function() {
                 HeroForm.form.trigger('reset')
-                // var $newOption4 = $("<option selected='selected'></option>").val('').text("--");
-                // HeroForm.user_id.append($newOption4).trigger('change');
                 HeroForm.updateBtn.attr('style', 'display: none !important');
                 HeroForm.span_cp.hide();
                 HeroForm.insertBtn.attr('style', 'display: ""');
-                HeroForm.image_hero.prop('required', true);
                 activeBtn = HeroForm.insertBtn;
                 HeroForm.modal.modal('show')
             })
@@ -389,10 +374,10 @@
                 }
 
                 if (HeroForm.insertBtn.is(":visible")) {
-                    url = '{{ route('manage.hero.create') }}';
+                    url = '{{ route('manage.hero-icon.create') }}';
                     metode = 'POST';
                 } else {
-                    url = '{{ route('manage.hero.update') }}';
+                    url = '{{ route('manage.hero-icon.update') }}';
                     metode = 'POST';
                 }
                 Swal.fire(SwalOpt()).then((result) => {

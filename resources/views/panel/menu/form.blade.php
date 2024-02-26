@@ -16,7 +16,6 @@
 
         <div class="card shadow mb-4">
             <div class="card-header py-3 d-flex justify-content-between align-items-center">
-
                 <form class="add-new-record pt-0 row g-3" id="form-content" onsubmit="return false">
                     @csrf
                     <input type="text" hidden id="id" value="{{ $dataEdit->id ?? '' }}" name="id" />
@@ -28,6 +27,7 @@
                                 aria-describedby="basicFullname2" />
                         </div>
                     </div>
+
                     <div class="col-lg-12">
                         <div class="row">
                             <div class="col-md-6">
@@ -61,6 +61,14 @@
                                             @endforeach
                                         </select>
                                     </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <label for="basicFullname">Key / Link :</label>
+                                <div class="input-group">
+                                    <input type="text" id="key" class="form-control dt-full-name" name="key"
+                                        value="{{ $dataEdit->key ?? '' }}" placeholder="" aria-label=""
+                                        aria-describedby="basicFullname2" />
                                 </div>
                             </div>
                         </div>

@@ -13,14 +13,27 @@ if (!function_exists('menus')) {
     function menus()
     {
         // $menus = DB::table('menus')->pluck('id', 'name', 'key', 'jenis', 'parent_id');
-        $menus = DB::table('menus')->select('id', 'name', 'key', 'jenis', 'parent_id', 'slug')->get()->toArray();
+        $menus = DB::table('menus')->select('id', 'name', 'key', 'jenis', 'parent_id', 'slug', 'deletable', 'editable')->get()->toArray();
         return susunMenu($menus);
+    }
+}
+if (!function_exists('susunParent')) {
+    function susunParent($data, &$result = [])
+    {
+        if ($data->parent) {
+            $result[] = ['slug' => $data->slug, 'name' => $data->name, 'jenis' => $data->jenis];
+            return susunParent($data->parent, $result);
+        } else {
+            // echo "itlast";
+            // die();
+            $result[] = ['slug' => $data->slug, 'name' => $data->name, 'jenis' => $data->jenis];
+            return $result;
+        }
     }
 }
 if (!function_exists('susunMenu')) {
     function susunMenu($menuItems, $parentId = null)
     {
-
         $menu = [];
         foreach ($menuItems as $item) {
             // dd($item->parent_id);
