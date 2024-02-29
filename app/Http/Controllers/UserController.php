@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\DataStructure;
+use App\Models\Agency;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
@@ -15,16 +16,17 @@ class UserController extends Controller
 {
     public function index(Request $request)
     {
+        // dd(Agency::with('menuparent')->get());
         if ($request->ajax()) {
             $data =  User::latest()
-                ->select('users.*')->selectRaw('roles.title as role_title')->leftJoin('roles', 'roles.id', '=', 'users.role_id');
+                ->select('users.*')
+                ->WithRole()->WithUserInstansi();
             if ($request->has('search') && !empty($request->input('search')['value'])) {
                 $searchValue = $request->input('search')['value'];
                 $data = $data->where('users.name', 'like', '%' . $searchValue . '%')
                     ->orWhere('phone', 'like', '%' . $searchValue . '%')
                     ->orWhere('username', 'like', '%' . $searchValue . '%');
             }
-
             $data = $data->get();
 
             return DataTables::of($data)->addColumn('id', function ($data) {
@@ -33,6 +35,8 @@ class UserController extends Controller
                 return $data->created_at;
             })->addColumn('name', function ($data) {
                 return $data->name;
+            })->addColumn('agency_name', function ($data) {
+                return $data->agency_name;
             })->addColumn('phone', function ($data) {
                 return $data->phone;
             })->addColumn('role_title', function ($data) {
@@ -46,6 +50,7 @@ class UserController extends Controller
         }
         $dataContent =  [
             'refRole' => Role::get(),
+            'refAgency' => Agency::get(),
         ];
         return view('panel.user.index', compact('request', 'dataContent'));
     }
@@ -53,11 +58,9 @@ class UserController extends Controller
     public function get(Request $request)
     {
         try {
-            $query =  User::withRole();
+            $query =  User::withRole()->get();
             if (!empty($request->id)) $query->where('id', '=', $request->id);
             $res = $query->get()->toArray();
-            // $data =   DataStructure::keyValueObj($res, 'id');
-            // return $this->responseSuccess($data);
         } catch (Exception $ex) {
             return  $this->ResponseError($ex->getMessage());
         }
@@ -70,6 +73,7 @@ class UserController extends Controller
                 'name' => $request->name,
                 'username' => $request->username,
                 'role_id' => $request->role_id,
+                'agency_id' => $request->agency_id,
                 'alamat' => $request->alamat,
                 'phone' => $request->phone,
                 'email' => $request->email,
@@ -80,8 +84,8 @@ class UserController extends Controller
 
             return  $this->responseSuccess($data);
         } catch (QueryException $ex) {
-            if ($ex->errorInfo[1] === 1062) {
-                return $this->ResponseError('Duplikat entri untuk email tersebut');
+            if ($errorMessage = getDbException($ex->errorInfo)) {
+                return $this->ResponseError($errorMessage);
             } else {
                 return $this->ResponseError($ex->getMessage());
             }
@@ -93,12 +97,13 @@ class UserController extends Controller
     public function update(Request $request)
     {
         try {
-            $data = User::withRole()->findOrFail($request->id);
+            $data = User::findOrFail($request->id);
 
             $data->update([
                 'name' => $request->name,
                 'username' => $request->username,
                 'role_id' => $request->role_id,
+                'agency_id' => $request->agency_id,
                 'alamat' => $request->alamat,
                 'phone' => $request->phone,
                 'email' => $request->email,
@@ -107,6 +112,7 @@ class UserController extends Controller
                 $data->update([
                     'password' => Hash::make($request->password),
                 ]);
+            $data->save();
             return  $this->responseSuccess($data);
         } catch (QueryException $ex) {
             if ($errorMessage = getDbException($ex->errorInfo)) {

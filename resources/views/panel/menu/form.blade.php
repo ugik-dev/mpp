@@ -47,22 +47,40 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <label for="basicSalary">Parent :</label>
-                                <div class="input-group">
-                                    <div class="form-floating form-floating-outline w-100">
-                                        <select id="parent_id" name="parent_id" class="form-control w-100 select2">
-                                            <option value="">--</option>
-                                            @foreach ($dataContent['parentData'] as $rd)
-                                                <option
-                                                    {{ !empty($dataEdit->parent_id) ? ($dataEdit->parent_id == $rd->id ? 'selected' : '') : '' }}
-                                                    value="{{ $rd->id }}">
-                                                    {{ $rd->name }}</option>
-                                            @endforeach
-                                        </select>
+                            @if (empty(Auth::user()->agency_id))
+                                <div class="col-md-6">
+                                    <label for="basicSalary">Parent :</label>
+                                    <div class="input-group">
+                                        <div class="form-floating form-floating-outline w-100">
+                                            <select id="parent_id" name="parent_id" class="form-control w-100 select2">
+                                                <option value="">--</option>
+                                                @foreach ($dataContent['parentData'] as $rd)
+                                                    <option
+                                                        {{ !empty($dataEdit->parent_id) ? ($dataEdit->parent_id == $rd->id ? 'selected' : '') : '' }}
+                                                        value="{{ $rd->id }}">
+                                                        {{ $rd->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                                <div class="col-md-6">
+                                    <label for="basicSalary">Instansi :</label>
+                                    <div class="input-group">
+                                        <div class="form-floating form-floating-outline w-100">
+                                            <select id="agency_id" name="agency_id" class="form-control w-100 select2">
+                                                <option value="">--</option>
+                                                @foreach ($dataContent['agencyData'] as $rd)
+                                                    <option
+                                                        {{ !empty($dataEdit->agency_id) ? ($dataEdit->agency_id == $rd->id ? 'selected' : '') : '' }}
+                                                        value="{{ $rd->id }}">
+                                                        {{ $rd->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
                             <div class="col-sm-12">
                                 <label for="basicFullname">Key / Link :</label>
                                 <div class="input-group">
@@ -116,9 +134,11 @@
                             class="btn btn-primary data-submit me-sm-3 me-1 text-white" id="insertBtn"
                             data-metod="ins">Tambah</a>
                         <a type="" {{ !empty($dataEdit->id) ? '' : 'hidden' }}
-                            class="btn btn-primary data-submit me-sm-3 me-1 text-white" id="updateBtn" data-act="upd">Simpan
+                            class="btn btn-primary data-submit me-sm-3 me-1 text-white" id="updateBtn"
+                            data-act="upd">Simpan
                             Perubahan</a>
-                        <button type="reset" class="btn btn-outline-secondary" data-bs-dismiss="offcanvas">Cancel</button>
+                        <button type="reset" class="btn btn-outline-secondary"
+                            data-bs-dismiss="offcanvas">Cancel</button>
                     </div>
                 </form>
             </div>

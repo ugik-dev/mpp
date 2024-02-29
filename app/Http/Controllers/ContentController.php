@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\DataStructure;
+use App\Models\Agency;
 use App\Models\Content;
 use App\Models\MediaUpload;
 use App\Models\RefContent;
@@ -22,12 +23,16 @@ class ContentController extends Controller
     {
         if ($request->ajax()) {
             $data =  Content::latest()
-                ->select('contents.*')->selectRaw('ref_contents.name as jenis_content')->leftJoin('ref_contents', 'contents.ref_content_id', '=', 'ref_contents.id');
+                ->select('contents.*')->selectRaw('ref_contents.name as jenis_content')->leftJoin('ref_contents', 'contents.ref_content_id', '=', 'ref_contents.id')
+                ->WithUserInstansi();
             if ($request->has('search') && !empty($request->input('search')['value'])) {
                 $searchValue = $request->input('search')['value'];
                 $data = $data->where('users.name', 'like', '%' . $searchValue . '%')
                     ->orWhere('phone', 'like', '%' . $searchValue . '%')
                     ->orWhere('username', 'like', '%' . $searchValue . '%');
+            }
+            if (!empty(Auth::user()->agency_id)) {
+                $data = $data->where('contents.agency_id', Auth::user()->agency_id);
             }
 
             $data = $data->get();
@@ -41,7 +46,9 @@ class ContentController extends Controller
             })->addColumn('judul', function ($data) {
                 return $data->judul;
             })->addColumn('img', function ($data) {
-                return '<img style="max-width:100px; max-height:80px" src="' . url('/storage/upload/content') . '/' . $data->sampul . '" alt="' . $data->judul . '" class="img-thumbnail">';
+                if ($data->sampul)
+                    return '<img style="max-width:100px; max-height:80px" src="' . url('/storage/upload/content') . '/' . $data->sampul . '" alt="' . $data->judul . '" class="img-thumbnail">';
+                else return 'No Image';
             })->addColumn('aksi', function ($data) {
                 return '<div class="btn-group" role="group" aria-label="Basic mixed styles example">
                     <a type="" class="edit-btn btn btn-secondary" href="' . route('manage.content.preview', $data->slug) . '"><i class="fas fa-eye" ></i></a>
@@ -96,6 +103,7 @@ class ContentController extends Controller
     {
 
         $dataContent =  [
+            'refAgency' => Agency::get(),
             'refContent' => RefContent::get(),
         ];
         return view('panel.content.form', compact('request', 'dataContent'));
@@ -123,10 +131,14 @@ class ContentController extends Controller
                 'judul' => $request->judul,
                 'content' => $request->content,
                 'tanggal' => $request->tanggal,
+                'agency_id' => $request->agency_id,
                 'ref_content_id' => $request->ref_content_id,
+                'user_id' => Auth::user()->id,
                 'slug' => $slug,
             ];
-
+            if (!empty(Auth::user()->agency_id)) {
+                $att['agency_id'] = Auth::user()->agency_id;
+            }
             $data = Content::create($att);
             $data = Content::with('ref_content')->find($data->id);
 
@@ -177,6 +189,7 @@ class ContentController extends Controller
     public function edit(string $id)
     {
         $dataContent =  [
+            'refAgency' => Agency::get(),
             'refContent' => RefContent::get(),
         ];
         $dataEdit = Content::findOrFail($id);
@@ -191,8 +204,14 @@ class ContentController extends Controller
                 'judul' => $request->judul,
                 'content' => $request->content,
                 'tanggal' => $request->tanggal,
+                'agency_id' => $request->agency_id,
+                'user_id' => Auth::user()->id,
                 'ref_content_id' => $request->ref_content_id,
             ];
+            if (!empty(Auth::user()->agency_id)) {
+                $att['agency_id'] = Auth::user()->agency_id;
+            }
+
             if ($request->judul != $data->judul)
                 $att['slug'] = Content::createUniqueSlug($request->judul, $request->id);
 

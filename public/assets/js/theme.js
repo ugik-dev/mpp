@@ -18,8 +18,8 @@ $(document).ready(function () {
             $(".mobile-nav-wrapper").toggleClass("expanded");
             $("body").toggleClass("locked");
         });
-        // var menu_content = $(".main-menu .navigation ul")[0].outerHTML;
-        // $(".mobile-nav-container").html(menu_content);
+        var menu_content = $(".main-menu .navigation ul")[0].outerHTML;
+        $(".mobile-nav-container").html(menu_content);
         $(".mobile-nav-container .main-menu-list li.has-dropdown > a").append(
             '<button><i class="fa-solid fa-chevron-right"></i></button>'
         );

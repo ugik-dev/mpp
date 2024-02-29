@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\DataStructure;
+use App\Models\Agency;
 use App\Models\MediaMenuUpload;
 use App\Models\Menu;
 use Exception;
@@ -22,13 +23,83 @@ class MenuController extends Controller
         $dataContent =  [
             'parentData' => Menu::get(),
         ];
-        return view('panel.menu.index', compact('request', 'dataContent'));
+        if (!empty(Auth::user()->agency_id)) {
+            return view('panel.menu.admin', compact('request', 'dataContent'));
+        } else
+            return view('panel.menu.index', compact('request', 'dataContent'));
     }
 
     public function get(Request $request)
     {
         try {
-            $menu = Menu::get()->toArray();
+            $menu = new Menu;
+            if (!empty(Auth::user()->agency_id)) {
+                $agency = Agency::where('id', Auth::user()->agency_id)->get()->first();
+                // $menu = $menu->Where('parent_id', $agency->menu_id);
+
+                $data =  Menu::latest()->Where('parent_id', $agency->menu_id);
+                if ($request->has('search') && !empty($request->input('search')['value'])) {
+                    $searchValue = $request->input('search')['value'];
+                    $data = $data->where('name', 'like', '%' . $searchValue . '%')
+                        ->orWhere('content', 'like', '%' . $searchValue . '%');
+                }
+                $data = $data->get();
+
+                return DataTables::of($data)->addColumn('id', function ($data) {
+                    return $data->id;
+                })->addColumn('created_at', function ($data) {
+                    return $data->created_at;
+                })->addColumn('name', function ($data) {
+                    return $data->name;
+                })->addColumn('jenis', function ($data) {
+                    return $data->jenis;
+                })->addColumn('key', function ($data) {
+                    return $data->key;
+                })->addColumn('slug', function ($data) {
+                    return $data->slug;
+                })->addColumn('aksi', function ($data) {
+                    return '<div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                    <a type="button" ' . ($data["editable"] == 'N' ? 'disabled' : '') . ' class="btn btn-warning" href="' . route('manage.menu.edit', $data["id"]) . '"><i class="fas fa-pencil-alt"></i></a>
+                    <button type="button" ' . ($data["deletable"] == 'N' ? 'disabled' : '') . ' class="delete-btn btn btn-danger" data-id="' . $data["id"] . '"><i class="fas fa-trash"></i></button>
+                </div>';
+                })->rawColumns(['aksi'])->make(true);
+            }
+            $menu = $menu->get()->toArray();
+            // dd($menu);
+            // $layanan = Menu::where('slug', 'layanan')->first()->toArray();
+            // $agencies = Agency::with('menus')->get()->toArray();
+            // $new = [];
+            // foreach ($agencies as $agency) {
+            //     $menu[] = [
+            //         "id" =>  'intansi_' . $agency['id'],
+            //         "parent_id" => $layanan['id'],
+            //         "name" => $agency['name'],
+            //         "jenis" => "instansi",
+            //         "agency_id" => null,
+            //         "content" => null,
+            //         "key" => null,
+            //         "slug" => "instansi/" . $agency['slug'],
+            //         "deletable" => "N",
+            //         "editable" => "N",
+            //     ];
+            //     foreach ($agency['menus'] as $m) {
+            //         $menu[] = [
+            //             "id" => $m['id'],
+            //             "parent_id" =>  'intansi_' . $agency['id'],
+            //             "name" => $m['name'],
+            //             "jenis" => "route",
+            //             "agency_id" => null,
+            //             "content" => null,
+            //             "key" => null,
+            //             "slug" =>  $m['slug'],
+            //             "deletable" => "N",
+            //             "editable" => "N",
+            //         ];
+            //     }
+            // }
+
+            // dd($new);
+            // dd($layanan);
             $t = $this->transformData($menu);
             return response()->json($t);
         } catch (Exception $ex) {
@@ -45,10 +116,8 @@ class MenuController extends Controller
         $itemLevels = [];
 
         foreach ($array as $item) {
-            // Inisialisasi level ke 0
             $level = 0;
 
-            // Jika parent_id tidak null, cari parent item dan tentukan level berdasarkan level parent
             if ($item["parent_id"] !== null && isset($itemLevels[$item["parent_id"]])) {
                 $level = $itemLevels[$item["parent_id"]] + 1;
             }
@@ -76,9 +145,11 @@ class MenuController extends Controller
 
     public function form(Request $request)
     {
+
         $dataContent =  [
+            'agencyData' => Agency::get(),
             'parentData' => Menu::get(),
-            'jenis_menu' => ['page' => "Halaman", "link" => "Link", "N" => "Hanya Parent / Parent dari sub menu"],
+            'jenis_menu' => ['page' => "Halaman", "link" => "Link", "N" => "Hanya Parent / Parent dari sub menu", "agency" => "Layanan Instansi"],
         ];
         return view('panel.menu.form', compact('request', 'dataContent'));
     }
@@ -86,8 +157,9 @@ class MenuController extends Controller
     public function edit(string $id)
     {
         $dataContent =  [
+            'agencyData' => Agency::get(),
             'parentData' => Menu::get(),
-            'jenis_menu' => ['page' => "Halaman", "link" => "Link", "N" => "Hanya Parent / Parent dari sub menu"],
+            'jenis_menu' => ['page' => "Halaman", "link" => "Link", "N" => "Hanya Parent / Parent dari sub menu", "agency" => "Layanan Instansi"],
         ];
         $dataEdit = Menu::findOrFail($id);
         if ($dataEdit->editable == true)
@@ -103,10 +175,15 @@ class MenuController extends Controller
                 'content' => $request->content,
                 'key' => $request->key,
                 'parent_id' => $request->parent_id,
+                'agency_id' => $request->agency_id,
                 'jenis' => $request->jenis,
                 'slug' => $slug,
             ];
-
+            if (!empty(Auth::user()->agency_id)) {
+                $agency = Agency::where('id', Auth::user()->agency_id)->get()->first();
+                $att['agency_id'] = Auth::user()->agency_id;
+                $att['parent_id'] = $agency->menu_id;
+            }
             $data = Menu::create($att);
             // $data = Content::with('ref_content')->find($data->id);
 
@@ -114,13 +191,13 @@ class MenuController extends Controller
                 'file_sampul' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Add appropriate validation rules
             ]);
 
-            if ($request->hasFile('file_sampul')) {
-                $photo = $request->file('file_sampul');
-                $originalFilename = time() . $photo->getClientOriginalName(); // Ambil nama asli file
-                $path = $photo->storeAs('upload/content', $originalFilename, 'public');
-                $data->sampul = $originalFilename;
-                $data->save();
-            }
+            // if ($request->hasFile('file_sampul')) {
+            //     $photo = $request->file('file_sampul');
+            //     $originalFilename = time() . $photo->getClientOriginalName(); // Ambil nama asli file
+            //     $path = $photo->storeAs('upload/content', $originalFilename, 'public');
+            //     $data->sampul = $originalFilename;
+            //     $data->save();
+            // }
             $img = extractImageNames($request->content);
             MediaMenuUpload::whereIn('filename', $img)->update(['status' => 'posted', 'menu_id' => $data->id]);
             $this->clearImgDraft();
@@ -140,21 +217,32 @@ class MenuController extends Controller
     {
         try {
             $data = Menu::findOrFail($request->id);
+            if (!empty(Auth::user()->agency_id)) {
+                if (Auth::user()->agency_id != $data->agency_id)
+                    return;
+            }
             $att = [
                 'name' => $request->name,
                 'content' => $request->content,
-                'tanggal' => $request->tanggal,
-                'ref_menu_id' => $request->ref_menu_id,
+                'key' => $request->key,
+                'parent_id' => $request->parent_id,
+                'agency_id' => $request->agency_id,
+                'jenis' => $request->jenis,
             ];
+            if (!empty(Auth::user()->agency_id)) {
+                $agency = Agency::where('id', Auth::user()->agency_id)->get()->first();
+                $att['agency_id'] = Auth::user()->agency_id;
+                $att['parent_id'] = $agency->menu_id;
+            }
             if ($request->name != $data->name)
                 $att['slug'] = Menu::createUniqueSlug($request->name, $request->id);
 
-            if ($request->hasFile('file_sampul')) {
-                $photo = $request->file('file_sampul');
-                $originalFilename = time() . $photo->getClientOriginalName(); // Ambil nama asli file
-                $path = $photo->storeAs('upload/content', $originalFilename, 'public');
-                $att['sampul']  = $originalFilename;
-            }
+            // if ($request->hasFile('file_sampul')) {
+            //     $photo = $request->file('file_sampul');
+            //     $originalFilename = time() . $photo->getClientOriginalName(); // Ambil nama asli file
+            //     $path = $photo->storeAs('upload/content', $originalFilename, 'public');
+            //     $att['sampul']  = $originalFilename;
+            // }
 
             $use_img = extractImageNames($request->content);
             $old_img = MediaMenuUpload::where('menu_id', '=', $request->id)->get();

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Agency;
 use App\Models\RefContent;
 use App\Models\RefJenFaskes;
 use App\Models\RefLiveLocation;

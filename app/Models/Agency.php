@@ -6,27 +6,18 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
-class Menu extends Model
+class Agency extends Model
 {
     use HasFactory;
-    protected $fillable = [
-        'name',
-        'parent_id',
-        'agency_id',
-        'jenis',
-        'slug',
-        'key',
-        'content',
-    ];
+    protected $fillable = ['name', 'alamat', 'phone', 'whatsapp', 'email', 'website', 'logo', 'image', 'agency_id'];
 
-    public function parent()
+    public function menus()
     {
-        return $this->belongsTo(self::class, 'parent_id')->with('parent');
+        return $this->hasMany(Menu::class, 'agency_id');
     }
-
-    public function children()
+    public function menuparent()
     {
-        return $this->hasMany(self::class, 'parent_id');
+        return $this->belongsTo(Menu::class, 'menu_id');
     }
 
     public function scopeCreateUniqueSlug($query, $title)
@@ -42,6 +33,6 @@ class Menu extends Model
 
     private function slugExists($slug)
     {
-        return Menu::where('slug', $slug)->exists();
+        return Agency::where('slug', $slug)->exists();
     }
 }

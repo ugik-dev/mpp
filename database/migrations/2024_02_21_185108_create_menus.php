@@ -16,6 +16,11 @@ return new class extends Migration
             $table->bigInteger('parent_id')->nullable();
             $table->string('name');
             $table->string('jenis');
+            $table->unsignedBigInteger('agency_id')->nullable();
+            $table->foreign('agency_id')
+                ->references('id')
+                ->on('agencies')
+                ->onDelete('cascade');
             $table->text('content')->nullable();
             $table->string('key')->nullable();
             $table->string('slug')->nullable();

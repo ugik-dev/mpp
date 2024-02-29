@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Agency;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -21,9 +22,9 @@ class UsersSeeder extends Seeder
     {
         $admin = User::updateOrCreate(
             [
-                'username' => 'ugikdev',
-                'name' => 'Ugik Dev',
-                'email' => 'ugik.dev@gmail.com',
+                'username' => 'super',
+                'name' => 'Super Admin',
+                'email' => 'super.admin@gmail.com',
                 'password' => Hash::make('123'),
                 'role_id' => 1
             ],
@@ -32,13 +33,28 @@ class UsersSeeder extends Seeder
         $role = Role::findOrFail(1);
         $admin->assignRole($role);
 
-        $sqlFilePath = database_path('seeders/sql/dumy_user.sql');
-        if (file_exists($sqlFilePath)) {
-            $sqlContent = file_get_contents($sqlFilePath);
-            DB::unprepared($sqlContent);
-        } else {
-            echo "SQL file not found at $sqlFilePath\n";
+        $instansi = Agency::with('menuparent')->get();
+        $r_admin = Role::findOrFail(7);
+        foreach ($instansi as $i) {
+            $user = User::updateOrCreate(
+                [
+                    'username' => 'admin' . $i->menuparent->slug,
+                    'name' => 'Admin ' . $i->name_sort,
+                    'agency_id' =>  $i->id,
+                    'email' => strtolower($i->name_sort) . '@mail.com',
+                    'password' => Hash::make('123'),
+                    'role_id' => 7
+                ],
+            );
+            $user->assignRole($r_admin);
         }
+        // $sqlFilePath = database_path('seeders/sql/dumy_user.sql');
+        // if (file_exists($sqlFilePath)) {
+        //     $sqlContent = file_get_contents($sqlFilePath);
+        //     DB::unprepared($sqlContent);
+        // } else {
+        //     echo "SQL file not found at $sqlFilePath\n";
+        // }
 
         // for ($i = 0; $i < 1000; $i++) {
         //     User::create([

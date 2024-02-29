@@ -7,4 +7,4 @@
 <script src="{{ asset('assets/vendor/youtube-popup/youtube-popup.jquery.js') }}"></script>
 <script src="{{ asset('assets/vendor/jquery-validation/jquery.validate.min.js') }}"></script>
 <script src="{{ asset('assets/js/theme.js') }}"></script>
-<script src="{{ asset('assets/js/mega-menu.js') }}"></script>
+{{-- <script src="{{ asset('assets/js/mega-menu.js') }}"></script> --}}

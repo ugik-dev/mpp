@@ -4,7 +4,8 @@
         <section class="page-banner"
             style="background-image:   linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url({{ asset('assets/image/bg/gedungmall.jpg') }})
             ;background-repeat:no-repeat;
-            background-position: center center;">
+            background-position: center center;
+            ">
             <div class="container">
                 <div class="page-breadcrumbs">
                     <ul class="list-unstyled">

@@ -1,48 +1,7 @@
-<?php
-$menus = [
-    [
-        'label' => 'Management User',
-        'url' => route('manage.user.index'),
-        'dropdown' => false,
-    ],
-    [
-        'label' => 'Kontent',
-        'url' => route('manage.content.index'),
-        'dropdown' => false,
-    ],
-    [
-        'label' => 'Struktur Menu',
-        'url' => route('manage.menu.index'),
-        'dropdown' => false,
-    ],
-    [
-        'label' => 'Pengaturan Home',
-        'dropdown' => true,
-        'children' => [
-            [
-                'label' => 'Hero',
-                'url' => route('manage.hero.index'),
-            ],
-            ['label' => 'Hero Icon', 'url' => route('manage.hero-icon.index')],
-            ['label' => 'Hero3', 'url' => route('manage.hero.index')],
-        ],
-    ],
-    [
-        'label' => 'Pengaturan',
-        'dropdown' => true,
-        'children' => [['label' => 'Jenis', 'url' => route('manage.hero.index')], ['label' => 'Hero2', 'url' => route('manage.hero.index')], ['label' => 'Hero3', 'url' => route('manage.hero.index')]],
-    ],
-];
-?>
-
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-
-    <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-        <div class="sidebar-brand-icon rotate-n-15">
-            <i class="fas fa-laugh-wink"></i>
-        </div>
-        <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
+        <img src="{{ asset('assets/image/kab-bangka.png') }}" style="width: 30%" />
+        <div class="sidebar-brand-text mx-3">MPP</div>
     </a>
 
     <hr class="sidebar-divider my-0">
@@ -65,30 +24,11 @@ $menus = [
         Addons
     </div>
 
-    @foreach ($menus as $key => $menu)
-        <li class="nav-item">
-            <a class="nav-link {{ $menu['dropdown'] ? 'collapsed' : '' }}" {!! $menu['dropdown']
-                ? 'href="/#" data-toggle="collapse" data-target="#collapseMenu_' . $key . '"'
-                : "href='{$menu['url']}'" !!}>
-                <i class="fas fa-fw fa-chart-area"></i>
-                <span>{{ $menu['label'] }}</span>
-            </a>
-
-            @if ($menu['dropdown'])
-                <div id="collapseMenu_{{ $key }}" class="collapse" aria-labelledby="headingPages"
-                    data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        @foreach ($menu['children'] as $child)
-                            <a class="collapse-item" href="{{ $child['url'] }}">{{ $child['label'] }}</a>
-                        @endforeach
-                        <a class="collapse-item" href="blank.html">Blank Page</a>
-                    </div>
-                </div>
-            @endif
-        </li>
-        {{-- @endif --}}
-    @endforeach
-
+    @if (Auth::user()->role_id == 1)
+        @include('panel.layout.datamenu.super')
+    @elseif (Auth::user()->role_id == 7)
+        @include('panel.layout.datamenu.admin')
+    @endif
     <hr class="sidebar-divider d-none d-md-block" />
 
     <!-- Sidebar Toggler (Sidebar) -->

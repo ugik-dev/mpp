@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AgencyController;
 use App\Http\Controllers\ContentController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HeroController;
@@ -17,7 +18,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/panel/dashboard', [DashboardController::class, 'index'])->name('panel.dashboard');
     Route::get('/logout', function () {
         Auth::logout();
-        return redirect('panel');
+        return redirect('login');
     });
 });
 Route::middleware(['auth', 'checkRole:admin,super'])->group(function () {
@@ -55,6 +56,14 @@ Route::middleware(['auth', 'checkRole:admin,super'])->group(function () {
         Route::post('update', [HeroController::class, 'update'])->name('update');
         Route::delete('/', [HeroController::class, 'delete'])->name('delete');
     });
+
+    Route::prefix('manage/agency')->name('manage.agency.')->group(function () {
+        Route::get('/', [AgencyController::class, 'index'])->name('index');
+        Route::post('', [AgencyController::class, 'create'])->name('create');
+        Route::post('update', [AgencyController::class, 'update'])->name('update');
+        Route::delete('/', [AgencyController::class, 'delete'])->name('delete');
+    });
+
     Route::prefix('manage/hero-icon')->name('manage.hero-icon.')->group(function () {
         Route::get('/', [HeroIconController::class, 'index'])->name('index');
         Route::get('/search-key', [HeroIconController::class, 'search_key'])->name('search-key');

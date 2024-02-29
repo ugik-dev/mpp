@@ -20,6 +20,17 @@ return new class extends Migration
                 ->references('id')
                 ->on('ref_contents')
                 ->onDelete('cascade');
+
+            $table->unsignedBigInteger('agency_id')->nullable();
+            $table->foreign('agency_id')
+                ->references('id')
+                ->on('agencies')
+                ->onDelete('cascade');
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
             $table->string('judul');
             $table->string('slug')->unique();
             $table->text('content')->nullable();

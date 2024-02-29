@@ -23,7 +23,6 @@
             </div>
         </div>
     </div>
-
     <div class="header-mid">
         <div class="container">
             <div class="mag-content">

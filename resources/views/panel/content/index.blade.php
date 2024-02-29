@@ -30,10 +30,12 @@
                                     <thead>
                                         <tr>
                                             <th>No</th>
-                                            <th>Waktu Login</th>
-                                            <th>Nama</th>
-                                            <th>Phone</th>
-                                            <th>Role</th>
+                                            <th>Waktu Pembuatan</th>
+                                            <th>Tanggal</th>
+                                            <th>Jenis</th>
+                                            <th>Judul</th>
+                                            <th>Instansi</th>
+                                            <th>Sampul</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
@@ -61,7 +63,7 @@
                 searching: true,
                 ordering: true,
                 order: [
-                    [1, 'desc']
+                    [2, 'desc']
                 ],
                 ajax: {
                     url: "{{ route('manage.content.index') }}",
@@ -76,24 +78,32 @@
                     }
                 },
                 columns: [{
-                    data: "id",
-                    name: "id"
-                }, {
-                    data: "created_at",
-                    name: "created_at"
-                }, {
-                    data: "jenis_content",
-                    name: "jenis_content"
-                }, {
-                    data: "judul",
-                    name: "judul"
-                }, {
-                    data: "img",
-                    name: "img"
-                }, {
-                    data: "aksi",
-                    name: "aksi"
-                }, ]
+                        data: "id",
+                        name: "id"
+                    }, {
+                        data: "created_at",
+                        name: "created_at"
+                    }, {
+                        data: "tanggal",
+                        name: "tanggal"
+                    }, {
+                        data: "jenis_content",
+                        name: "jenis_content"
+                    }, {
+                        data: "judul",
+                        name: "judul"
+                    },
+                    {
+                        data: "agency_name",
+                        name: "agency_name"
+                    }, {
+                        data: "img",
+                        name: "img"
+                    }, {
+                        data: "aksi",
+                        name: "aksi"
+                    },
+                ]
             });
 
             datatable.on('click', '.delete-btn', function(ev) {

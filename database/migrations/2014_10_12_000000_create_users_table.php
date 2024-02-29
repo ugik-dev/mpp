@@ -18,6 +18,11 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->integer('role_id')->default('6');
+            $table->unsignedBigInteger('agency_id')->nullable();
+            $table->foreign('agency_id')
+                ->references('id')
+                ->on('agencies')
+                ->onDelete('cascade');
             $table->string('password');
             $table->string('alamat')->nullable();
             $table->string('phone')->nullable();

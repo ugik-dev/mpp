@@ -45,18 +45,18 @@
                                 <div class="col-sm-12">
                                     <label for="basicSalary">Jenis :</label>
                                     <div class="input-group">
-                                        <div class="form-floating form-floating-outline">
-                                            <!-- <input type="number" id="user_id" name="user_id" class="form-control dt-salary" aria-label="" aria-describedby="basicSalary2" /> -->
-                                            <select id="ref_content_id" name="ref_content_id" class="form-control">
-                                                <option value="">--</option>
-                                                @foreach ($dataContent['refContent'] as $rd)
-                                                    <option
-                                                        {{ !empty($dataEdit->ref_content_id) ? ($dataEdit->ref_content_id == $rd->id ? 'selected' : '') : '' }}
-                                                        value="{{ $rd->id }}">
-                                                        {{ $rd->name }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
+                                        {{-- <div class="form-floating form-floating-outline"> --}}
+                                        <!-- <input type="number" id="user_id" name="user_id" class="form-control dt-salary" aria-label="" aria-describedby="basicSalary2" /> -->
+                                        <select id="ref_content_id" name="ref_content_id" class="form-control">
+                                            <option value="">--</option>
+                                            @foreach ($dataContent['refContent'] as $rd)
+                                                <option
+                                                    {{ !empty($dataEdit->ref_content_id) ? ($dataEdit->ref_content_id == $rd->id ? 'selected' : '') : '' }}
+                                                    value="{{ $rd->id }}">
+                                                    {{ $rd->name }}</option>
+                                            @endforeach
+                                        </select>
+                                        {{-- </div> --}}
                                     </div>
                                 </div>
                                 <div class="col-sm-12">
@@ -65,6 +65,25 @@
                                         <input type="date" value="{{ $dataEdit->tanggal ?? '' }}" id="tanggal"
                                             class="form-control dt-full-name" name="tanggal" placeholder="" aria-label=""
                                             aria-describedby="basicFullname2" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="col-sm-12">
+                                    <label for="basicSalary">Instansi :</label>
+                                    <div class="input-group">
+                                        <div class="form-floating form-floating-outline">
+                                            <!-- <input type="number" id="user_id" name="user_id" class="form-control dt-salary" aria-label="" aria-describedby="basicSalary2" /> -->
+                                            <select id="agency_id" name="agency_id" class="form-control">
+                                                <option value="">--</option>
+                                                @foreach ($dataContent['refAgency'] as $rd)
+                                                    <option
+                                                        {{ !empty($dataEdit->agency_id) ? ($dataEdit->agency_id == $rd->id ? 'selected' : '') : '' }}
+                                                        value="{{ $rd->id }}">
+                                                        {{ $rd->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

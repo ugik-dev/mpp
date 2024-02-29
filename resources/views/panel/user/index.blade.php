@@ -27,10 +27,11 @@
                                     <thead>
                                         <tr>
                                             <th>No</th>
-                                            <th>Waktu Login</th>
+                                            <th>Username</th>
                                             <th>Nama</th>
                                             <th>Phone</th>
                                             <th>Role</th>
+                                            <th>Instansi</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
@@ -84,6 +85,17 @@
                                         Role harus diisi
                                     </div>
                                 </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="basicSalary" class="form-label">Instansi:</label>
+                                    <select id="agency_id" name="agency_id" class="form-control">
+                                        <option value="">--</option>
+                                        @foreach ($dataContent['refAgency'] as $rd)
+                                            <option value="{{ $rd->id }}">{{ $rd->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    <div class="invalid-feedback">
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -104,8 +116,8 @@
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label for="basicFullname" class="form-label">Email:</label>
-                                    <input type="text" id="email" class="form-control" name="email" placeholder=""
-                                        required>
+                                    <input type="text" id="email" class="form-control" name="email"
+                                        placeholder="" required>
                                     <div class="invalid-feedback">
                                         Email tidak valid!
                                     </div>
@@ -171,24 +183,33 @@
                     }
                 },
                 columns: [{
-                    data: "id",
-                    name: "id"
-                }, {
-                    data: "username",
-                    name: "username"
-                }, {
-                    data: "name",
-                    name: "name"
-                }, {
-                    data: "phone",
-                    name: "phone"
-                }, {
-                    data: "role_title",
-                    name: "role_title"
-                }, {
-                    data: "aksi",
-                    name: "aksi"
-                }, ]
+
+                        data: "id",
+                        name: "id"
+                    }, {
+                        data: "level",
+                        visible: false,
+                    },
+                    {
+                        data: "key",
+                        visible: false,
+                    },
+                    {
+                        data: "parent",
+                        visible: false,
+                    },
+                    {
+                        data: "name",
+                        type: "custom",
+                    },
+                    {
+                        data: "value",
+                        type: "custom",
+                    }, {
+                        data: "aksi",
+                        name: "aksi"
+                    },
+                ]
             });
             var activeBtn;
             var validationRules = {
@@ -201,6 +222,9 @@
                 },
                 role_id: {
                     required: true
+                },
+                agency_id: {
+                    required: false
                 },
                 phone: {
                     required: true,
@@ -223,6 +247,7 @@
                 'id': $('#form-user').find('#id'),
                 'name': $('#form-user').find('#name'),
                 'role_id': $('#form-user').find('#role_id'),
+                'agency_id': $('#form-user').find('#agency_id'),
                 'alamat': $('#form-user').find('#alamat'),
                 'password': $('#form-user').find('#password'),
                 'span_cp': $('#form-user').find('#span_cp'),
@@ -237,6 +262,7 @@
                 validationRules['password']['minlength'] = -1
                 var id = $(ev.currentTarget).data('id');
                 currentData = dataRow[id];
+                console.log(dataRow)
                 UserForm.form.trigger('reset')
                 // var $newOption4 = $("<option selected='selected'></option>").val('').text("--");
                 // UserForm.user_id.append($newOption4).trigger('change');
@@ -249,6 +275,7 @@
                 UserForm.name.val(decoderValue(currentData['name']));
                 UserForm.alamat.val(decoderValue(currentData['alamat']));
                 UserForm.role_id.val(currentData['role_id']);
+                UserForm.agency_id.val(currentData['agency_id']);
                 console.log(decoderValue("jum&#039;at@gmail.com"));
                 UserForm.email.val(decoderValue(currentData['email']));
                 UserForm.username.val(currentData['username']);

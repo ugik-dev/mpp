@@ -14,10 +14,9 @@
 <link rel="stylesheet" href="{{ asset('assets/vendor/youtube-popup/youtube-popup.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}">
 
-<link rel="stylesheet" href="{{ asset('assets/css/mega-menu.css') }}">
 
-<!-- favicons Icons -->
+
 <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('assets/image/favicon/apple-touch-icon.png') }}">
 <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('assets/image/favicon/favicon-32x32.png') }}">
 <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/image/favicon/favicon-16x16.png') }}">
-<link rel="manifest" href="{{ asset('assets/image/favicons/site.webmanifest') }}">
+{{-- <link rel="manifest" href="{{ asset('assets/image/favicons/site.webmanifest') }}"> --}}

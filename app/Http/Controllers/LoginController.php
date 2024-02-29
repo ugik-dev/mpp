@@ -22,13 +22,16 @@ class LoginController extends Controller
     public function login(Request $request)
     {
         $credentials = $request->only('username', 'password');
-        $user = User::select('users.*', 'roles.title as title_role')
-            ->join('roles', 'users.role_id', '=', 'roles.id')
-            ->where('users.username', $credentials['username'])
-            ->first();
+        // $user = User::select('users.*', 'roles.title as title_role')
+        //     ->join('roles', 'users.role_id', '=', 'roles.id')
+        //     ->where('users.username', $credentials['username'])
+        //     ->first();
+        $user = User::where('username', $credentials['username'])->first();
+        // dd($user);
         if ($user && Hash::check($credentials['password'], $user->password)) {
             Auth::attempt(['username' => $credentials['username'], 'password' => $credentials['password']]);
-            if (Auth::check() == true) {
+            if (Auth::check()) {
+                // dd(Auth::user());
                 return $this->responseSuccess(['success', 'data' => Auth::user()]);
             } else {
                 return  $this->responseError("Password salah");

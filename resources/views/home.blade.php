@@ -4,6 +4,7 @@
     <div class="page-wrapper">
         @include('landingPage.hero')
         @include('landingPage.hero_icon')
+        @include('landingPage.blog')
         <!--about-section-->
         <section class="service-section">
             <div class="container">
@@ -452,87 +453,7 @@
                 </div><!--cta-five-card-->
             </div><!-- container -->
         </section><!--cta-five-section-->
-        <section class="blog-section">
-            <div class="container">
-                <div class="blog-box">
-                    <div class="section-title-box text-center">
-                        <div class="section-tagline">DIRECT FROM THE BLOG POSTS</div>
-                        <h2 class="section-title">Checkout Latest News <br>and Articles</h2>
-                    </div><!-- section-title-box -->
-                </div><!--blog-box-->
-                <div class="row row-gutter-y-155">
-                    <div class="col-lg-4">
-                        <div class="blog-card">
-                            <div class="blog-card-image">
-                                <img src="assets/image/blog/blog-1.jpg" class="img-fluid" alt="img-22">
-                                <a href="news-details.html"></a>
-                            </div><!-- blog-card-image -->
-                            <div class="blog-card-date">
-                                <a href="news-details.html">28SEP</a>
-                            </div><!-- blog-card-date -->
-                            <div class="blog-card-content">
-                                <div class="blog-card-meta">
-                                    <span class="author">
-                                        by<a href="news-details.html">Admin</a>
-                                    </span><!-- author -->
-                                    <span class="comment">
-                                        <a href="news-details.html">02 Comments</a>
-                                    </span><!-- comment -->
-                                </div><!-- blog-card-meta -->
-                                <h4><a href="news-details.html">Supporting local business to bounce back</a></h4>
-                                <p>Tellus amet vel nisi, vel felis morbi sit et. Risus, pulvinar ultricie</p>
-                            </div><!-- blog-card-content -->
-                        </div><!-- blog-card -->
-                    </div><!-- col-lg-4 -->
-                    <div class="col-lg-4">
-                        <div class="blog-card">
-                            <div class="blog-card-image">
-                                <img src="assets/image/blog/blog-2.jpg" class="img-fluid" alt="img-23">
-                                <a href="news-details.html"></a>
-                            </div><!-- blog-card-image -->
-                            <div class="blog-card-date">
-                                <a href="news-details.html">28SEP</a>
-                            </div><!-- blog-card-date -->
-                            <div class="blog-card-content">
-                                <div class="blog-card-meta">
-                                    <span class="author">
-                                        by<a href="news-details.html">Admin</a>
-                                    </span><!-- author -->
-                                    <span class="comment">
-                                        <a href="news-details.html">02 Comments</a>
-                                    </span><!-- comment -->
-                                </div><!-- blog-card-meta -->
-                                <h4><a href="news-details.html">Resilience for TownGov Green Project</a></h4>
-                                <p>Tellus amet vel nisi, vel felis morbi sit et. Risus, pulvinar ultricie</p>
-                            </div><!-- blog-card-content -->
-                        </div><!-- blog-card -->
-                    </div><!-- col-lg-4 -->
-                    <div class="col-lg-4">
-                        <div class="blog-card">
-                            <div class="blog-card-image">
-                                <img src="assets/image/blog/blog-3.jpg" class="img-fluid" alt="img-24">
-                                <a href="news-details.html"></a>
-                            </div><!-- blog-card-image -->
-                            <div class="blog-card-date">
-                                <a href="news-details.html">28SEP</a>
-                            </div><!-- blog-card-date -->
-                            <div class="blog-card-content">
-                                <div class="blog-card-meta">
-                                    <span class="author">
-                                        by<a href="news-details.html">Admin</a>
-                                    </span><!-- author -->
-                                    <span class="comment">
-                                        <a href="news-details.html">02 Comments</a>
-                                    </span><!-- comment -->
-                                </div><!-- blog-card-meta -->
-                                <h4><a href="news-details.html">Save soil and save world project in 2022</a></h4>
-                                <p>Tellus amet vel nisi, vel felis morbi sit et. Risus, pulvinar ultricie</p>
-                            </div><!-- blog-card-content -->
-                        </div><!-- blog-card -->
-                    </div><!-- col-lg-4 -->
-                </div><!-- row -->
-            </div><!-- container -->
-        </section><!-- blog-section -->
+
         <section class="cta-two-section">
             <div class="container">
                 <div class="cta-two-section-inner">
