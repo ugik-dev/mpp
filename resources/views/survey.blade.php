@@ -2,18 +2,18 @@
 @section('content')
     <style>
         /* .form-icon>i {
-                                                                                                                                                                                                                                                                                                                                                                            position: absolute;
-                                                                                                                                                                                                                                                                                                                                                                            top: 50%;
-                                                                                                                                                                                                                                                                                                                                                                            right: 45px;
-                                                                                                                                                                                                                                                                                                                                                                            -webkit-transform: translateY(-50%);
-                                                                                                                                                                                                                                                                                                                                                                            -ms-transform: translateY(-50%);
-                                                                                                                                                                                                                                                                                                                                                                            transform: translateY(-50%);
-                                                                                                                                                                                                                                                                                                                                                                            opacity: 0.8;
-                                                                                                                                                                                                                                                                                                                                                                        }
+                                                                                                                                                                                                                                                                                                                                                                                                                                                position: absolute;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                top: 50%;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                right: 45px;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                -webkit-transform: translateY(-50%);
+                                                                                                                                                                                                                                                                                                                                                                                                                                                -ms-transform: translateY(-50%);
+                                                                                                                                                                                                                                                                                                                                                                                                                                                transform: translateY(-50%);
+                                                                                                                                                                                                                                                                                                                                                                                                                                                opacity: 0.8;
+                                                                                                                                                                                                                                                                                                                                                                                                                                            }
 
-                                                                                                                                                                                                                                                                                                                                                                        form .message-box .form-icon>i {
-                                                                                                                                                                                                                                                                                                                                                                            top: 15%;
-                                                                                                                                                                                                                                                                                                                                                                        } */
+                                                                                                                                                                                                                                                                                                                                                                                                                                            form .message-box .form-icon>i {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                top: 15%;
+                                                                                                                                                                                                                                                                                                                                                                                                                                            } */
     </style>
     <div class="page-wrapper">
         <section class="page-banner"
@@ -534,82 +534,66 @@
             </div>
         </section><!-- department-details-section -->
     </div><!--page-wrapper-->
+@endsection
 
 @section('style')
-    <website href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.5/dist/sweetalert2.min.css" rel="stylesheet">
 @endsection
 @section('script')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.5/dist/sweetalert2.all.min.js"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-beta.1/js/select2.full.min.js"
         integrity="sha512-orfBhUXN61JpjXpFeA1NkJ1c2IOtytP4aMxpKqpE2ToIEn5wz4+BiM8xLXEJVxCVubpQOQhFbQWdbF3qLkYYcg=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-@endsection
 
-{{-- <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    {{-- <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> --}}
-<script>
-    function clearValidity() {
-        document.getElementById('respon4').setCustomValidity('');
-    }
-    // $(document).ready(function() {
-    //     document.getElementById("menu_informasi").classList.add("active")
-
-    form_survey = $('#form_survey');
-    sub_btn = $('#sub_btn');
-    $('.select2').select2();
-
-
-    function clearValidity() {
-        document.getElementById('respon4').setCustomValidity('');
-    }
-
-    form_survey.submit(function(ev) {
-    event.preventDefault();
-    // if (respon.val() == '' ||
-    //     respon.val() == null) {
-    //     Swal.fire({
-    //         icon: 'warning',
-    //         html: '<h5>Lengkapi form ...</h5>',
-    //         // allowOutsideClick: false
-    //     });
-    //     return;
-    // }
-    // Swal.fire({
-    //     html: '<h5>Loading ...</h5>',
-    //     allowOutsideClick: false
-    // });
-    // Swal.showLoading()
-
-
-
-    $.ajax({
-        method: 'POST',
-        url: '{{ route('survey-post') }}',
-        data: form_survey.serialize(),
-        success: function(data) {
-            // alert(data);
-            res = JSON.parse(data);
-            if (res['error']) {
-                Swal.close();
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: res['message'],
-                });
-            } else {
-                let timerInterval
-                Swal.fire({
-                    icon: 'success',
-                    html: 'Hasil survei berhasil disimpan',
-                    timer: 9200,
-                    timerProgressBar: true,
-                }).then((result) => {
-                    // location.reload();
-                })
-            }
+    <script>
+        function clearValidity() {
+            document.getElementById('respon4').setCustomValidity('');
         }
-    });
-    })
+        // $(document).ready(function() {
+        //     document.getElementById("menu_informasi").classList.add("active")
 
-    })
-</script>
+        form_survey = $('#form_survey');
+        sub_btn = $('#sub_btn');
+        $('.select2').select2();
+
+
+        function clearValidity() {
+            document.getElementById('respon4').setCustomValidity('');
+        }
+
+        form_survey.submit(function(ev) {
+            event.preventDefault();
+            $.ajax({
+                method: 'POST',
+                url: '{{ route('survey-post') }}',
+                data: form_survey.serialize(),
+                success: function(data) {
+                    // alert(data);
+                    res = data;
+                    if (res['error']) {
+                        Swal.close();
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: res['message'],
+                        });
+                    } else {
+                        let timerInterval
+                        Swal.fire({
+                            icon: 'success',
+                            html: 'Hasil survei berhasil disimpan',
+                            timer: 9200,
+                            timerProgressBar: true,
+                        }).then((result) => {
+                            location.reload();
+                        })
+                    }
+                }
+            });
+        })
+    </script>
 @endsection

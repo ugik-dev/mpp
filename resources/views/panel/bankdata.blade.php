@@ -1,7 +1,7 @@
 @extends('panel/layout/userLayout')
 @section('vendor-style')
-    <website href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <website href="{{ asset('admin/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet" />
+    <public href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <public href="{{ asset('admin/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet" />
     <style>
         .select2-container--bootstrap {
             border: 1px solid #d1d3e2 !important;
@@ -22,7 +22,7 @@
 @section('content')
     <div class="container-fluid">
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Management Instansi</h1>
+            <h1 class="h3 mb-0 text-gray-800">Management Bank Data</h1>
         </div>
         <div class="card shadow mb-4">
             <div class="card-header py-3 d-flex justify-content-between align-items-center">
@@ -31,7 +31,7 @@
                     <span class="icon text-white-50">
                         <i class="fas fa-plus"></i>
                     </span>
-                    <span class="text">Tambah Instansi</span>
+                    <span class="text">Tambah Bank Data</span>
                 </button>
             </div>
             <div class="card-body">
@@ -43,14 +43,14 @@
                                     <thead>
                                         <tr>
                                             <th>ID</th>
-                                            <th>Nama Instansi</th>
-                                            <th>Alamat</th>
-                                            <th>Phone</th>
-                                            <th>Whatsapp</th>
-                                            <th>Email</th>
-                                            <th>Website</th>
-                                            <th>Logo</th>
-                                            <th>Sampul</th>
+                                            <th>Nama Bank Data</th>
+                                            <th>Description</th>
+                                            <th>Tanggal</th>
+                                            <th>Jenis</th>
+                                            <th>Instansi</th>
+                                            <th>Upload By</th>
+                                            <th>Publik</th>
+                                            <th>File</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
@@ -67,70 +67,72 @@
         aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <form class="" id="form-agency" novalidate="novalidate">
+                <form class="" id="form-bank-data" novalidate="novalidate">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Form Instansi</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Form Bank Data</h5>
                         <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">x</button>
                     </div>
                     <div class="modal-body">
                         @csrf
                         <input type="text" id="id" class="" name="id" />
                         <div class="col-sm-12 mb-3">
-                            <label for="basicFullname" class="form-label">Nama Instansi:</label>
+                            <label for="basicFullname" class="form-label">Nama File:</label>
                             <input type="text" id="name" class="form-control" name="name" placeholder=""
                                 required>
                         </div>
                         <div class="col-md-12 mb-3">
-                            <label for="basicFullname" class="form-label">Alamat:</label>
-                            <input type="text" id="alamat" class="form-control" name="alamat" placeholder=""
+                            <label for="basicFullname" class="form-label">Description:</label>
+                            <input type="text" id="description" class="form-control" name="description" placeholder=""
                                 required>
                             <div class="invalid-feedback">
                             </div>
                         </div>
-                        <div class="col-sm-12">
-                            <div class="row">
-                                <div class="col-md-4 mb-3">
-                                    <label for="basicFullname" class="form-label">Telepon:</label>
-                                    <input type="text" id="phone" class="form-control" name="phone">
-                                    <div class="invalid-feedback">
-                                    </div>
-                                </div>
-                                <div class="col-sm-12 mb-3">
-                                    <label for="basicFullname" class="form-label">Whatsapp :</label>
-                                    <input type="text" id="whatsapp" class="form-control" name="whatsapp"
-                                        placeholder="">
-                                    <div class="invalid-feedback">
-                                    </div>
-                                </div>
-                                <div class="col-sm-12 mb-3">
-                                    <label for="basicFullname" class="form-label">Website :</label>
-                                    <input type="text" id="website" class="form-control" name="website" placeholder="">
-                                    <div class="invalid-feedback">
-                                    </div>
-                                </div>
-                                <div class="col-sm-12 mb-3">
-                                    <label for="basicFullname" class="form-label">Email :</label>
-                                    <input type="email" id="email" class="form-control" name="email"
-                                        placeholder="">
-                                    <div class="invalid-feedback">
-                                    </div>
-                                </div>
+                        <div class="col-md-12 mb-3">
+                            <label for="basicFullname" class="form-label">Tanggal Dokumen:</label>
+                            <input type="date" id="tanggal_dokumen" class="form-control" name="tanggal_dokumen"
+                                placeholder="" required>
+                            <div class="invalid-feedback">
                             </div>
                         </div>
 
 
-
-                        <div class="col-sm-12 mb-3">
-                            <label for="basicFullname" class="form-label">Logo:</label>
-                            <input type="file" id="logo_agency" name="logo_agency_upload" accept="image/*"
-                                class="form-control">
+                        <div class="col-md-12 mb-3">
+                            <label for="basicFullname" class="form-label">Jenis:</label>
+                            <select type="text" id="ref_id" class="form-control" name="ref_id">
+                                <option value="">-</option>
+                                @foreach ($refBankData as $ref)
+                                    <option value="{{ $ref->id }}">{{ $ref->name }}</option>
+                                @endforeach
+                            </select>
                             <div class="invalid-feedback">
                             </div>
                         </div>
                         <div class="col-sm-12 mb-3">
-                            <label for="basicFullname" class="form-label">Gambar Sampul:</label>
-                            <input type="file" id="image_agency" name="image_agency_upload" accept="image/*"
-                                class="form-control">
+                            <label for="basicFullname" class="form-label">Instansi :</label>
+                            <select type="text" id="agency_id" class="form-control" name="agency_id">
+                                <option value="">-</option>
+                                @foreach ($refAgency as $ref)
+                                    <option value="{{ $ref->id }}">{{ $ref->name }}</option>
+                                @endforeach
+                            </select>
+                            <div class="invalid-feedback">
+                            </div>
+                        </div>
+                        <div class="col-sm-12 mb-3">
+                            <label for="basicFullname" class="form-label">Publik Aksess :</label>
+                            <select type="text" id="public" class="form-control" name="public">
+                                <option value="">-</option>
+                                <option value="Y">Tampilkan</option>
+                                <option value="N">Tutup</option>
+
+                            </select>
+                            <div class="invalid-feedback">
+                            </div>
+                        </div>
+                        <div class="col-sm-12 mb-3">
+                            <label for="basicFullname" class="form-label">File:</label>
+                            <input type="file" id="file_bank_data" name="file_bank_data_upload"
+                                accept="image/*, .pdf, .doc, .docx, .xls, .xlsx, .ppt, .pptx" class="form-control">
                             <div class="invalid-feedback">
                             </div>
                         </div>
@@ -164,7 +166,7 @@
                 searching: true,
                 ordering: true,
                 ajax: {
-                    url: "{{ route('manage.agency.index') }}",
+                    url: "{{ route('manage.bank-data.index') }}",
                     dataSrc: function(response) {
                         dataRes = response.data;
                         dataRow = [];
@@ -181,27 +183,27 @@
                         data: "name",
                         name: "name"
                     }, {
-                        data: "alamat",
-                        name: "alamat"
+                        data: "description",
+                        name: "description"
                     }, {
-                        data: "phone",
-                        name: "phone"
+                        data: "tanggal_dokumen",
+                        name: "tanggal_dokumen"
                     }, {
-                        data: "whatsapp",
-                        name: "whatsapp"
+                        data: "ref_name",
+                        name: "ref_name"
+                    }, {
+                        data: "agency_name",
+                        name: "agency_name"
+                    }, {
+                        data: "user_name",
+                        name: "user_name"
                     },
                     {
-                        data: "email",
-                        name: "email"
+                        data: "public_span",
+                        name: "public_span"
                     }, {
-                        data: "website_link",
-                        name: "website"
-                    }, {
-                        data: "logo_span",
-                        name: "logo"
-                    }, {
-                        data: "img",
-                        name: "img"
+                        data: "filename_span",
+                        name: "filename_span"
                     }, {
                         data: "aksi",
                         name: "aksi"
@@ -213,53 +215,53 @@
                 name: {
                     required: false
                 },
-                alamat: {
+                description: {
                     required: false,
                 },
                 button: {
                     required: true
                 },
-                phone: {
+                ref_id: {
                     required: false,
                 },
-                whatsapp: {
-                    required: true,
+                agency_id: {
+                    required: false,
                 },
             };
 
-            var AgencyForm = {
-                'form': $('#form-agency'),
+            var BankDataForm = {
+                'form': $('#form-bank-data'),
                 'modal': $('#user_modal'),
-                'insertBtn': $('#form-agency').find('#insertBtn'),
-                'updateBtn': $('#form-agency').find('#updateBtn'),
-                'id': $('#form-agency').find('#id'),
-                'name': $('#form-agency').find('#name'),
-                'alamat': $('#form-agency').find('#alamat'),
-                'whatsapp': $('#form-agency').find('#whatsapp'),
-                'website': $('#form-agency').find('#website'),
-                'email': $('#form-agency').find('#email'),
-                'phone': $('#form-agency').find('#phone'),
-                'logo_agency': $('#form-agency').find('#logo_agency'),
-                'image_agency': $('#form-agency').find('#image_agency'),
+                'insertBtn': $('#form-bank-data').find('#insertBtn'),
+                'updateBtn': $('#form-bank-data').find('#updateBtn'),
+                'id': $('#form-bank-data').find('#id'),
+                'name': $('#form-bank-data').find('#name'),
+                'description': $('#form-bank-data').find('#description'),
+                'tanggal_dokumen': $('#form-bank-data').find('#tanggal_dokumen'),
+                'agency_id': $('#form-bank-data').find('#agency_id'),
+                'public': $('#form-bank-data').find('#public'),
+                'email': $('#form-bank-data').find('#email'),
+                'ref_id': $('#form-bank-data').find('#ref_id'),
+                'file_bank_data': $('#form-bank-data').find('#file_bank_data'),
             }
 
             datatable.on('click', '.edit-btn', (ev) => {
                 var id = $(ev.currentTarget).data('id');
                 currentData = dataRow[id];
-                AgencyForm.form.trigger('reset')
-                AgencyForm.insertBtn.attr('style', 'display: none !important');
-                AgencyForm.updateBtn.attr('style', 'display: ""');
-                activeBtn = AgencyForm.updateBtn;
-                AgencyForm.logo_agency.prop('required', false);
-                AgencyForm.image_agency.prop('required', false);
-                AgencyForm.modal.modal('show');
-                AgencyForm.id.val(currentData['id']);
-                AgencyForm.name.val(decodeHTML(currentData['name']));
-                AgencyForm.alamat.val(decodeHTML(currentData['alamat']));
-                AgencyForm.phone.val(currentData['phone']);
-                AgencyForm.whatsapp.val(currentData['whatsapp']);
-                AgencyForm.website.val(currentData['website']);
-                AgencyForm.email.val(currentData['email']);
+                BankDataForm.form.trigger('reset')
+                BankDataForm.insertBtn.attr('style', 'display: none !important');
+                BankDataForm.updateBtn.attr('style', 'display: ""');
+                activeBtn = BankDataForm.updateBtn;
+                BankDataForm.file_bank_data.prop('required', false);
+                BankDataForm.modal.modal('show');
+                BankDataForm.id.val(currentData['id']);
+                BankDataForm.name.val(decodeHTML(currentData['name']));
+                BankDataForm.description.val(decodeHTML(currentData['description']));
+                BankDataForm.tanggal_dokumen.val(decodeHTML(currentData['tanggal_dokumen']));
+                BankDataForm.ref_id.val(currentData['ref_id']);
+                BankDataForm.agency_id.val(currentData['agency_id']);
+                BankDataForm.public.val(currentData['public']);
+                BankDataForm.email.val(currentData['email']);
             })
 
             $.ajaxSetup({
@@ -279,7 +281,7 @@
                         return;
                     }
                     $.ajax({
-                        url: "<?= route('manage.agency.delete') ?>/",
+                        url: "<?= route('manage.bank-data.delete') ?>/",
                         'type': 'DELETE',
                         data: {
                             '_token': token,
@@ -299,34 +301,33 @@
             });
 
             $('#addBtn').on('click', function() {
-                AgencyForm.form.trigger('reset')
+                BankDataForm.form.trigger('reset')
                 // var $newOption4 = $("<option selected='selected'></option>").val('').text("--");
-                // AgencyForm.user_id.append($newOption4).trigger('change');
-                AgencyForm.updateBtn.attr('style', 'display: none !important');
-                AgencyForm.insertBtn.attr('style', 'display: ""');
-                AgencyForm.logo_agency.prop('required', false);
-                AgencyForm.image_agency.prop('required', false);
-                activeBtn = AgencyForm.insertBtn;
-                AgencyForm.modal.modal('show')
+                // BankDataForm.user_id.append($newOption4).trigger('change');
+                BankDataForm.updateBtn.attr('style', 'display: none !important');
+                BankDataForm.insertBtn.attr('style', 'display: ""');
+                BankDataForm.file_bank_data.prop('required', false);
+                activeBtn = BankDataForm.insertBtn;
+                BankDataForm.modal.modal('show')
             })
 
-            $('#form-agency input,select').on('keyup change', function() {
+            $('#form-bank-data input,select').on('keyup change', function() {
                 validateForm(validationRules, activeBtn)
             });
 
 
-            AgencyForm.form.on('submit', function(event) {
+            BankDataForm.form.on('submit', function(event) {
                 event.preventDefault();
 
                 if (!validateForm(validationRules, activeBtn)) {
                     return false;
                 }
 
-                if (AgencyForm.insertBtn.is(":visible")) {
-                    url = '{{ route('manage.agency.create') }}';
+                if (BankDataForm.insertBtn.is(":visible")) {
+                    url = '{{ route('manage.bank-data.create') }}';
                     metode = 'POST';
                 } else {
-                    url = '{{ route('manage.agency.update') }}';
+                    url = '{{ route('manage.bank-data.update') }}';
                     metode = 'POST';
                 }
                 Swal.fire(SwalOpt()).then((result) => {
@@ -337,7 +338,7 @@
                     $.ajax({
                         url: url,
                         'type': metode,
-                        data: new FormData(AgencyForm.form[0]),
+                        data: new FormData(BankDataForm.form[0]),
                         processData: false,
                         contentType: false,
                         success: function(data) {
@@ -345,9 +346,9 @@
                                 swalError(data['message'], "Simpan Gagal !!");
                                 return;
                             }
-                            var agency = data['data']
+                            var bank_data = data['data']
                             swalBerhasil();
-                            AgencyForm.modal.modal('hide');
+                            BankDataForm.modal.modal('hide');
                             datatable.ajax.reload(null, false);
                         },
                         error: function(e) {}

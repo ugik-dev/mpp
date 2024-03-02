@@ -31,35 +31,36 @@ class AgencyController extends Controller
 
             $data = $data->get();
 
-            $datatable =  DataTables::of($data)->addColumn('id', function ($data) {
+            return  DataTables::of($data)->addColumn('id', function ($data) {
                 return $data->id;
-            })->addColumn('name', function ($data) {
-                return $data->name;
-            })->addColumn('alamat', function ($data) {
-                return $data->alamat;
-            })->addColumn('email', function ($data) {
-                return $data->email;
-            })->addColumn('whatsapp', function ($data) {
-                return $data->whatsapp;
-            })->addColumn('phone', function ($data) {
-                return $data->phone;
-            })->addColumn('website', function ($data) {
-                // return $data->website;
-                return '<a href="' . $data->website . '" >' . $data->website . '</a>';
-            })->addColumn('img', function ($data) {
-                return '<img style="max-width:100px; max-height:80px" src="' . url('/storage/upload/agency_image') . '/' . $data->image . '" alt="' . $data->image . '" class="img-thumbnail">';
-            })->addColumn('logo', function ($data) {
-                return '<img style="max-width:100px; max-height:80px" src="' . url('/storage/upload/agency') . '/' . $data->logo . '" alt="' . $data->image . '" class="img-thumbnail">';
-            })->addColumn('aksi', function ($data) {
-                return '<div class="btn-group" role="group" aria-label="Basic mixed styles example">
+            })
+                // ->addColumn('name', function ($data) {
+                //     return $data->name;
+                // })->addColumn('alamat', function ($data) {
+                //     return $data->alamat;
+                // })->addColumn('email', function ($data) {
+                //     return $data->email;
+                // })->addColumn('whatsapp', function ($data) {
+                //     return $data->whatsapp;
+                // })->addColumn('phone', function ($data) {
+                //     return $data->phone;
+                // })
+                ->addColumn('website_link', function ($data) {
+                    return '<a href="' . $data->website . '" >' . $data->website . '</a>';
+                })->addColumn('img', function ($data) {
+                    return '<img style="max-width:100px; max-height:80px" src="' . url('/storage/upload/agency_image') . '/' . $data->image . '" alt="' . $data->image . '" class="img-thumbnail">';
+                })->addColumn('logo_span', function ($data) {
+                    return '<img style="max-width:100px; max-height:80px" src="' . url('/storage/upload/agency') . '/' . $data->logo . '" alt="' . $data->image . '" class="img-thumbnail">';
+                })->addColumn('aksi', function ($data) {
+                    return '<div class="btn-group" role="group" aria-label="Basic mixed styles example">
                     <phone type="phone" class="edit-btn btn btn-warning" data-id="' . $data->id . '"><i class="fas fa-pencil-alt" ></i></phone>
                     <phone type="phone" class="delete-btn btn btn-danger" data-id="' . $data->id . '"><i class="fas fa-trash" ></i></phone>
                 </div>';
-            })->rawColumns(['aksi', 'img', 'logo', 'website'])->make(true);
-            return response()->json([
-                'datatable' => $datatable,
-                'data_original' => $data
-            ]);
+                })->rawColumns(['aksi', 'img', 'logo_span', 'website_link'])->make(true);
+            // return response()->json([
+            //     'datatable' => $datatable,
+            //     'data_original' => $data
+            // ]);
         }
         $dataContent =  [
             'refRole' => Role::get(),

@@ -16,6 +16,21 @@ $menus = [
         'dropdown' => false,
     ],
     [
+        'label' => 'Bank Data',
+        'url' => route('manage.bank-data.index'),
+        'dropdown' => false,
+    ],
+    [
+        'label' => 'e-Survey / SKM',
+        'url' => route('panel.monitoring.survey'),
+        'dropdown' => false,
+    ],
+    [
+        'label' => 'Pengaduan',
+        'url' => route('panel.monitoring.pengaduan'),
+        'dropdown' => false,
+    ],
+    [
         'label' => 'Pengaturan Home',
         'dropdown' => true,
         'children' => [

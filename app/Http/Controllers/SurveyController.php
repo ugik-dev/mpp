@@ -46,17 +46,8 @@ class SurveyController extends Controller
                 // 'sarpras' => 'integer|min:0|max:5',
                 // 'pengaduan' => 'integer|min:0|max:5',
             ]);
-
-            // Create a new survey instance
-            // $survey = new Survey();
-            // dd($request->input());
-            // Fill the survey instance with validated data
             $data =    Survey::create($request->input());
-
-            // Save the survey to the database
-            // $survey->save();
-
-            // Optionally, you can return a response or redirect to a thank you page
+            // dd($data);
             return $this->responseSuccess($data, 'Survey submitted successfully');
         } catch (QueryException $ex) {
             if ($errorMessage = getDbException($ex->errorInfo)) {

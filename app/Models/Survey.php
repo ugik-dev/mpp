@@ -34,4 +34,11 @@ class Survey extends Model
         'sarpras',
         'pengaduan',
     ];
+
+    public function scopeComplete($query)
+    {
+        return
+            $query
+            ->selectRaw('menus.name as layanan_name')->leftJoin('menus', 'menus.id', '=', 'surveys.layanan');
+    }
 }

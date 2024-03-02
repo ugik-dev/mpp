@@ -13,7 +13,6 @@ class Content extends Model
     public function scopeCreateUniqueSlug($query, $title)
     {
         $slug = Str::slug($title);
-
         $count = 1;
         while ($this->slugExists($slug)) {
             $slug = Str::slug($title) . '-' . $count++;
@@ -53,7 +52,7 @@ class Content extends Model
         return
             $query
             ->selectRaw('ref_contents.name as ref_content_name, prefix')->leftJoin('ref_contents', 'ref_contents.id', '=', 'contents.ref_content_id')
-            ->selectRaw('agencies.name_sort as agency_name')->join('agencies', 'agencies.id', '=', 'contents.agency_id')
+            ->selectRaw('agencies.name_sort as agency_name')->leftJoin('agencies', 'agencies.id', '=', 'contents.agency_id')
             ->selectRaw('users.name as user_name')->join('users', 'users.id', '=', 'contents.user_id');
     }
     public function scopeFilter($query, $filter)

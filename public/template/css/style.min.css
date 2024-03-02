@@ -7521,7 +7521,7 @@ a.category:hover {
 
 .flex-direction-nav {
     list-style: none;
-    *height: 0;
+    height: 0;
     height: 0;
     margin: 0;
     padding: 0;

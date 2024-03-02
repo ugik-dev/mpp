@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AgencyController;
+use App\Http\Controllers\BankDataController;
 use App\Http\Controllers\ContentController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HeroController;
@@ -9,6 +10,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\HeroIconController;
+use App\Http\Controllers\MonitoringController;
 use Illuminate\Support\Facades\Auth;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
@@ -63,6 +65,12 @@ Route::middleware(['auth', 'checkRole:admin,super'])->group(function () {
         Route::post('update', [AgencyController::class, 'update'])->name('update');
         Route::delete('/', [AgencyController::class, 'delete'])->name('delete');
     });
+    Route::prefix('manage/bank-data')->name('manage.bank-data.')->group(function () {
+        Route::get('/', [BankDataController::class, 'index'])->name('index');
+        Route::post('', [BankDataController::class, 'create'])->name('create');
+        Route::post('update', [BankDataController::class, 'update'])->name('update');
+        Route::delete('/', [BankDataController::class, 'delete'])->name('delete');
+    });
 
     Route::prefix('manage/hero-icon')->name('manage.hero-icon.')->group(function () {
         Route::get('/', [HeroIconController::class, 'index'])->name('index');
@@ -73,6 +81,9 @@ Route::middleware(['auth', 'checkRole:admin,super'])->group(function () {
     });
     // Rute untuk panel admin
     Route::get('/panel/users', [DashboardController::class, 'index'])->name('panel.admin.index');
+
+    Route::get('/panel/monitoring/survey', [MonitoringController::class, 'survey'])->name('panel.monitoring.survey');
+    Route::get('/panel/monitoring/pengaduan', [MonitoringController::class, 'pengaduan'])->name('panel.monitoring.pengaduan');
 });
 
 Route::middleware(['auth'])->group(function () {

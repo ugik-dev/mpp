@@ -2,15 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Agency;
+use App\Models\BankData;
 use App\Models\Comment;
 use App\Models\Content;
 use App\Models\Hero;
 use App\Models\HeroIcon;
 use App\Models\Menu;
+use App\Models\RefBankData;
 use App\Models\Survey;
 use Exception;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
+
 
 class HomeController extends Controller
 {
@@ -104,5 +109,39 @@ class HomeController extends Controller
         } catch (Exception $ex) {
             return $this->ResponseError($ex->getMessage());
         }
+    }
+
+
+    public function bank_data(Request $request)
+    {
+        if ($request->ajax()) {
+            $data =  BankData::select('bank_data.*')->complete()->latest();
+            if ($request->has('search') && !empty($request->input('search')['value'])) {
+                $searchValue = $request->input('search')['value'];
+                $data = $data->filter($searchValue);
+            }
+            $data = $data->where('public', 'Y');
+
+            $data = $data->get();
+
+            return  DataTables::of($data)->addColumn('id', function ($data) {
+                return $data->id;
+            })->addColumn('filename_span', function ($data) {
+                return '
+                      <a href="' . url('/bank-data') . '/' . $data->slug . '" alt="Download" target="_blank" class="btn btn-info btn-download w-100"><i class="fa fa-download"></i></a>
+                    ';
+            })->rawColumns(['filename_span'])->make(true);
+        }
+        $refBankData = RefBankData::get();
+        $refAgency = Agency::get();
+        return view('bankdata', compact('request', 'refBankData', 'refAgency'));
+    }
+
+    public function bank_data_download($slug)
+    {
+        $data =  BankData::select('bank_data.*')->where('slug', $slug)->complete()->firstOrFail();
+        $data->increment('view');
+        $filePath = 'storage/upload/bankdata/' . $data->filename;
+        return response()->file($filePath);
     }
 }
