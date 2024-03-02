@@ -3,7 +3,7 @@
         @foreach ($heroes as $hero)
             <div class="item">
                 <div class="item-slider-bg"
-                    style="background-image: url({{ $hero->image ? url('/storage/upload/hero/' . $hero->image) : url('assets/image/bg/1.jpg') }});background-repeat:no-repeat !important;
+                    style="background-image: url({{ $hero->image ? url('/storage/upload/hero/' . $hero->image) : url('assets/background/bg-' . str_pad(rand(1, 23), 2, '0', STR_PAD_LEFT) . '.jpg') }});background-repeat:no-repeat !important;
                     background-position: center center !important;">
                 </div>
                 <div class="container">

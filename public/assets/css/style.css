@@ -1486,7 +1486,7 @@ a.search-toggler {
 * Department
 ***********************/
 .department-section {
-    background-image: url("../image/bg/department-bg-1.jpg");
+    /* background-image: url("../background/bg-13.jpg"); */
     padding-bottom: 20px;
     margin-top: -20px;
 }
@@ -2663,7 +2663,7 @@ a.search-toggler {
 }
 
 .service-card {
-    background-image: url("../image/bg/service-3.jpg");
+    background-image: url("../background/bg-03.jpg");
     position: relative;
     z-index: 1;
     background-position: bottom center;
