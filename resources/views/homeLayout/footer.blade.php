@@ -111,9 +111,10 @@
 <div class="search-popup">
     <div class="search-popup-overlay search-toggler"></div><!-- search-popup-overlay -->
     <div class="search-popup-content">
-        <form action="#">
+        <form action="{{ route('search') }}">
             <label for="search" class="sr-only">search here</label><!-- sr-only -->
-            <input type="text" id="search" placeholder="Search Here...">
+            <input type="text" id="s" name="s" placeholder="Search Here..."
+                value="{{ request()->input('s') }}">
             <button type="submit" aria-label="search submit" class="search-btn">
                 <span><i class="flaticon-search-interface-symbol"></i></span>
             </button><!-- search-btn -->

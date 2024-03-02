@@ -23,10 +23,14 @@ class Menu extends Model
     {
         return $this->belongsTo(self::class, 'parent_id')->with('parent');
     }
-
     public function children()
     {
         return $this->hasMany(self::class, 'parent_id');
+    }
+
+    public function childrens()
+    {
+        return $this->children()->with('childrens');
     }
 
     public function scopeCreateUniqueSlug($query, $title)

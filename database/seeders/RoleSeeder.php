@@ -21,6 +21,7 @@ class RoleSeeder extends Seeder
         $kabid = Role::updateOrCreate(['id' => 4, 'name' => 'kabid', 'title' => 'Kepala Bidang']);
         $kasi = Role::updateOrCreate(['id' => 5, 'name' => 'kasi', 'title' => 'Kepala Seksi']);
         $pegawai = Role::updateOrCreate(['id' => 6, 'name' => 'pegawai', 'title' => 'Pegawai']);
+        $masyarakat = Role::updateOrCreate(['id' => 99, 'name' => 'masyarakat', 'title' => 'Penguuna']);
 
         $respon_call = Permission::updateOrCreate(['name' => 'respon_call']);
         $crud_users = Permission::updateOrCreate(['name' => 'crud_users']);

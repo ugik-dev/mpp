@@ -52,12 +52,12 @@
                                         <a class="btn btn-primary btn-outline-success w-100 portal-btn"
                                             href="{{ url('berita') }}">Layanan</a>
                                     </div>
-                                    @for ($i = 1; $i <= 7; $i++)
+                                    {{-- @for ($i = 1; $i <= 7; $i++)
                                         <div class="col-lg-6 col-sm-7 ">
                                             <button class="btn btn-primary btn-outline-success w-100 portal-btn"
                                                 style="">Website</button>
                                         </div>
-                                    @endfor
+                                    @endfor --}}
                                 </div>
                             </div>
                         </div>

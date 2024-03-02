@@ -792,13 +792,17 @@ a {
 }
 
 .main-menu-logo {
-    min-width: 253px;
+    width: 253px;
     justify-content: center;
     display: flex;
     align-items: center;
-    padding: 33px 20px;
+    padding: 10px 10px;
     background: #fff;
 }
+
+/* .main-menu-log>a>img {
+    width: 100%;
+} */
 
 @media (max-width: 399px) {
     .main-menu-logo {
@@ -1483,7 +1487,7 @@ a.search-toggler {
 ***********************/
 .department-section {
     background-image: url("../image/bg/department-bg-1.jpg");
-    padding-bottom: 120px;
+    padding-bottom: 20px;
     margin-top: -20px;
 }
 
@@ -3424,7 +3428,7 @@ a.search-toggler {
 * Page banner
 ***********************/
 .page-banner {
-    background-image: url("../image/bg/page-banner.png");
+    background-image: url("../image/bg/1.jpg");
     background-repeat: no-repeat;
     background-color: var(--thm-black);
     background-size: cover;
@@ -4302,7 +4306,7 @@ a.search-toggler {
 }
 
 .footer-widget-logo {
-    padding: 45px 60px;
+    padding: 5px 6px;
     max-width: 250px;
     align-items: center;
     color: var(--thm-white);
@@ -5509,10 +5513,12 @@ a.search-toggler {
 
 .testimonial-name {
     position: absolute;
-    left: -20px;
+    left: -40px;
     bottom: 31%;
     letter-spacing: 2px;
-    color: var(--thm-primary);
+    font-weight: bold;
+    font-size: large;
+    color: #ffffff;
     writing-mode: vertical-lr;
     transform: rotate(180deg);
 }
@@ -5941,7 +5947,7 @@ a.search-toggler {
 * News
 ***********************/
 .blog-section {
-    padding-top: 120px;
+    padding-top: 20px;
     padding-bottom: 120px;
 }
 
@@ -5974,6 +5980,7 @@ a.search-toggler {
 
 .blog-card-image img {
     margin-top: -121px;
+    height: 15rem;
 }
 
 @media(max-width: 991px) {
@@ -6091,6 +6098,14 @@ a.search-toggler {
 
 .blog-card-meta .author:before {
     content: "\f2bd";
+    font-family: "Font Awesome 6 Free";
+    font-weight: bold;
+    font-size: 12px;
+    color: var(--thm-primary);
+}
+
+.view:before {
+    content: "\f06e";
     font-family: "Font Awesome 6 Free";
     font-weight: bold;
     font-size: 12px;
@@ -7318,7 +7333,7 @@ label {
 }
 
 .sidebar-widget-card {
-    background-image: url("../image/shapes/widget-1.png");
+    background-image: url("../image/shapes/widget-1.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     padding: 45px 50px;

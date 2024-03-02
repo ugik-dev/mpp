@@ -183,33 +183,27 @@
                     }
                 },
                 columns: [{
-
-                        data: "id",
-                        name: "id"
-                    }, {
-                        data: "level",
-                        visible: false,
-                    },
-                    {
-                        data: "key",
-                        visible: false,
-                    },
-                    {
-                        data: "parent",
-                        visible: false,
-                    },
-                    {
-                        data: "name",
-                        type: "custom",
-                    },
-                    {
-                        data: "value",
-                        type: "custom",
-                    }, {
-                        data: "aksi",
-                        name: "aksi"
-                    },
-                ]
+                    data: "id",
+                    name: "id"
+                }, {
+                    data: "username",
+                    name: "username"
+                }, {
+                    data: "name",
+                    name: "name"
+                }, {
+                    data: "phone",
+                    name: "phone"
+                }, {
+                    data: "role_title",
+                    name: "role_title"
+                }, {
+                    data: "agency_name",
+                    name: "agency_name"
+                }, {
+                    data: "aksi",
+                    name: "aksi"
+                }, ]
             });
             var activeBtn;
             var validationRules = {

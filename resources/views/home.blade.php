@@ -162,8 +162,8 @@
         </section><!--mayor-section-->
         <section class="portfolio-section">
             <div class="section-title-box text-center">
-                <div class="section-tagline">recent work portfolio</div>
-                <h2 class="section-title">Explore City Highlights <br>Portfolios</h2>
+                <div class="section-tagline">Gelari</div>
+                <h2 class="section-title">Beberapa Event Kami</h2>
             </div><!-- section-title-box -->
             <div class="portfolio-content conatainer-fluid">
                 <div class="portfolio-carousel owl-carousel owl-theme">
@@ -231,89 +231,49 @@
         </section><!--client-section-->
         <section class="testimonial-section">
             <div class="container">
-                <div class="testimonial-name">Apa tanggapan Masyarakat</div>
+                <div class="section-title-box text-center">
+                    <h2 class="section-title text-white">Tanggapan Publik</h2>
+                </div>
+                <div class="testimonial-name">Tanggapan Publik </div>
                 <div class="testimonial-slider">
                     <div class="swiper testimonial-reviews">
                         <div class="swiper-wrapper">
-                            <div class="swiper-slide">
-                                <div class="testimonial-content">
-                                    <div class="testimonial-ratings">
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                    </div><!-- testimonial-ratings -->
-                                    <div class="testimonial-text">
-                                        This is due to their excellent service, competitive pricing and customer
-                                        support. It’s throughly refresing to get such a personal touch. Duis aute lorem
-                                        ipsum is simply free text irure dolor in reprehenderit in esse nulla pariatur.
-                                    </div><!-- testimonial-text -->
-                                    <div class="testimonial-thumb-card">
-                                        <h5>Martin McLaughlin</h5>
-                                        <span>Customer</span>
-                                    </div><!-- testimonial-thumb-card -->
-                                </div><!--testimonial-content-->
-                            </div><!--swiper-slide-->
-                            <div class="swiper-slide">
-                                <div class="testimonial-content">
-                                    <div class="testimonial-ratings">
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                    </div><!-- testimonial-ratings -->
-                                    <div class="testimonial-text">
-                                        This is due to their excellent service, competitive pricing and customer
-                                        support. It’s throughly refresing to get such a personal touch. Duis aute lorem
-                                        ipsum is simply free text irure dolor in reprehenderit in esse nulla pariatur.
-                                    </div><!-- testimonial-text -->
-                                    <div class="testimonial-thumb-card">
-                                        <h5>Aleesha Brown</h5>
-                                        <span>Customer</span>
-                                    </div><!-- testimonial-thumb-card -->
-                                </div><!--testimonial-content-->
-                            </div><!--swiper-slide-->
-                            <div class="swiper-slide">
-                                <div class="testimonial-content">
-                                    <div class="testimonial-ratings">
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                    </div><!-- testimonial-ratings -->
-                                    <div class="testimonial-text">
-                                        This is due to their excellent service, competitive pricing and customer
-                                        support. It’s throughly refresing to get such a personal touch. Duis aute lorem
-                                        ipsum is simply free text irure dolor in reprehenderit in esse nulla pariatur.
-                                    </div><!-- testimonial-text -->
-                                    <div class="testimonial-thumb-card">
-                                        <h5>Dian Firnandy, SE</h5>
-                                        <span>Member</span>
-                                    </div><!-- testimonial-thumb-card -->
-                                </div><!--testimonial-content-->
-                            </div><!--swiper-slide-->
+                            @foreach ($surveys as $survey)
+                                <div class="swiper-slide">
+                                    <div class="testimonial-content">
+                                        <div class="testimonial-ratings">
+                                            @for ($i = 1; $i <= 5; $i++)
+                                                <i class="fa fa-star{{ $survey->respon >= $i ? '' : '-o' }}"></i>
+                                            @endfor
+                                            {{-- <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star-o"></i> --}}
+                                        </div><!-- testimonial-ratings -->
+                                        <div class="testimonial-text">
+                                            {{ $survey->alasan }}
+                                        </div><!-- testimonial-text -->
+                                        <div class="testimonial-thumb-card">
+                                            <h5>{{ $survey->nama }}</h5>
+                                            <span>{{ $survey->alamat }}</span>
+                                        </div><!-- testimonial-thumb-card -->
+                                    </div><!--testimonial-content-->
+                                </div>
+                            @endforeach
                         </div><!-- swiper-wrapper -->
                         <div class="swiper-pagination"></div>
                     </div><!--swiper testimonial-reviews-->
-                    <div class="testimonial-thumb">
+                    {{-- <div class="testimonial-thumb">
                         <div class="swiper-wrapper">
-                            <div class="swiper-slide">
-                                <img src="assets/image/testimonial/testimonial-2.jpg" class="img-fluid" alt="img-17">
-                                <i class="fa-solid fa-quote-left"></i>
-                            </div><!-- swiper-slide -->
-                            <div class="swiper-slide">
-                                <img src="assets/image/testimonial/testimonial-3.jpg" class="img-fluid" alt="img-18">
-                                <i class="fa-solid fa-quote-left"></i>
-                            </div><!-- swiper-slide -->
-                            <div class="swiper-slide">
-                                <img src="assets/image/testimonial/testimonial-4.jpg" class="img-fluid" alt="img-19">
-                                <i class="fa-solid fa-quote-left"></i>
-                            </div><!-- swiper-slide -->
+                            @foreach ($surveys as $survey)
+                                <div class="swiper-slide">
+                                    <img src="assets/image/testimonial/testimonial-2.jpg" class="img-fluid"
+                                        alt="img-17">
+                                    <i class="fa-solid fa-quote-left"></i>
+                                </div>
+                            @endforeach
                         </div><!--swiper-wrapper-->
-                    </div><!--testimonial-thumb-->
+                    </div><!--testimonial-thumb--> --}}
                 </div><!--testimonial-slider-->
             </div><!-- container -->
         </section><!--testimonial-section-->
@@ -323,7 +283,7 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="section-title-box">
-                                <div class="section-tagline">LATEST EVENTS</div>
+                                <div class="section-tagline">EVENTS TERBARU</div>
                                 <h2 class="section-title">Explore Upcoming City Event Schedule</h2>
                             </div><!-- section-title-box -->
                         </div><!--col-lg-6-->
@@ -338,7 +298,7 @@
                         </div><!-- col-lg-6 -->
                     </div><!-- row -->
                     <div class="row row-gutter-y-40">
-                        <div class="col-xl-5">
+                        {{-- <div class="col-xl-5">
                             <div class="event-subscribe-card">
                                 <div class="event-details-card-title">
                                     <div class="event-icon">
@@ -358,43 +318,48 @@
                                     </form><!-- form -->
                                 </div><!-- event-details-card-content -->
                             </div><!-- event-subscribe-card -->
-                        </div><!-- col-xl-5 -->
-                        <div class="col-xl-7">
-                            <div class="event-card">
-                                <div class="event-card-image">
-                                    <div class="event-card-image-inner">
-                                        <a href="event-details.html"><img src="assets/image/event/event-2.jpg"
-                                                class="img-fluid" alt="img-20"></a>
-                                        <div class="event-card-meta">
-                                            <div class="event-meta-number">
-                                                <span>28</span>
-                                            </div><!-- event-meta-number -->
-                                            <div class="event-meta-date">
-                                                <span>October 2022</span>
-                                            </div><!-- event-meta-date -->
-                                        </div><!-- event-card-meta -->
-                                    </div><!-- event-card-image-inner -->
-                                </div><!--event-card-image-->
-                                <div class="event-card-content">
-                                    <div class="event-card-info">
-                                        <ul class="list-unstyled">
-                                            <li>
-                                                <i class="fa-solid fa-clock"></i>
-                                                <span>08:00am - 05:00pm</span>
-                                            </li><!-- li -->
-                                            <li>
-                                                <i class="fa-sharp fa-solid fa-location-pin"></i>
-                                                <span>New Hyde Park, NY 11040</span>
-                                            </li><!-- li -->
-                                        </ul><!-- list-unstyled -->
-                                    </div><!--event-card-info-->
-                                    <div class="event-card-title">
-                                        <h4><a href="event-details.html">Organizing 2022 city photography new
-                                                contest</a></h4>
-                                    </div><!-- event-card-title -->
-                                </div><!--"event-card-content-->
-                            </div><!--event-card-->
-                            <div class="event-card">
+                        </div><!-- col-xl-5 --> --}}
+                        <div class="col-xl-12">
+                            <div class="row">
+
+                                @foreach ($events as $event)
+                                    <div class="col-xl-6">
+                                        <div class="event-card">
+                                            <div class="event-card-image">
+                                                <div class="event-card-image-inner">
+                                                    <a href="event-details.html">
+                                                        @if ($event->sampul)
+                                                            <img src="{{ url('storage/upload/content/' . $event->sampul) }}"
+                                                                class="img-fluid" style="width: 250px; height: 250px"
+                                                                alt="img-22">
+                                                        @else
+                                                            <img src="assets/image/bg/1.jpg"
+                                                                style="width: 250px; height: 250px" class="img-fluid"
+                                                                alt="img-22">
+                                                        @endif
+                                                        <div class="event-card-meta">
+                                                            <div class="event-meta-number">
+                                                                <span>{{ \Carbon\Carbon::parse($event->tanggal)->format('d') }}</span>
+                                                            </div><!-- event-meta-number -->
+                                                            <div class="event-meta-date">
+                                                                <span>{{ \Carbon\Carbon::parse($event->tanggal)->format('F Y') }}</span>
+                                                            </div><!-- event-meta-date -->
+                                                        </div><!-- event-card-meta -->
+                                                </div><!-- event-card-image-inner -->
+                                            </div><!--event-card-image-->
+                                            <div class="event-card-content">
+                                                <div class="event-card-title">
+                                                    <h4><a
+                                                            href="{{ route('blog', [$event->prefix, $event->judul]) }}">{{ $event->judul }}</a>
+                                                    </h4>
+                                                </div><!-- event-card-title -->
+                                            </div><!--"event-card-content-->
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+
+                            {{-- <div class="event-card">
                                 <div class="event-card-image">
                                     <div class="event-card-image-inner">
                                         <a href="event-details.html"><img src="assets/image/event/event-3.jpg"
@@ -409,31 +374,13 @@
                                         </div><!-- event-card-meta -->
                                     </div><!-- event-card-image-inner -->
                                 </div><!-- event-card-image -->
-                                <div class="event-card-content">
-                                    <div class="event-card-info">
-                                        <ul class="list-unstyled">
-                                            <li>
-                                                <i class="fa-solid fa-clock"></i>
-                                                <span>08:00am - 05:00pm</span>
-                                            </li><!-- li -->
-                                            <li>
-                                                <i class="fa-sharp fa-solid fa-location-pin"></i>
-                                                <span>New Hyde Park, NY 11040</span>
-                                            </li><!-- li -->
-                                        </ul><!-- list-unstyled -->
-                                    </div><!--event-card-info-->
-                                    <div class="event-card-title">
-                                        <h4><a href="event-details.html">Organizing 2022 city photography new
-                                                contest</a></h4>
-                                    </div><!-- event-card-title -->
-                                </div><!--event-card-content-->
-                            </div><!--event-card-->
+                            </div><!--event-card--> --}}
                         </div><!-- col-xl-7 -->
                     </div><!-- row -->
                 </div><!--event-section-inner-->
             </div><!--container-->
         </section><!--event-section-->
-        <section class="cta-five-section">
+        {{-- <section class="cta-five-section">
             <div class="container">
                 <div class="cta-five-card">
                     <div class="cta-five-card-icon">
@@ -452,24 +399,24 @@
                     </div><!-- cta-five-img -->
                 </div><!--cta-five-card-->
             </div><!-- container -->
-        </section><!--cta-five-section-->
+        </section><!--cta-five-section--> --}}
 
         <section class="cta-two-section">
             <div class="container">
                 <div class="cta-two-section-inner">
                     <div class="row">
-                        <div class="col-xl-5">
+                        <div class="col-xl-6">
                             <div class="cta-two-title">
                                 <div class="cta-two-card-icon">
                                     <i class="flaticon-envelope-2"></i>
                                 </div><!-- cta-two-card-icon -->
                                 <div class="cta-two-card-content">
-                                    <p>Stay Connected</p>
-                                    <h3>Join Our Newsletter</h3>
+                                    <p>Tetap Terhubung Untuk Mendapatkan Update Terbaru</p>
+                                    <h3>Bergabung dengan kami</h3>
                                 </div><!-- cta-two-card-content -->
                             </div><!--cta-two-title-->
                         </div><!--col-xl-5-->
-                        <div class="col-xl-7">
+                        <div class="col-xl-6">
                             <form action="assets/inc/sendemail.php" class="cta-two-form" method="post">
                                 <div class="cta-two-form-group">
                                     <input type="email" id="email" class="input-text" placeholder="Email address"

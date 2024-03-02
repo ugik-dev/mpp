@@ -58,6 +58,7 @@ class MenuSeeder extends Seeder
 
         Menu::updateOrCreate(['jenis' => 'N', 'slug' => 'bank-data', 'name' => 'Bank Data', 'deletable' => 'N', 'editable' => 'N']);
         Menu::updateOrCreate(['jenis' => 'N', 'slug' => 'pengaduan', 'name' => 'Pengaduan', 'deletable' => 'N', 'editable' => 'N']);
-        Menu::updateOrCreate(['jenis' => 'N', 'slug' => 'informasi', 'name' => 'Informasi', 'deletable' => 'N', 'editable' => 'N']);
+        $id_informasi =     Menu::updateOrCreate(['jenis' => 'N', 'slug' => 'informasi', 'name' => 'Informasi', 'deletable' => 'N', 'editable' => 'N'])->id;
+        Menu::updateOrCreate(['jenis' => 'route', 'parent_id' => $id_informasi, 'slug' => 'survey', 'name' => 'e-Survey', 'deletable' => 'N', 'editable' => 'N']);
     }
 }

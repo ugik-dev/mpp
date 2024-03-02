@@ -43,7 +43,7 @@
             <div class="main-menu-left">
                 <div class="main-menu-logo">
                     <a href="index.html"><img src="{{ asset('assets/image/logo.png') }}" alt="img-1"
-                            width="140"></a>
+                            width="100%"></a>
                 </div>
                 <div class="navigation">
                     @php
@@ -77,6 +77,8 @@
                                                     } else {
                                                         $ch_link = url($menu->slug . '/' . $ch->slug);
                                                     }
+                                                } elseif ($ch->jenis == 'route') {
+                                                    $ch_link = route($ch->slug);
                                                 } elseif ($ch->jenis == 'N') {
                                                     $ch_link = '#';
                                                 } else {
@@ -107,6 +109,8 @@
                                                                                 $ch2->slug,
                                                                         );
                                                                     }
+                                                                } elseif ($ch2->jenis == 'route') {
+                                                                    $ch2_link = route($ch2->slug);
                                                                 } elseif ($ch2->jenis == 'N') {
                                                                     $ch2_link = '#';
                                                                 } else {
@@ -186,7 +190,7 @@
                     <span></span>
                 </div><!-- mobile-menu-button -->
                 <div class="search-box">
-                    <a href="#" class="search-toggler">
+                    <a href="{{ route('search') }}" class="search-toggler">
                         <i class="flaticon-search-interface-symbol"></i>
                     </a><!-- search-toggler -->
                 </div><!-- search-box -->

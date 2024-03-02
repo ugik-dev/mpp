@@ -20,7 +20,6 @@ return new class extends Migration
                 ->references('id')
                 ->on('ref_contents')
                 ->onDelete('cascade');
-
             $table->unsignedBigInteger('agency_id')->nullable();
             $table->foreign('agency_id')
                 ->references('id')
@@ -32,6 +31,7 @@ return new class extends Migration
                 ->on('users')
                 ->onDelete('cascade');
             $table->string('judul');
+            $table->integer('view')->default(0);
             $table->string('slug')->unique();
             $table->text('content')->nullable();
             $table->string('sampul')->nullable();

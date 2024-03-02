@@ -36,7 +36,6 @@ class ContentController extends Controller
             }
 
             $data = $data->get();
-
             return DataTables::of($data)->addColumn('id', function ($data) {
                 return $data->id;
             })->addColumn('created_at', function ($data) {

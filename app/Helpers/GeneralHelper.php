@@ -17,6 +17,13 @@ if (!function_exists('menus')) {
         return susunMenu($menus);
     }
 }
+if (!function_exists('category')) {
+    function category()
+    {
+        $category = DB::table('ref_contents')->get()->toArray();
+        return $category;
+    }
+}
 if (!function_exists('susunParent')) {
     function susunParent($data, &$result = [])
     {

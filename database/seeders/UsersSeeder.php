@@ -20,12 +20,13 @@ class UsersSeeder extends Seeder
      */
     public function run(): void
     {
+        $pwd = Hash::make('123');
         $admin = User::updateOrCreate(
             [
                 'username' => 'super',
                 'name' => 'Super Admin',
                 'email' => 'super.admin@gmail.com',
-                'password' => Hash::make('123'),
+                'password' => $pwd,
                 'role_id' => 1
             ],
         );
@@ -42,7 +43,7 @@ class UsersSeeder extends Seeder
                     'name' => 'Admin ' . $i->name_sort,
                     'agency_id' =>  $i->id,
                     'email' => strtolower($i->name_sort) . '@mail.com',
-                    'password' => Hash::make('123'),
+                    'password' => $pwd,
                     'role_id' => 7
                 ],
             );
@@ -56,24 +57,18 @@ class UsersSeeder extends Seeder
         //     echo "SQL file not found at $sqlFilePath\n";
         // }
 
-        // for ($i = 0; $i < 1000; $i++) {
-        //     User::create([
-        //         'name' => fake()->name(),
-        //         'username' => fake()->unique()->userName(),
-        //         'email' => fake()->unique()->safeEmail(),
-        //         'email_verified_at' => now(),
-        //         'role_id' => '7',
-        //         'password' => Hash::make('123'),
-        //         'remember_token' => Str::random(10),
-
-        //         // 'username' => fake()->name(),
-        //         // 'name' => $faker->name,
-        //         // 'email' => fake()->unique()->safeEmail(),
-        //         // 'email_verified_at' => now(),
-        //         // 'password' => Hash::make('password'),
-        //         // 'role_id' => $faker->randomElement([2, 3, 4, 5, 6]),
-        //         // 'remember_token' => Str::random(10),
-        //     ]);
-        // }
+        for ($i = 0; $i < 1000; $i++) {
+            User::create([
+                'name' => fake()->name(),
+                'phone' => fake()->phoneNumber(),
+                'alamat' => fake()->streetAddress(),
+                'username' => fake()->unique()->userName(),
+                'email' => fake()->unique()->safeEmail(),
+                'email_verified_at' => now(),
+                'role_id' => 99,
+                'password' => $pwd,
+                'remember_token' => Str::random(10),
+            ]);
+        }
     }
 }
