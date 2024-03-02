@@ -31,9 +31,9 @@
             </div><!-- topbar-left -->
             <div class="topbar-right">
                 <ul>
-                    <li><a href="department-details.html">MPP</a></li>
-                    <li><a href="departments.html">Pemkab Bangka</a></li>
-                    <li><a href="contact.html">Komplain</a></li>
+                    <li><a href="{{ route('home') }}">MPP</a></li>
+                    <li><a href="https://bangka.go.id/">Pemkab Bangka</a></li>
+                    <li><a href="{{ route('login') }}">Login</a></li>
                 </ul>
             </div>
         </div>
