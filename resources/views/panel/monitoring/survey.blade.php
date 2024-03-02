@@ -56,9 +56,6 @@
                                             <th>prilaku</th>
                                             <th>sarpras</th>
                                             <th>pengaduan</th>
-                                            {{-- <th>Publik</th>
-                                            <th>File</th>
-                                            <th>Aksi</th> --}}
                                         </tr>
                                     </thead>
                                 </table>
