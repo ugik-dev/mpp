@@ -83,8 +83,8 @@
                                         <img src="{{ url('storage/upload/content/' . $item->sampul) }}"
                                             class="img-fluid img-search" alt="">
                                     @else
-                                        <img src="assets/image/event/event-3.jpg" class="img-fluid img-search"
-                                            alt="img-22">
+                                        <img src="assets/background/bg-{{ str_pad(rand(1, 23), 2, '0', STR_PAD_LEFT) }}.jpg"
+                                            class="img-fluid img-search" alt="img-22">
                                     @endif
                                     <a href="{{ $url }}"></a>
                                 </div><!-- blog-card-image -->

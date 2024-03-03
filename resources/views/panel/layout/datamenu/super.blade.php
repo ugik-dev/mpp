@@ -31,7 +31,7 @@ $menus = [
         'dropdown' => false,
     ],
     [
-        'label' => 'Pengaturan Home',
+        'label' => 'Pengaturan',
         'dropdown' => true,
         'children' => [
             [
@@ -39,7 +39,8 @@ $menus = [
                 'url' => route('manage.hero.index'),
             ],
             ['label' => 'Hero Icon', 'url' => route('manage.hero-icon.index')],
-            ['label' => 'Hero3', 'url' => route('manage.hero.index')],
+            ['label' => 'Landing Page', 'url' => route('manage.home')],
+            ['label' => 'Website', 'url' => route('manage.profile')],
         ],
     ],
     [

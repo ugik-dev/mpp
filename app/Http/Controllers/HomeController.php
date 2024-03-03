@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Agency;
 use App\Models\BankData;
 use App\Models\Comment;
+use App\Models\ConfHome;
 use App\Models\Content;
 use App\Models\Hero;
 use App\Models\HeroIcon;
@@ -23,11 +24,12 @@ class HomeController extends Controller
     {
         $heroes = Hero::get();
         $hero_icon = HeroIcon::get();
+        $conf_home = ConfHome::first();
         $sidbar_lates_content = Content::with('comment')->select('contents.*')->complete()->latest('tanggal')->limit(6)->get();
         $events = Content::with('comment')->select('contents.*')->where('ref_content_id', 5)->complete()->latest('tanggal')->limit(4)->get();
         $surveys = Survey::latest('created_at')->limit(10)->get();
         // dd($event);
-        return view('home', compact('heroes', 'hero_icon', 'sidbar_lates_content', 'events', 'surveys'));
+        return view('home', compact('heroes', 'hero_icon', 'sidbar_lates_content', 'events', 'surveys', 'conf_home'));
     }
     public function portal()
     {
@@ -81,8 +83,6 @@ class HomeController extends Controller
         $data->increment('view');
         $sidebar = Menu::with('parent')->where('parent_id', 1)->get();
         $sidbar_lates_content = Content::select('contents.*')->complete()->where('slug', '<>', $slug)->latest('tanggal')->take(5)->get();
-        // dd($sidbar_lates_content);
-
         return view('blog', compact('data', 'sidbar_lates_content', 'sidebar'));
     }
 

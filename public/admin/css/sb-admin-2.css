@@ -103,6 +103,11 @@ p {
     margin-bottom: 1rem;
 }
 
+.thumb-image {
+    justify-content: center;
+    max-width: 300px;
+}
+
 abbr[title],
 abbr[data-original-title] {
     text-decoration: underline;

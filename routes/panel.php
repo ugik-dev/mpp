@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AgencyController;
 use App\Http\Controllers\BankDataController;
+use App\Http\Controllers\ConfigController;
 use App\Http\Controllers\ContentController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HeroController;
@@ -20,8 +21,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/panel/dashboard', [DashboardController::class, 'index'])->name('panel.dashboard');
     Route::get('/logout', function () {
         Auth::logout();
-        return redirect('login');
-    });
+        return redirect('/');
+    })->name('logout');
 });
 Route::middleware(['auth', 'checkRole:admin,super'])->group(function () {
     Route::prefix('manage/user')->name('manage.user.')->group(function () {
@@ -79,6 +80,13 @@ Route::middleware(['auth', 'checkRole:admin,super'])->group(function () {
         Route::post('update', [HeroIconController::class, 'update'])->name('update');
         Route::delete('/', [HeroIconController::class, 'delete'])->name('delete');
     });
+
+    Route::get('/manage/home', [ConfigController::class, 'home'])->name('manage.home');
+    Route::post('/manage/home', [ConfigController::class, 'home_update'])->name('manage.home.update');
+
+    Route::get('/manage/profile', [ConfigController::class, 'profile'])->name('manage.profile');
+    Route::post('/manage/profile', [ConfigController::class, 'profile_update'])->name('manage.profile.update');
+
     // Rute untuk panel admin
     Route::get('/panel/users', [DashboardController::class, 'index'])->name('panel.admin.index');
 

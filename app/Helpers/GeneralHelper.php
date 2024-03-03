@@ -17,6 +17,28 @@ if (!function_exists('menus')) {
         return susunMenu($menus);
     }
 }
+if (!function_exists('formatWhatsAppNumber')) {
+    function formatWhatsAppNumber($number, $message = '')
+    {
+        // Remove any non-numeric characters
+        $number = preg_replace('/[^0-9]/', '', $number);
+
+        // Check if the number starts with '08' and replace it with '62'
+        if (substr($number, 0, 2) == '08') {
+            $number = '628' . substr($number, 2);
+        } else if (substr($number, 0, 3) == '+62') {
+            $number = '62' . substr($number, 3);
+        }
+
+        return 'https://wa.me/' . $number . '/?text=' . urlencode("Selamat datang di Mall Pelayanan Publik, silahkan isi data dibawah\n \nNama : \nAlamat : \nNIK : \n\n Tulis pesan ini : ");
+    }
+}
+if (!function_exists('profile')) {
+    function profile()
+    {
+        return DB::table('profiles')->select('*')->first();
+    }
+}
 if (!function_exists('category')) {
     function category()
     {

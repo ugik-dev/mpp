@@ -2663,7 +2663,7 @@ a.search-toggler {
 }
 
 .service-card {
-    background-image: url("../background/bg-03.jpg");
+    background-image: url("../background/bg-p-02.jpg");
     position: relative;
     z-index: 1;
     background-position: bottom center;
@@ -3307,6 +3307,8 @@ a.search-toggler {
 
 .mayor-img {
     position: relative;
+    max-height: 300px;
+
 }
 
 .mayor-img:before {
@@ -4362,7 +4364,7 @@ a.search-toggler {
 }
 
 .footer-widget {
-    margin-top: 120px;
+    margin-top: 20px;
 }
 
 @media (max-width: 991px) {
@@ -5649,6 +5651,11 @@ a.search-toggler {
 
 .testimonial-thumb .swiper-wrapper {
     justify-content: center;
+}
+
+.thumb-image {
+    justify-content: center;
+    max-width: 300px;
 }
 
 .testimonial-thumb img {

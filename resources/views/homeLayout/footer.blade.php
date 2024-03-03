@@ -8,17 +8,25 @@
                                 alt="img-25"></a>
                     </div><!-- footer-widget-logo -->
                     <div class="footer-widget-text">
-                        <p>The gowrnx official guide to living, working, visiting and investing in the Texas</p>
+                        <p>{{ $profile->description_footer }}</p>
                     </div><!-- footer-widget-text -->
                     <div class="footer-widget-socials">
-                        <a href="#"><i class="fa-brands fa-twitter"></i></a>
-                        <a href="#"><i class="fa-brands fa-facebook"></i></a>
-                        <a href="#"><i class="fa-brands fa-pinterest-p"></i></a>
-                        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                        @if ($profile->twitter)
+                            <a href="{{ $profile->twitter }}"><i class="fa-brands fa-twitter"></i></a>
+                        @endif
+                        @if ($profile->facebook)
+                            <a href="{{ $profile->facebook }}"><i class="fa-brands fa-facebook"></i></a>
+                        @endif
+                        @if ($profile->pinterest)
+                            <a href="{{ $profile->pinterest }}"><i class="fa-brands fa-pinterest-p"></i></a>
+                        @endif
+                        @if ($profile->instagram)
+                            <a href="{{ $profile->instagram }}"><i class="fa-brands fa-instagram"></i></a>
+                        @endif
                     </div><!-- footer-widget-socials -->
                 </div><!--col-lg-4-->
                 <div class="col-lg-3">
-                    <div class="footer-widget">
+                    {{-- <div class="footer-widget">
                         <div class="footer-widget-explore">
                             <h4 class="footer-widget-title">Explore</h4>
                             <ul class="list-unstyled">
@@ -29,10 +37,10 @@
                                 <li><a href="contact.html">Contact Us</a></li>
                             </ul><!-- list-unstyled -->
                         </div><!-- footer-widget-explore -->
-                    </div><!--footer-widget-->
+                    </div><!--footer-widget--> --}}
                 </div><!--col-lg-3-->
                 <div class="col-lg-2">
-                    <div class="footer-widget">
+                    {{-- <div class="footer-widget">
                         <div class="footer-widget-department">
                             <h4 class="footer-widget-title">Departments</h4>
                             <ul class="list-unstyled">
@@ -43,26 +51,32 @@
                                 <li><a href="department-details.html">Arts & Culture</a></li>
                             </ul><!-- list-unstyled -->
                         </div><!-- footer-widget-department -->
-                    </div><!--footer-widget-->
+                    </div><!--footer-widget--> --}}
                 </div><!--col-lg-2-->
                 <div class="col-lg-3">
                     <div class="footer-widget">
                         <div class="footer-widget-contact">
                             <h4 class="footer-widget-title">Contact</h4>
-                            <p>88 Broklyn Golden Road Street,<br>New York. USA</p>
+                            <p>{!! $profile->address !!}</p>
                         </div><!-- footer-widget-contact -->
                         <div class="footer-widget-contact-list">
                             <i class="fa-solid fa-envelope"></i>
                             <div class="footer-widget-contact-item">
-                                <a href="mailto:needhelp@company.com">needhelp@company.com</a>
+                                <a href="mailto:{{ $profile->email }}">{{ $profile->email }}</a>
                             </div><!-- footer-widget-contact-item -->
                         </div><!-- footer-widget-contact-list -->
                         <div class="footer-widget-contact-list">
                             <i class="fa-solid fa-phone"></i>
                             <div class="footer-widget-contact-item">
-                                <a href="tel:+92-003-68-090">+92 (003) 68-090</a>
-                            </div><!-- footer-widget-contact-item -->
-                        </div><!-- footer-widget-contact-list -->
+                                <a href="tel:{{ $profile->telephone }}">{{ $profile->telephone }}</a>
+                            </div>
+                        </div>
+                        <div class="footer-widget-contact-list">
+                            <i class="fa fa-solid fa-whatsapp"></i>
+                            <div class="footer-widget-contact-item">
+                                <a href="{{ formatWhatsAppNumber($profile->whatsapp) }}">{{ $profile->whatsapp }}</a>
+                            </div>
+                        </div>
                     </div><!--footer-widget-->
                 </div><!--col-lg-3-->
             </div><!-- row -->
@@ -70,7 +84,7 @@
     </div><!--footer-inner-->
     <div class="bottom-footer">
         <div class="conatiner">
-            <p>© Copyright 2023 by Company.com</p>
+            <p><a href="https://ugikdev.site/">© Copyright 2024 by CV. Bangka Musi Tekno</a></p>
         </div><!-- container -->
     </div><!--bottom-footer-->
 </section><!--footer-->
@@ -101,10 +115,26 @@
             </li><!-- li -->
         </ul><!-- mobile-nav-contact -->
         <ul class="mobile-nav-social list-unstyled">
-            <li><a href="#"><i class="fa-brands fa-twitter"></i></a></li>
-            <li><a href="#"><i class="fa-brands fa-facebook"></i></a></li>
-            <li><a href="#"><i class="fa-brands fa-pinterest-p"></i></a></li>
-            <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
+            @if ($profile->twitter)
+                <li>
+                    <a href="{{ $profile->twitter }}"><i class="fa-brands fa-twitter"></i></a>
+                </li>
+            @endif
+            @if ($profile->facebook)
+                <li>
+                    <a href="{{ $profile->facebook }}"><i class="fa-brands fa-facebook"></i></a>
+                </li>
+            @endif
+            @if ($profile->pinterest)
+                <li>
+                    <a href="{{ $profile->pinterest }}"><i class="fa-brands fa-pinterest-p"></i></a>
+                </li>
+            @endif
+            @if ($profile->instagram)
+                <li>
+                    <a href="{{ $profile->instagram }}"><i class="fa-brands fa-instagram"></i></a>
+                </li>
+            @endif
         </ul><!-- mobile-nav-social -->
     </div><!-- mobile-nav-content -->
 </div><!--mobile-nav-wrapper-->

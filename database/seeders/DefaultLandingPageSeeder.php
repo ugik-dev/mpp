@@ -2,9 +2,11 @@
 
 namespace Database\Seeders;
 
+use App\Models\ConfHome;
 use App\Models\Hero;
 use App\Models\HeroIcon;
 use App\Models\LoginSession;
+use App\Models\Profile;
 use App\Models\RequestCall;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -27,5 +29,8 @@ class DefaultLandingPageSeeder extends Seeder
         HeroIcon::updateOrCreate(['number' => '2', 'text' => 'Bisnis & Industri', 'icon' => 'fa-solid fa-industry', 'link' => 'https://www.bangka.go.id/', 'button' => 'N', 'button_type' => 'link']);
         HeroIcon::updateOrCreate(['number' => '3', 'text' => 'Sosial dan Pemberdayaan', 'icon' => 'flaticon-parthenon', 'link' => 'https://www.bangka.go.id/', 'button' => 'N', 'button_type' => 'link']);
         HeroIcon::updateOrCreate(['number' => '4', 'text' => 'Kesehatan', 'icon' => 'flaticon-parthenon', 'link' => 'https://www.bangka.go.id/', 'button' => 'N', 'button_type' => 'link']);
+
+        ConfHome::create(['id' => 1]);
+        Profile::create(['id' => 1]);
     }
 }

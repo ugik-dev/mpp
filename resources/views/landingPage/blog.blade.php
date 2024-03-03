@@ -18,7 +18,8 @@
                                 <img src="{{ url('storage/upload/content/' . $lp->sampul) }}" class="img-fluid"
                                     alt="img-22">
                             @else
-                                <img src="assets/image/bg/1.jpg" class="img-fluid" alt="img-22">
+                                <img src="assets/background/bg-{{ str_pad(rand(1, 23), 2, '0', STR_PAD_LEFT) }}.jpg"
+                                    class="img-fluid" alt="img-22">
                             @endif
                             <a href="{{ $url }}"></a>
                         </div>

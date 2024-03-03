@@ -4,154 +4,127 @@
     <div class="page-wrapper">
         @include('landingPage.hero')
         @include('landingPage.hero_icon')
+
+        {{-- <div class="row">
+            <div class="col-lg-9"> --}}
+
         @include('landingPage.blog')
+        {{-- </div>
+    <div class="col-lg-2 mt-5">
+        <div class="inside mt-5">
+            <div class="panel-pane pane-custom pane-2">
+                <p><a href="https://simbg.pu.go.id/" target="_blank"><img alt=""
+                            src="{{ url('storage/upload/banner/SIMBG.png') }}" style=""></a>
+                </p>
+            </div>
+        </div>
+    </div>
+    </div> --}}
+
         <!--about-section-->
         <section class="service-section">
             <div class="container">
                 <div class="row justify-content-between">
                     <div class="col-lg-6">
                         <div class="section-title-box">
-                            <div class="section-tagline">Pelayanan</div><!-- section-tagline -->
-                            <h2 class="section-title text-white">Explore our Online<br> Governmet Services <br> &
-                                Resources</h2>
+                            <div class="section-tagline">{{ $conf_home->sec_2_title }}</div>
+                            <h2 class="section-title text-white">{{ $conf_home->sec_2_sub_title }}</h2>
                             <div class="section-text">
-                                <p>Aliquam viverra arcu. Donec aliquet blandit enim feugiat. Suspendisse id quam sed
-                                    eros tincidunt luctus sit amet eu nibh egestas tempus turpis, sit amet mattis magna
-                                    varius non.</p>
-                            </div><!-- section-text -->
+                                <p>{{ $conf_home->sec_2_description }}</p>
+                            </div>
                             <div class="service-arrow-image">
                                 <img src="assets/image/shapes/arrow.png" alt="img-6">
-                            </div><!-- service-arrow-image -->
-                        </div><!--section-title-box-->
+                            </div>
+                        </div>
                     </div><!--col-lg-6-->
                     <div class="col-lg-5">
-                        <div class="service-card">
+                        <div class="service-card" {!! $conf_home->sec_2_sidebar_background
+                            ? 'style="background-image:url(' . url('storage/upload/images/' . $conf_home->sec_2_sidebar_background) . ')"'
+                            : '' !!}>
                             <div class="service-card-video">
-                                <a href="https://www.youtube.com/watch?v=rzfmZC3kg3M" class="video-popup">
+                                <a href="{{ $conf_home->sec_2_video }}" class="video-popup">
                                     <i class="fa fa-play"></i>
-                                </a><!-- video-popup -->
-                            </div><!-- service-card-video -->
+                                </a>
+                            </div>
                             <ul class="list-unstyled">
-                                <li><a href="department-details.html">Perizinan OSS <i
-                                            class="fa-solid fa-chevron-right"></i></a></li>
-                                <li><a href="department-details.html">Pembuakaan lahan <i
-                                            class="fa-solid fa-chevron-right"></i></a></li>
-                                <li><a href="department-details.html">Bantuan Sosial <i
-                                            class="fa-solid fa-chevron-right"></i></a></li>
-                                <li><a href="department-details.html">BPJS <i class="fa-solid fa-chevron-right"></i></a>
-                                </li>
-                                <li><a href="department-details.html">Samsat <i class="fa-solid fa-chevron-right"></i></a>
-                                </li>
-                                <li><a href="department-details.html">TASPEN <i class="fa-solid fa-chevron-right"></i></a>
-                                </li>
-                            </ul><!-- list-unstyled -->
-                            <div class="service-button">
-                                <a href="department-details.html" class="btn btn-primary">Discover More</a>
-                            </div><!-- service-button -->
-                        </div><!--service-card-->
-                    </div><!--col-lg-5-->
-                </div><!-- row -->
-            </div><!-- container -->
+                                @php
+                                    $sec_2_sidebar =
+                                        $conf_home->sec_2_sidebar == null ? [] : json_decode($conf_home->sec_2_sidebar);
+                                @endphp
+                                @foreach ($sec_2_sidebar as $item)
+                                    <li><a href="{{ $item->link }}">{{ $item->label }} <i
+                                                class="fa-solid fa-chevron-right"></i></a></li>
+                                @endforeach
+                            </ul>
+                            @if ($conf_home->sec_2_button)
+                                <div class="service-button">
+                                    <a href="{{ $conf_home->sec_2_button }}" class="btn btn-primary">Discover More</a>
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section><!--service-section-->
-        <section class="funfact-section">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xl-3 col-md-6">
-                        <div class="funfact-counter-item">
-                            <div class="funfact-counter-box">
-                                <div class="funfact-counter-icon">
-                                    <i class="flaticon-running-man"></i>
-                                </div><!-- funfact-counter-icon -->
-                                <div class="funfact-counter-number">
-                                    <h3 class="counter-number">84</h3>
-                                    <span class="funfact-counter-number-postfix">k</span>
-                                </div><!-- funfact-counter-number -->
-                            </div><!-- funfact-counter-box -->
-                            <p class="funfact-text">Total Masyarakat<br>di Kabupaten Bangka</p>
-                        </div><!--funfact-counter-item-->
-                    </div><!--col-xl-3 col-md-6-->
-                    <div class="col-xl-3 col-md-6">
-                        <div class="funfact-counter-item">
-                            <div class="funfact-counter-box">
-                                <div class="funfact-counter-icon">
-                                    <i class="flaticon-coverage"></i>
-                                </div><!-- funfact-counter-icon -->
-                                <div class="funfact-counter-number">
-                                    <h3 class="counter-number">3.3</h3>
-                                    <span class="funfact-counter-number-postfix">k</span>
-                                </div><!-- funfact-counter-number -->
-                            </div><!-- funfact-counter-box -->
-                            <p class="funfact-text">Cakupan kilometre<br>yang di Cover</p>
-                        </div><!--funfact-counter-item-->
-                    </div><!--col-xl-3 col-md-6-->
-                    <div class="col-xl-3 col-md-6">
-                        <div class="funfact-counter-item">
-                            <div class="funfact-counter-box">
-                                <div class="funfact-counter-icon">
-                                    <i class="flaticon-landscape"></i>
-                                </div><!-- funfact-counter-icon -->
-                                <div class="funfact-counter-number">
-                                    <h3 class="counter-number">89</h3>
-                                    <span class="funfact-counter-number-postfix">%</span>
-                                </div><!-- funfact-counter-number -->
-                            </div><!-- funfact-counter-box -->
-                            <p class="funfact-text">Legatitas <br>yang dicover</p>
-                        </div><!--funfact-counter-item-->
-                    </div><!--col-xl-3 col-md-6-->
-                    <div class="col-xl-3 col-md-6">
-                        <div class="funfact-counter-item">
-                            <div class="funfact-counter-box">
-                                <div class="funfact-counter-icon">
-                                    <i class="flaticon-barn-3"></i>
-                                </div><!-- funfact-counter-icon -->
-                                <div class="funfact-counter-number">
-                                    <h3 class="counter-number">100</h3>
-                                    <span class="funfact-counter-number-postfix">%</span>
-                                </div><!-- funfact-counter-number -->
-                            </div><!-- funfact-counter-box -->
-                            <p class="funfact-text">Gratis Biaya</p>
-                        </div><!--funfact-counter-item-->
-                    </div><!--col-xl-3 col-md-6-->
-                </div><!-- row -->
-            </div><!-- container -->
-        </section><!-- /.funfact-section -->
+        @if ($conf_home->sec_3 == 'Y')
+            <section class="funfact-section">
+                <div class="container">
+                    <div class="row">
+                        @php
+                            $sec_3_data = $conf_home->sec_3_data == null ? [] : json_decode($conf_home->sec_3_data);
+                        @endphp
+                        @foreach ($sec_3_data as $item)
+                            <div class="col-xl-3 col-md-6">
+                                <div class="funfact-counter-item">
+                                    <div class="funfact-counter-box">
+                                        <div class="funfact-counter-icon">
+                                            <i class="{{ $item->icon }}"></i>
+                                        </div>
+                                        <div class="funfact-counter-number">
+                                            <h3 class="counter-number">{{ $item->value }}</h3>
+                                            <span class="funfact-counter-number-postfix">{{ $item->satuan }}</span>
+                                        </div>
+                                    </div>
+                                    <p class="funfact-text">{{ $item->desc }}</p>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            </section>
+        @endif
+
         <section class="mayor-section">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="mayor-box">
                             <div class="section-title-box">
-                                <div class="section-tagline">MAYOR OF GOWRNX</div><!-- section-tagline -->
-                                <h2 class="section-title">Major Voice of City Government</h2>
-                                <p>There cursus massa at urnaaculis estie. Sed aliquamellus vitae ultrs condmentum leo
-                                    massa mollis estiegittis miristum nulla sed medy fringilla vitae.</p>
+                                <div class="section-tagline">{{ $conf_home->sec_4_title }}</div><!-- section-tagline -->
+                                <h2 class="section-title">{{ $conf_home->sec_4_sub_title }}</h2>
+                                {{-- <p></p> --}}
                             </div><!--section-title-box-->
                             <div class="mayor-icon-box">
                                 <div class="mayor-icon">
                                     <i class="flaticon-professor"></i>
                                 </div><!-- mayor-icon -->
-                                <h4 class="mayor-icon-title">Meet Ideological Leader for Youth Generation</h4>
+                                <h4 class="mayor-icon-title">{{ $conf_home->sec_4_description }}</h4>
                             </div><!--mayor-icon-box-->
                             <ul class="list-unstyled list-style-one">
-                                <li>
-                                    <i class="fa-solid fa-circle-check"></i>
-                                    <p>Making this the first true generator on the Internet</p>
-                                </li><!-- li -->
-                                <li>
-                                    <i class="fa-solid fa-circle-check"></i>
-                                    <p>Lorem Ipsum is not simply random text</p>
-                                </li><!-- li -->
-                                <li>
-                                    <i class="fa-solid fa-circle-check"></i>
-                                    <p>If you are going to use a passage</p>
-                                </li><!-- li -->
+                                @foreach (json_decode($conf_home->sec_4_list) ?? [] as $list)
+                                    <li>
+                                        <i class="fa-solid fa-circle-check"></i>
+                                        <p>{{ $list }}</p>
+                                    </li>
+                                @endforeach
                             </ul><!-- ul -->
                         </div><!--mayor-box-->
                     </div><!-- col-lg-6 -->
                     <div class="col-lg-6">
                         <div class="mayor-img">
                             <img src="assets/image/shapes/shape-1.png" class="floated-image-one" alt="img-7">
-                            <img src="assets/image/gallery/mayor-2.jpg" alt="img-8">
+                            <img src="{{ $conf_home->sec_4_image ? url('storage/upload/images/' . $conf_home->sec_4_image) : 'assets/image/gallery/mayor-2.jpg' }}"
+                                alt="img-8">
                             <div class="mayor-name">
                                 Dian Firnandy, SE
                             </div><!-- mayor-name -->
@@ -159,7 +132,8 @@
                     </div><!--col-lg-6"-->
                 </div><!-- row -->
             </div><!-- container -->
-        </section><!--mayor-section-->
+        </section>
+        <!--mayor-section-->
         <section class="portfolio-section">
             <div class="section-title-box text-center">
                 <div class="section-tagline">Gelari</div>
@@ -167,49 +141,24 @@
             </div><!-- section-title-box -->
             <div class="portfolio-content conatainer-fluid">
                 <div class="portfolio-carousel owl-carousel owl-theme">
-                    <div class="item">
-                        <div class="portfolio-card">
-                            <img src="assets/image/portfolio/portfolio-1.jpg" class="img-fluid" alt="img-9">
-                            <div class="portfolio-card-meta">
-                                <div class="portfolio-card-text"><a href="portfolio-details.html">Places</a></div>
-                                <div class="portfolio-card-title"><a href="portfolio-details.html">Broadway Road</a>
-                                </div>
-                            </div><!-- portfolio-card-meta -->
-                        </div><!--portfolio-card-->
-                    </div><!-- item -->
-                    <div class="item">
-                        <div class="portfolio-card">
-                            <img src="assets/image/portfolio/portfolio-2.jpg" class="img-fluid" alt="img-10">
-                            <div class="portfolio-card-meta">
-                                <div class="portfolio-card-text"><a href="portfolio-details.html">Intercity</a></div>
-                                <div class="portfolio-card-title"><a href="portfolio-details.html"> Grand Central
-                                        Terminal</a></div>
-                            </div><!-- portfolio-card-meta -->
-                        </div><!--portfolio-card-->
-                    </div><!-- item -->
-                    <div class="item">
-                        <div class="portfolio-card">
-                            <img src="assets/image/portfolio/portfolio-3.jpg" class="img-fluid" alt="img-11">
-                            <div class="portfolio-card-meta">
-                                <div class="portfolio-card-text"><a href="portfolio-details.html">Business</a></div>
-                                <div class="portfolio-card-title"><a href="portfolio-details.html">Empire State
-                                        Building</a></div>
-                            </div><!-- portfolio-card-meta -->
-                        </div><!--portfolio-card-->
-                    </div><!-- item -->
-                    <div class="item">
-                        <div class="portfolio-card">
-                            <img src="assets/image/portfolio/portfolio-4.jpg" class="img-fluid" alt="img-12">
-                            <div class="portfolio-card-meta">
-                                <div class="portfolio-card-text"><a href="portfolio-details.html">Travel</a></div>
-                                <div class="portfolio-card-title"><a href="portfolio-details.html">Fulton Center</a>
-                                </div>
-                            </div><!-- portfolio-card-meta -->
-                        </div><!--portfolio-card-->
-                    </div><!-- item -->
+                    @for ($i = 1; $i <= 4; $i++)
+                        <div class="item">
+                            <div class="portfolio-card">
+                                <img style="height: 10rem"
+                                    src="assets/background/bg-{{ str_pad(rand(1, 23), 2, '0', STR_PAD_LEFT) }}.jpg"
+                                    class="img-fluid" alt="img-9">
+                                <div class="portfolio-card-meta">
+                                    <div class="portfolio-card-text"><a href="portfolio-details.html">Places</a></div>
+                                    <div class="portfolio-card-title"><a href="portfolio-details.html">Broadway Road</a>
+                                    </div>
+                                </div><!-- portfolio-card-meta -->
+                            </div><!--portfolio-card-->
+                        </div>
+                    @endfor
                 </div><!--portfolio-carousel-->
             </div><!--portfolio-content-->
         </section><!--portfolio-section-->
+        {{-- Patner --}}
         <section class="client-section">
             <h5 class="client-text">Our partners & suppoters</h5>
             <div class="container">
@@ -229,6 +178,7 @@
                 </div><!--client-carousel owl-carousel owl-theme-->
             </div><!--container-->
         </section><!--client-section-->
+        {{-- Tanggapan Publik --}}
         <section class="testimonial-section">
             <div class="container">
                 <div class="section-title-box text-center">
@@ -277,6 +227,7 @@
                 </div><!--testimonial-slider-->
             </div><!-- container -->
         </section><!--testimonial-section-->
+        {{-- Event --}}
         <section class="event-section">
             <div class="container">
                 <div class="event-section-inner">
@@ -284,10 +235,10 @@
                         <div class="col-lg-6">
                             <div class="section-title-box">
                                 <div class="section-tagline">EVENTS TERBARU</div>
-                                <h2 class="section-title">Explore Upcoming City Event Schedule</h2>
+                                {{-- <h2 class="section-title">Explore Upcoming City Event Schedule</h2> --}}
                             </div><!-- section-title-box -->
                         </div><!--col-lg-6-->
-                        <div class="col-lg-6">
+                        {{-- <div class="col-lg-6">
                             <div class="event-content-box">
                                 <div class="section-text">
                                     <p>Aliquam viverra arcu. Donec aliquet blandit enim feugiat.
@@ -295,7 +246,7 @@
                                         turpis.</p>
                                 </div><!-- section-text -->
                             </div><!--event-content-box-->
-                        </div><!-- col-lg-6 -->
+                        </div><!-- col-lg-6 --> --}}
                     </div><!-- row -->
                     <div class="row row-gutter-y-40">
                         {{-- <div class="col-xl-5">
@@ -321,7 +272,6 @@
                         </div><!-- col-xl-5 --> --}}
                         <div class="col-xl-12">
                             <div class="row">
-
                                 @foreach ($events as $event)
                                     <div class="col-xl-6">
                                         <div class="event-card">
@@ -333,7 +283,7 @@
                                                                 class="img-fluid" style="width: 250px; height: 250px"
                                                                 alt="img-22">
                                                         @else
-                                                            <img src="assets/image/bg/1.jpg"
+                                                            <img src="assets/background/bg-{{ str_pad(rand(1, 23), 2, '0', STR_PAD_LEFT) }}.jpg"
                                                                 style="width: 250px; height: 250px" class="img-fluid"
                                                                 alt="img-22">
                                                         @endif
@@ -359,48 +309,12 @@
                                 @endforeach
                             </div>
 
-                            {{-- <div class="event-card">
-                                <div class="event-card-image">
-                                    <div class="event-card-image-inner">
-                                        <a href="event-details.html"><img src="assets/image/event/event-3.jpg"
-                                                class="img-fluid" alt="img-21"></a>
-                                        <div class="event-card-meta">
-                                            <div class="event-meta-number">
-                                                <span>28</span>
-                                            </div><!-- event-meta-number -->
-                                            <div class="event-meta-date">
-                                                <span>October 2022</span>
-                                            </div><!-- event-meta-date -->
-                                        </div><!-- event-card-meta -->
-                                    </div><!-- event-card-image-inner -->
-                                </div><!-- event-card-image -->
-                            </div><!--event-card--> --}}
                         </div><!-- col-xl-7 -->
                     </div><!-- row -->
                 </div><!--event-section-inner-->
             </div><!--container-->
         </section><!--event-section-->
-        {{-- <section class="cta-five-section">
-            <div class="container">
-                <div class="cta-five-card">
-                    <div class="cta-five-card-icon">
-                        <i class="flaticon-file"></i>
-                    </div><!-- cta-five-card-icon -->
-                    <div class="cta-five-content">
-                        <h4>Download Recent Documents</h4>
-                        <p>There are many variations of passages of Lorem Ipsum available, but the majority<br> have
-                            suffered in some form, by injected humour words.</p>
-                    </div><!-- cta-five-content -->
-                    <div class="cta-five-button">
-                        <a href="#" class="btn btn-primary">Download Files</a>
-                    </div><!-- cta-five-button -->
-                    <div class="cta-five-img">
-                        <i class="flaticon-file"></i>
-                    </div><!-- cta-five-img -->
-                </div><!--cta-five-card-->
-            </div><!-- container -->
-        </section><!--cta-five-section--> --}}
-
+        {{-- Subscribe --}}
         <section class="cta-two-section">
             <div class="container">
                 <div class="cta-two-section-inner">

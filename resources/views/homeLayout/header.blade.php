@@ -3,19 +3,38 @@
         <div class="topbar-inner">
             <div class="topbar-left">
                 <div class="topbar-socials">
-                    <a href="#"><i class="fa-brands fa-twitter"></i></a>
-                    <a href="#"><i class="fa-brands fa-facebook"></i></a>
-                    <a href="#"><i class="fa-brands fa-pinterest-p"></i></a>
-                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    @if ($profile->twitter)
+                        <a href="{{ $profile->twitter }}"><i class="fa-brands fa-twitter"></i></a>
+                    @endif
+                    @if ($profile->facebook)
+                        <a href="{{ $profile->facebook }}"><i class="fa-brands fa-facebook"></i></a>
+                    @endif
+                    @if ($profile->pinterest)
+                        <a href="{{ $profile->pinterest }}"><i class="fa-brands fa-pinterest-p"></i></a>
+                    @endif
+                    @if ($profile->instagram)
+                        <a href="{{ $profile->instagram }}"><i class="fa-brands fa-instagram"></i></a>
+                    @endif
                 </div>
                 <div class="topbar-info">
                     <ul>
+                        @if ($profile->whatsapp)
+                            <li>
+                                <div class="topbar-icon">
+                                    <i class="fa fa-solid fa-whatsapp"></i>
+                                </div>
+                                <div class="topbar-text">
+                                    <a target="_blank"
+                                        href="https://wa.me/{{ formatWhatsAppNumber($profile->whatsapp) }}">{{ $profile->whatsapp }}</a>
+                                </div>
+                            </li>
+                        @endif
                         <li>
                             <div class="topbar-icon">
                                 <i class="fa-solid fa-envelope"></i>
                             </div><!-- topbar-icon -->
                             <div class="topbar-text">
-                                <a href="mailto:dinpmp2kukm@gmail.com">dinpmp2kukm@gmail.com</a>
+                                <a href="mailto:{{ $profile->email }}">{{ $profile->email }}</a>
                             </div><!-- topbar-text -->
                         </li><!-- li -->
                         <li>
@@ -23,7 +42,7 @@
                                 <i class="fa-solid fa-clock"></i>
                             </div><!-- topbar-icon -->
                             <div class="topbar-text">
-                                <span>Jam Pelayanan: Senin - Sabtu 8.00 - 16.00 </span>
+                                <span>Jam Pelayanan : {{ $profile->operational_time }} </span>
                             </div><!-- topbar-text -->
                         </li><!-- li -->
                     </ul><!-- ul -->
