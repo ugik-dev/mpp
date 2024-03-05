@@ -421,10 +421,10 @@ a {
 #loader-circle {
     display: block;
     position: relative;
-    left: 50%;
-    top: 35%;
-    width: 450px;
-    height: 450px;
+    left: calc(50% - 100px);
+    top: calc(35% - 100px);
+    width: 350px;
+    height: 350px;
     margin: -75px 0 0 -75px;
     border-radius: 50%;
     border: 3px solid transparent;
