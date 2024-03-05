@@ -178,6 +178,7 @@ class MenuController extends Controller
                 'agency_id' => $request->agency_id,
                 'jenis' => $request->jenis,
                 'slug' => $slug,
+                'number' => $request->number,
             ];
             if (!empty(Auth::user()->agency_id)) {
                 $agency = Agency::where('id', Auth::user()->agency_id)->get()->first();
@@ -228,6 +229,7 @@ class MenuController extends Controller
                 'parent_id' => $request->parent_id,
                 'agency_id' => $request->agency_id,
                 'jenis' => $request->jenis,
+                'number' => $request->number,
             ];
             if (!empty(Auth::user()->agency_id)) {
                 $agency = Agency::where('id', Auth::user()->agency_id)->get()->first();

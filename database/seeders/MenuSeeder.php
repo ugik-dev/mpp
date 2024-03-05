@@ -14,19 +14,22 @@ class MenuSeeder extends Seeder
      */
     public function run(): void
     {
-        Menu::updateOrCreate(['id' => 1, 'jenis' => 'route', 'slug' => 'home', 'name' => 'Home', 'deletable' => 'N', 'editable' => 'N']);
-        $id_tentang = Menu::updateOrCreate(['id' => 2, 'jenis' => 'N',  'slug' => 'tentang', 'name' => 'Tentang Kami', 'deletable' => 'N', 'editable' => 'Y'])->id;
-        $id_layanan = Menu::updateOrCreate(['id' => 8, 'jenis' => 'N', 'slug' => 'layanan',  'name' => 'Layanan', 'deletable' => 'N', 'editable' => 'N'])->id;
-        $id_informasi =     Menu::updateOrCreate(['id' => 17, 'jenis' => 'N', 'slug' => 'informasi', 'name' => 'Informasi', 'deletable' => 'N', 'editable' => 'N'])->id;
-
-        Menu::updateOrCreate(['jenis' => 'page',  'slug' => 'moto', 'name' => 'Moto', 'parent_id' => $id_tentang, 'deletable' => 'N', 'editable' => 'Y']);
-        Menu::updateOrCreate(['jenis' => 'page',  'slug' => 'sambutan', 'name' => 'Sambutan Kepala Dinas', 'parent_id' => $id_tentang, 'deletable' => 'N', 'editable' => 'Y']);
-        Menu::updateOrCreate(['jenis' => 'page',  'slug' => 'visi-misi', 'name' => 'Visi dan Misi', 'parent_id' => $id_tentang, 'deletable' => 'N', 'editable' => 'Y']);
-        Menu::updateOrCreate(['jenis' => 'page',  'slug' => 'slogan', 'name' => 'Slogan', 'parent_id' => $id_tentang, 'deletable' => 'N', 'editable' => 'N']);
-        Menu::updateOrCreate(['jenis' => 'page',  'slug' => 'fakta-integritas', 'name' => 'Fakta Integritas', 'parent_id' => $id_tentang, 'deletable' => 'Y', 'editable' => 'N']);
-        $id_ptsp = Menu::updateOrCreate(['jenis' => 'page', 'slug' => 'dinpmp2kukm',  'name' => 'DINPMP2KUKM', 'parent_id' => $id_layanan, 'deletable' => 'N', 'editable' => 'Y'])->id;
-        Menu::updateOrCreate(['jenis' => 'page', 'slug' => 'oss',  'name' => 'OSS', 'parent_id' => $id_ptsp, 'deletable' => 'N', 'editable' => 'Y']);
-        Agency::updateOrCreate([
+        Menu::create(['id' => 1, 'number' => 1, 'jenis' => 'route', 'slug' => 'home', 'name' => 'Home', 'deletable' => 'N', 'editable' => 'N']);
+        Menu::create(['id' => 3, 'number' => 99, 'jenis' => 'route', 'slug' => 'contact', 'name' => 'Kontak', 'deletable' => 'N', 'editable' => 'N']);
+        $id_tentang = Menu::create(['id' => 2, 'number' => 2, 'jenis' => 'N',  'slug' => 'tentang', 'name' => 'Tentang Kami', 'deletable' => 'N', 'editable' => 'Y'])->id;
+        $id_layanan = Menu::create(['id' => 8, 'number' => 3, 'jenis' => 'N', 'slug' => 'layanan',  'name' => 'Layanan', 'deletable' => 'N', 'editable' => 'N'])->id;
+        $id_informasi =     Menu::create(['id' => 17, 'number' => 4, 'jenis' => 'N', 'slug' => 'informasi', 'name' => 'Informasi', 'deletable' => 'N', 'editable' => 'N'])->id;
+        Menu::create(['id' => 4, 'number' => 9, 'jenis' => 'route', 'slug' => 'bank-data', 'name' => 'Bank Data', 'deletable' => 'N', 'editable' => 'N']);
+        Menu::create(['jenis' => 'route', 'parent_id' => $id_informasi, 'slug' => 'survey', 'name' => 'e-Survey', 'deletable' => 'N', 'editable' => 'N']);
+        Menu::create(['jenis' => 'N', 'parent_id' => $id_informasi, 'slug' => 'pengaduan', 'name' => 'Pengaduan', 'deletable' => 'N', 'editable' => 'N']);
+        Menu::create(['jenis' => 'page',  'slug' => 'moto', 'name' => 'Moto', 'parent_id' => $id_tentang, 'deletable' => 'N', 'editable' => 'Y']);
+        Menu::create(['jenis' => 'page',  'slug' => 'sambutan', 'name' => 'Sambutan Kepala Dinas', 'parent_id' => $id_tentang, 'deletable' => 'N', 'editable' => 'Y']);
+        Menu::create(['jenis' => 'page',  'slug' => 'visi-misi', 'name' => 'Visi dan Misi', 'parent_id' => $id_tentang, 'deletable' => 'N', 'editable' => 'Y']);
+        Menu::create(['jenis' => 'page',  'slug' => 'slogan', 'name' => 'Slogan', 'parent_id' => $id_tentang, 'deletable' => 'N', 'editable' => 'N']);
+        Menu::create(['jenis' => 'page',  'slug' => 'fakta-integritas', 'name' => 'Fakta Integritas', 'parent_id' => $id_tentang, 'deletable' => 'Y', 'editable' => 'N']);
+        $id_ptsp = Menu::create(['jenis' => 'page', 'slug' => 'dinpmp2kukm',  'name' => 'DINPMP2KUKM', 'parent_id' => $id_layanan, 'deletable' => 'N', 'editable' => 'Y'])->id;
+        Menu::create(['jenis' => 'page', 'slug' => 'oss',  'name' => 'OSS', 'parent_id' => $id_ptsp, 'deletable' => 'N', 'editable' => 'Y']);
+        Agency::create([
             'name' => 'Dinas Penanaman Modal, Pelayanan Perizinan Satu Pintu, Koperasi, Usaha Kecil dan Menengah',
             'name_sort' => 'PMP2KUKM',
             'website' => 'https://dinpmp2kukm.bangka.go.id/',
@@ -36,10 +39,10 @@ class MenuSeeder extends Seeder
             'email' => 'dinpmp2kukm@gmail.com',
             'alamat' => 'Jalan Pemuda Sungailiat 33215',
         ]);
-        $id_dks = Menu::updateOrCreate(['jenis' => 'page', 'slug' => 'dinkes',  'name' => 'Dinas Kesehatan', 'parent_id' => $id_layanan, 'deletable' => 'N', 'editable' => 'Y'])->id;
-        Menu::updateOrCreate(['jenis' => 'page', 'slug' => 'bpjs-baru',  'name' => 'BPJS Baru', 'parent_id' => $id_dks, 'deletable' => 'N', 'editable' => 'Y']);
-        Menu::updateOrCreate(['jenis' => 'page', 'slug' => 'bpjs-migrasi',  'name' => 'BPJS Migrasi', 'parent_id' => $id_dks, 'deletable' => 'N', 'editable' => 'Y']);
-        Agency::updateOrCreate([
+        $id_dks = Menu::create(['jenis' => 'page', 'slug' => 'dinkes',  'name' => 'Dinas Kesehatan', 'parent_id' => $id_layanan, 'deletable' => 'N', 'editable' => 'Y'])->id;
+        Menu::create(['jenis' => 'page', 'slug' => 'bpjs-baru',  'name' => 'BPJS Baru', 'parent_id' => $id_dks, 'deletable' => 'N', 'editable' => 'Y']);
+        Menu::create(['jenis' => 'page', 'slug' => 'bpjs-migrasi',  'name' => 'BPJS Migrasi', 'parent_id' => $id_dks, 'deletable' => 'N', 'editable' => 'Y']);
+        Agency::create([
             'name' => 'Dinas Kesehatan',
             'name_sort' => 'Dinas Kesehatan',
             'website' => 'https://dinkes.bangka.go.id/',
@@ -49,16 +52,12 @@ class MenuSeeder extends Seeder
             'email' => 'dinkes.bangka@gmail.com',
             'alamat' => 'Jl A Yani, Jalur Dua Sungailiat 33215',
         ]);
-        $id_dinsos = Menu::updateOrCreate(['jenis' => 'page', 'slug' => 'dinsos',  'name' => 'Dinas Sosial', 'parent_id' => $id_layanan, 'deletable' => 'N', 'editable' => 'Y'])->id;
-        Agency::updateOrCreate([
+        $id_dinsos = Menu::create(['jenis' => 'page', 'slug' => 'dinsos',  'name' => 'Dinas Sosial', 'parent_id' => $id_layanan, 'deletable' => 'N', 'editable' => 'Y'])->id;
+        Agency::create([
             'name' => 'Dinas Sosial',
             'name_sort' => 'Dinas Sosial',
             'website' => 'https://dinsos.bangka.go.id/',
             'menu_id' => $id_dinsos,
         ]);
-
-        Menu::updateOrCreate(['jenis' => 'route', 'slug' => 'bank-data', 'name' => 'Bank Data', 'deletable' => 'N', 'editable' => 'N']);
-        Menu::updateOrCreate(['jenis' => 'route', 'parent_id' => $id_informasi, 'slug' => 'survey', 'name' => 'e-Survey', 'deletable' => 'N', 'editable' => 'N']);
-        Menu::updateOrCreate(['jenis' => 'N', 'parent_id' => $id_informasi, 'slug' => 'pengaduan', 'name' => 'Pengaduan', 'deletable' => 'N', 'editable' => 'N']);
     }
 }

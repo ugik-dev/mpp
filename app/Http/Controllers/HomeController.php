@@ -10,6 +10,8 @@ use App\Models\Content;
 use App\Models\Hero;
 use App\Models\HeroIcon;
 use App\Models\Menu;
+use App\Models\Patner;
+use App\Models\Profile;
 use App\Models\RefBankData;
 use App\Models\Survey;
 use Exception;
@@ -27,17 +29,26 @@ class HomeController extends Controller
         $conf_home = ConfHome::first();
         $sidbar_lates_content = Content::with('comment')->select('contents.*')->complete()->latest('tanggal')->limit(6)->get();
         $events = Content::with('comment')->select('contents.*')->where('ref_content_id', 5)->complete()->latest('tanggal')->limit(4)->get();
+        $patners = Patner::where('jenis', 'Patner')->orderBy('number', 'asc')->get();
         $surveys = Survey::latest('created_at')->limit(10)->get();
         // dd($event);
-        return view('home', compact('heroes', 'hero_icon', 'sidbar_lates_content', 'events', 'surveys', 'conf_home'));
+        return view('home', compact('heroes', 'hero_icon', 'sidbar_lates_content', 'events', 'surveys', 'conf_home', 'patners'));
     }
     public function portal()
     {
+
         return view(
             'portal',
 
         );
     }
+    public function contact()
+    {
+        $profile = Profile::first();
+        $agencies = Agency::get();
+        return view('contact', compact('profile', 'agencies'));
+    }
+
     public function search(Request $request)
     {
         $contents = Content::with('comment')->select('contents.*')->complete()->latest('tanggal')->filter($request->s)->paginate(

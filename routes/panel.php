@@ -12,6 +12,7 @@ use App\Http\Controllers\MenuController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\HeroIconController;
 use App\Http\Controllers\MonitoringController;
+use App\Http\Controllers\PatnerController;
 use Illuminate\Support\Facades\Auth;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
@@ -66,13 +67,20 @@ Route::middleware(['auth', 'checkRole:admin,super'])->group(function () {
         Route::post('update', [AgencyController::class, 'update'])->name('update');
         Route::delete('/', [AgencyController::class, 'delete'])->name('delete');
     });
+
+
     Route::prefix('manage/bank-data')->name('manage.bank-data.')->group(function () {
         Route::get('/', [BankDataController::class, 'index'])->name('index');
         Route::post('', [BankDataController::class, 'create'])->name('create');
         Route::post('update', [BankDataController::class, 'update'])->name('update');
         Route::delete('/', [BankDataController::class, 'delete'])->name('delete');
     });
-
+    Route::prefix('manage/patner')->name('manage.patner.')->group(function () {
+        Route::get('/', [PatnerController::class, 'index'])->name('index');
+        Route::post('', [PatnerController::class, 'create'])->name('create');
+        Route::post('update', [PatnerController::class, 'update'])->name('update');
+        Route::delete('/', [PatnerController::class, 'delete'])->name('delete');
+    });
     Route::prefix('manage/hero-icon')->name('manage.hero-icon.')->group(function () {
         Route::get('/', [HeroIconController::class, 'index'])->name('index');
         Route::get('/search-key', [HeroIconController::class, 'search_key'])->name('search-key');

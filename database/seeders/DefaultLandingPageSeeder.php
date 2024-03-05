@@ -6,6 +6,7 @@ use App\Models\ConfHome;
 use App\Models\Hero;
 use App\Models\HeroIcon;
 use App\Models\LoginSession;
+use App\Models\Patner;
 use App\Models\Profile;
 use App\Models\RequestCall;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -32,5 +33,13 @@ class DefaultLandingPageSeeder extends Seeder
 
         ConfHome::create(['id' => 1]);
         Profile::create(['id' => 1]);
+
+        Patner::create(['jenis' => 'Patner', 'name' => 'OSS', 'link' => 'https://oss.go.id/']);
+        Patner::create(['jenis' => 'Patner', 'name' => 'Pemerintah Kabupaten Bangka', 'link' => 'https://bangka.go.id/']);
+        Patner::create(['jenis' => 'Patner', 'name' => 'DISKOMINFOTIK', 'link' => 'https://bangka.go.id/']);
+        Patner::create(['jenis' => 'Patner', 'name' => 'SIMBG PURP', 'link' => 'https://simbg.pu.go.id/']);
+        Patner::create(['jenis' => 'Patner', 'name' => 'SPAN LAPOR', 'link' => 'https://lapor.go.id/']);
+
+        Patner::create(['jenis' => 'Banner', 'name' => 'PPID Bangka', 'link' => 'https://ppid-kab.bangka.go.id/']);
     }
 }

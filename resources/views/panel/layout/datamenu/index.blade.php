@@ -14,7 +14,6 @@
                     @foreach ($menu['children'] as $child)
                         <a class="collapse-item" href="{{ $child['url'] }}">{{ $child['label'] }}</a>
                     @endforeach
-                    <a class="collapse-item" href="blank.html">Blank Page</a>
                 </div>
             </div>
         @endif

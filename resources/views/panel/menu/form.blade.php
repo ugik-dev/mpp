@@ -81,11 +81,19 @@
                                     </div>
                                 </div>
                             @endif
-                            <div class="col-sm-12">
+                            <div class="col-sm-9">
                                 <label for="basicFullname">Key / Link :</label>
                                 <div class="input-group">
                                     <input type="text" id="key" class="form-control dt-full-name" name="key"
                                         value="{{ $dataEdit->key ?? '' }}" placeholder="" aria-label=""
+                                        aria-describedby="basicFullname2" />
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <label for="basicFullname">Urutan :</label>
+                                <div class="input-group">
+                                    <input type="number" id="number" class="form-control dt-full-name" name="number"
+                                        value="{{ $dataEdit->number ?? '' }}" placeholder="" aria-label=""
                                         aria-describedby="basicFullname2" />
                                 </div>
                             </div>

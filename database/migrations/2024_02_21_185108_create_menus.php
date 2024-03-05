@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('menus', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('parent_id')->nullable();
+            $table->integer('number')->default(99);
             $table->string('name');
             $table->string('jenis');
             $table->unsignedBigInteger('agency_id')->nullable();

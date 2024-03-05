@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('profiles', function (Blueprint $table) {
             $table->id();
-            $table->string('address')->default('Jl. Jendral Sudirman, Ex. Puskesmas Sungailiat, 33211, Kabupaten Bangka Provinsi Kepulauan Bangka Belitung - Indonesia');
+            $table->string('address')->default("Jl. Jendral Sudirman, Ex. Puskesmas Sungailiat,<br> Kabupaten Bangka (33211),<br> Provinsi Kepulauan Bangka Belitung - Indonesia");
             $table->string('telephone')->default('07170000')->nullable();
             $table->string('whatsapp')->default('081279748967')->nullable();
             $table->string('email')->default('dinpmp2kukm@gmail.com');
@@ -23,6 +23,8 @@ return new class extends Migration
             $table->string('twitter')->nullable();
             $table->string('operational_time')->default("Senin - Jumat | 08.30 - 15.30");
             $table->string('description_footer')->default('Selamat Datang');
+            $table->string('lng')->default('');
+            $table->string('lat')->default('Selamat Datang');
             $table->timestamps();
         });
     }

@@ -41,6 +41,7 @@ $menus = [
             ['label' => 'Hero Icon', 'url' => route('manage.hero-icon.index')],
             ['label' => 'Landing Page', 'url' => route('manage.home')],
             ['label' => 'Website', 'url' => route('manage.profile')],
+            ['label' => 'Patner dan Banner', 'url' => route('manage.patner.index')],
         ],
     ],
     [

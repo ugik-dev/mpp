@@ -391,17 +391,31 @@ a {
     right: 0;
 }
 
-#loader-logo {
+#loader-logo>img {
     display: block;
-    position: relative;
-    left: calc(50% - 20em/2);
+    position: absolute;
+    /* left: calc(50% - 20em/2);
     top: 15%;
     width: 20em;
     height: 9.375em;
     background-repeat: no-repeat;
     background-position: center;
     background-image: url("http://imgh.us/loading_4.svg");
+    z-index: 1001; */
+
+    border-color: red;
+    left: 50%;
+    top: 35%;
+    width: 150px;
+    height: 150px;
+    margin: -75px 0 0 -75px;
+    /* border-radius: 50%; */
+    border: 3px solid transparent;
+    /* border-top-color: #fff; */
+    /* -webkit-animation: spin 2s linear infinite; */
+    /* animation: spin 2s linear infinite; */
     z-index: 1001;
+
 }
 
 #loader-circle {
@@ -409,8 +423,8 @@ a {
     position: relative;
     left: 50%;
     top: 35%;
-    width: 150px;
-    height: 150px;
+    width: 450px;
+    height: 450px;
     margin: -75px 0 0 -75px;
     border-radius: 50%;
     border: 3px solid transparent;
@@ -2612,7 +2626,7 @@ a.search-toggler {
 ***********************/
 .service-section {
     padding-top: 120px;
-    background-image: url("../image/bg/service-bg-1.jpg");
+    background-image: url("../image/bg/1.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     background-color: var(--thm-dark-black);
@@ -3819,17 +3833,45 @@ a.search-toggler {
     font-size: 100%;
 }
 
+.client-carousel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* height: 200px; */
+    /* position: relative; */
+    /* border: 3px solid green; */
+}
+
+.client-carousel .owl-item .image-item {
+    /* border: 3px solid red; */
+    width: auto;
+    height: 120px;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
 .client-carousel .owl-item img {
-    display: block;
-    width: 100%;
-    opacity: 0.4;
-    padding: 30px;
+    /* display: block; */
+    /* border: 3px solid purple; */
+    margin: auto;
+    width: auto;
+    object-fit: contain !important;
+    height: 120px;
+    /* opacity: 0.4; */
+    padding: 10px;
     transition: all 500ms ease;
+
+
+    /* width: 50%; */
 }
 
 .client-carousel .owl-item img:hover {
-    opacity: 1;
+    /* opacity: 1; */
     background-color: var(--thm-light-bg);
+    transform: scale(1.5);
 }
 
 .client-text {
@@ -4093,7 +4135,7 @@ a.search-toggler {
 .cta-four-section .container .row {
     z-index: 3;
     position: relative;
-    align-items: center;
+    align-items: top;
 }
 
 .cta-four-inner {

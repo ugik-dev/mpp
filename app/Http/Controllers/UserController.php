@@ -28,7 +28,7 @@ class UserController extends Controller
                     ->orWhere('username', 'like', '%' . $searchValue . '%');
             }
             $data = $data->get();
-            dd($data);
+            // dd($data);
 
             return DataTables::of($data)->addColumn('id', function ($data) {
                 return $data->id;

@@ -74,7 +74,7 @@
                         <div class="footer-widget-contact-list">
                             <i class="fa fa-solid fa-whatsapp"></i>
                             <div class="footer-widget-contact-item">
-                                <a href="{{ formatWhatsAppNumber($profile->whatsapp) }}">{{ $profile->whatsapp }}</a>
+                                <a href="{{ formatTelphone($profile->whatsapp) }}">{{ $profile->whatsapp }}</a>
                             </div>
                         </div>
                     </div><!--footer-widget-->

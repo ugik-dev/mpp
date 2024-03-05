@@ -17,6 +17,7 @@ class Menu extends Model
         'slug',
         'key',
         'content',
+        'number',
     ];
 
     public function parent()

@@ -13,24 +13,32 @@ if (!function_exists('menus')) {
     function menus()
     {
         // $menus = DB::table('menus')->pluck('id', 'name', 'key', 'jenis', 'parent_id');
-        $menus = DB::table('menus')->select('id', 'name', 'key', 'jenis', 'parent_id', 'slug', 'deletable', 'editable')->get()->toArray();
+        $menus = DB::table('menus')->select('id', 'name', 'key', 'jenis', 'parent_id', 'slug', 'deletable', 'editable', 'number')->orderBy('number', 'asc')->get()->toArray();
         return susunMenu($menus);
     }
 }
-if (!function_exists('formatWhatsAppNumber')) {
-    function formatWhatsAppNumber($number, $message = '')
+if (!function_exists('formatTelphone')) {
+    function formatTelphone($number, $message = '"Selamat datang di Mall Pelayanan Publik, silahkan isi data dibawah\n \nNama : \nAlamat : \nNIK : \n\n Tulis pesan ini : "', $wa = true, $plus = false)
     {
-        // Remove any non-numeric characters
         $number = preg_replace('/[^0-9]/', '', $number);
-
-        // Check if the number starts with '08' and replace it with '62'
         if (substr($number, 0, 2) == '08') {
             $number = '628' . substr($number, 2);
         } else if (substr($number, 0, 3) == '+62') {
             $number = '62' . substr($number, 3);
         }
-
-        return 'https://wa.me/' . $number . '/?text=' . urlencode("Selamat datang di Mall Pelayanan Publik, silahkan isi data dibawah\n \nNama : \nAlamat : \nNIK : \n\n Tulis pesan ini : ");
+        if (substr($number, 0, 2) == '07') {
+            $number = '627' . substr($number, 2);
+        } else if (substr($number, 0, 3) == '+62') {
+            $number = '62' . substr($number, 3);
+        }
+        if ($wa) {
+            if ($message) {
+                $message = urlencode($message);
+            } else {
+                $message = '';
+            }
+            return 'https://wa.me/' . $number . '/?text=' . $message;
+        } else return $number;
     }
 }
 if (!function_exists('profile')) {

@@ -127,16 +127,16 @@
                                 alt="img-8">
                             <div class="mayor-name">
                                 Dian Firnandy, SE
-                            </div><!-- mayor-name -->
-                        </div><!--mayor-img-->
-                    </div><!--col-lg-6"-->
-                </div><!-- row -->
-            </div><!-- container -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
         <!--mayor-section-->
         <section class="portfolio-section">
             <div class="section-title-box text-center">
-                <div class="section-tagline">Gelari</div>
+                <div class="section-tagline">Galeri</div>
                 <h2 class="section-title">Beberapa Event Kami</h2>
             </div><!-- section-title-box -->
             <div class="portfolio-content conatainer-fluid">
@@ -160,21 +160,20 @@
         </section><!--portfolio-section-->
         {{-- Patner --}}
         <section class="client-section">
-            <h5 class="client-text">Our partners & suppoters</h5>
+            <h5 class="client-text">Patner</h5>
             <div class="container">
                 <div class="client-carousel owl-carousel owl-theme">
-                    <div class="item">
-                        <img src="assets/image/shapes/client-1.png" class="img-fluid" alt="img-13">
-                    </div><!--item-->
-                    <div class="item">
-                        <img src="assets/image/shapes/client-1.png" class="img-fluid" alt="img-14">
-                    </div><!--item-->
-                    <div class="item">
-                        <img src="assets/image/shapes/client-1.png" class="img-fluid" alt="img-15">
-                    </div><!--item-->
-                    <div class="item">
-                        <img src="assets/image/shapes/client-1.png" class="img-fluid" alt="img-16">
-                    </div><!--item-->
+                    @foreach ($patners as $p)
+                        <div class="item" title="{{ $p->name }}">
+                            <div class="image-item">
+                                <a href="{{ $p->link }}" alt="{{ $p->name }}">
+                                    <img src="{{ $p->image ? url('storage/upload/images/' . $p->image) : url('assets/image/shapes/client-1.png') }}"
+                                        class="img-fluid" title="{{ $p->name }}">
+                                </a>
+                            </div>
+                            <h6 class="text-center">{{ $p->name }}</h6>
+                        </div>
+                    @endforeach
                 </div><!--client-carousel owl-carousel owl-theme-->
             </div><!--container-->
         </section><!--client-section-->

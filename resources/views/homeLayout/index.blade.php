@@ -25,7 +25,19 @@
 
     @include('homeLayout.script')
     @yield('script')
-
+    <div id="pre-loader">
+        <div id="loader-logo">
+            <img src="{{ url('assets/image/kab-bangka.png') }}">
+        </div>
+        <!-- loader-logo -->
+        <div id="loader-circle">
+        </div>
+        <!-- loader-circle -->
+        <div class="loader-section section-left"></div>
+        <!-- loader-section -->
+        <div class="loader-section section-right"></div>
+        <!-- loader-section -->
+    </div>
 </body>
 
 </html>

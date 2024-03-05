@@ -25,7 +25,7 @@
                                 </div>
                                 <div class="topbar-text">
                                     <a target="_blank"
-                                        href="https://wa.me/{{ formatWhatsAppNumber($profile->whatsapp) }}">{{ $profile->whatsapp }}</a>
+                                        href="{{ formatTelphone($profile->whatsapp) }}">{{ $profile->whatsapp }}</a>
                                 </div>
                             </li>
                         @endif
