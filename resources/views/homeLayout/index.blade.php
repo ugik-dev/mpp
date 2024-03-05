@@ -15,16 +15,6 @@
 
 
 <body>
-    @include('homeLayout.header')
-    {{-- @include('homeLayout.header_mega') --}}
-
-    @yield('content')
-
-    @include('homeLayout.footer')
-    <a href="#" class="scroll-to-top scroll-to-target" data-target="html"><i class="fa-solid fa-arrow-up"></i></a>
-
-    @include('homeLayout.script')
-    @yield('script')
     <div id="pre-loader">
         <div id="loader-logo">
             <img src="{{ url('assets/image/kab-bangka.png') }}">
@@ -38,6 +28,18 @@
         <div class="loader-section section-right"></div>
         <!-- loader-section -->
     </div>
+
+    @include('homeLayout.header')
+    {{-- @include('homeLayout.header_mega') --}}
+
+    @yield('content')
+
+    @include('homeLayout.footer')
+    <a href="#" class="scroll-to-top scroll-to-target" data-target="html"><i class="fa-solid fa-arrow-up"></i></a>
+
+    @include('homeLayout.script')
+    @yield('script')
+
 </body>
 
 </html>
