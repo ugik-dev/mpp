@@ -4,7 +4,7 @@
             <div class="row">
                 <div class="col-lg-4">
                     <div class="footer-widget-logo">
-                        <a href="index.html"><img src="{{ asset('assets/image/logo.png') }}" class="img-fluid"
+                        <a href="{{ route('home') }}"><img src="{{ asset('assets/image/logo.png') }}" class="img-fluid"
                                 alt="img-25"></a>
                     </div><!-- footer-widget-logo -->
                     <div class="footer-widget-text">
@@ -96,8 +96,8 @@
             <span></span>
         </a><!-- mobile-nav-close -->
         <div class="logo-box">
-            <a href="index.html"><img src="{{ asset('assets/image/logo-light.png') }}" width="160" height="40"
-                    alt="26"></a>
+            <a href="{{ route('home') }}"><img src="{{ asset('assets/image/logo-light.png') }}" width="160"
+                    height="40" alt="26"></a>
         </div><!-- logo-box -->
         <div class="mobile-nav-container"></div><!-- mobile-nav-container -->
         <ul class="mobile-nav-contact list-unstyled">

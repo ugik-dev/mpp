@@ -16,7 +16,7 @@
 
 
 <body>
-    {{-- <div id="pre-loader">
+    <div id="pre-loader">
         <div id="loader-logo">
             <img src="{{ url('assets/image/kab-bangka.png') }}">
         </div>
@@ -24,7 +24,7 @@
         </div>
         <div class="loader-section section-left"></div>
         <div class="loader-section section-right"></div>
-    </div> --}}
+    </div>
 
     @include('homeLayout.header')
     {{-- @include('homeLayout.header_mega') --}}

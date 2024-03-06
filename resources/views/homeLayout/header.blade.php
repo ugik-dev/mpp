@@ -61,7 +61,7 @@
         <div class="main-menu-inner">
             <div class="main-menu-left">
                 <div class="main-menu-logo">
-                    <a href="index.html"><img src="{{ asset('assets/image/logo.png') }}" alt="img-1"
+                    <a href="{{ route('home') }}"><img src="{{ asset('assets/image/logo.png') }}" alt="img-1"
                             width="100%"></a>
                 </div>
                 <div class="navigation">
@@ -152,7 +152,7 @@
                         {{-- <li class="active has-dropdown">
                             <a href="#">Home</a>
                             <ul class="list-unstyled">
-                                <li><a href="index.html">Home 1</a></li>
+                                <li><a href="{{route('home')}}">Home 1</a></li>
                                 <li><a href="index-2.html">Home 2</a></li>
                             </ul>
                         </li> --}}

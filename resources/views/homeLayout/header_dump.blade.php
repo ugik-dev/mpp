@@ -42,7 +42,7 @@
         <div class="main-menu-inner">
             <div class="main-menu-left">
                 <div class="main-menu-logo">
-                    <a href="index.html"><img src="{{ asset('assets/image/logo.png') }}" alt="img-1"
+                    <a href="{{ route('home') }}"><img src="{{ asset('assets/image/logo.png') }}" alt="img-1"
                             width="140"></a>
                 </div><!-- main-menu-logo -->
                 <div class="navigation">

@@ -22,7 +22,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/panel/dashboard', [DashboardController::class, 'index'])->name('panel.dashboard');
     Route::get('/logout', function () {
         Auth::logout();
-        return redirect('/');
+        return redirect('/home');
     })->name('logout');
 });
 Route::middleware(['auth', 'checkRole:admin,super'])->group(function () {
