@@ -19,8 +19,9 @@ use Illuminate\Support\Facades\Route;
 
 require __DIR__ . '/panel.php';
 
+Route::get('/', [HomeController::class, 'index']);
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/login', [LoginController::class, 'index'])->name('login');
-Route::get('/', [HomeController::class, 'index'])->name('home');
 // Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/portal', [HomeController::class, 'portal'])->name('portal');
 Route::get('/search', [HomeController::class, 'search'])->name('search');
