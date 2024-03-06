@@ -45,10 +45,11 @@
 
 body {
     font: 14px/26px "Open Sans", Arial, sans-serif;
-    background-color: #fff;
-    color: #33263e;
+    /* background-color: #fff; */
+    /* color: #33263e; */
 }
 
+/*
 h1,
 h2,
 h3,
@@ -144,7 +145,7 @@ a:hover,
 a:focus {
     outline: 0;
     color: #358ffe;
-}
+} */
 
 h1 small,
 h2 small,
