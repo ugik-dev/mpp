@@ -9,11 +9,13 @@
 
 {{-- <link href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" rel="stylesheet" /> --}}
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/vendor/animate/animate.min.css') }}">
+{{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" /> --}}
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/vendor/flaticon/css/flaticon_towngov.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/vendor/owl-carousel/owl.carousel.min.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/vendor/swiper/swiper-bundle.min.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/vendor/youtube-popup/youtube-popup.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}">
+
 
 
 

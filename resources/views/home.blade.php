@@ -3,10 +3,10 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/bdg/settings.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/bdg/navigation.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/bdg/layers.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/bdg/custom.css') }}">
+    {{-- <link rel="stylesheet" type="text/css" href="{{ asset('css/bdg/custom.css') }}"> --}}
     {{-- <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}"> --}}
-    <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/revslider@5.4.201-8.6/fonts/pe-icon-7-stroke/css/helper.min.css">
+    {{-- <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/revslider@5.4.201-8.6/fonts/pe-icon-7-stroke/css/helper.min.css"> --}}
 @endsection
 @section('script')
     {{-- <script src="https://cdn.jsdelivr.net/npm/revslider@5.4.201-8.6/js/jquery.themepunch.revolution.min.js"></script> --}}
@@ -27,6 +27,7 @@
 @section('content')
     <!--header-->
     <div class="page-wrapper">
+        @include('landingPage.banner')
         @include('landingPage.revolution_slider')
         @include('landingPage.hero')
         @include('landingPage.hero_icon')
@@ -192,10 +193,10 @@
                     @foreach ($patners as $p)
                         <div class="item" title="{{ $p->name }}">
                             <div class="image-item">
-                                <a href="{{ $p->link }}" alt="{{ $p->name }}">
-                                    <img src="{{ $p->image ? url('storage/upload/images/' . $p->image) : url('assets/image/shapes/client-1.png') }}"
-                                        class="img-fluid" title="{{ $p->name }}">
-                                </a>
+                                {{-- <a href="{{ $p->link }}" alt="{{ $p->name }}"> --}}
+                                <img src="{{ $p->image ? url('storage/upload/images/' . $p->image) : url('assets/image/shapes/client-1.png') }}"
+                                    class="img-fluid" title="{{ $p->name }}">
+                                {{-- </a> --}}
                             </div>
                             <h6 class="text-center">{{ $p->name }}</h6>
                         </div>

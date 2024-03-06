@@ -1,203 +1,223 @@
     <!-- REV SLIDER -->
-    <div class="rev_slider_wrapper" style="height: 100px !important">
-        <div class="rev_slider" data-version="5.0">
-            <ul>
-                <li data-transition="fade">
-                    <img src="{{ asset('assets/image/revolution/bg-slide-2.jpg') }}" alt="">
-                    <div class="tp-caption rs-parallaxlevel-3" data-x="100" data-y="80" data-speed="700"
-                        data-start="1000" data-transform_in="sX:0;sY:0;s:700;" data-transform_out="sX:0;sY:0;s:700;">
-                        <img src="{{ asset('assets/image/revolution/slide-2-image-1.png') }}" alt="">
-                    </div>
+    <section class="main-slider">
+        <div class="main-slider-swiper owl-carousel owl-theme">
+            <div class="rev_slider_wrapper" style="height: 100px !important">
+                <div class="rev_slider" data-version="5.0">
+                    <ul>
+                        <li data-transition="fade">
+                            <img src="{{ asset('assets/image/revolution/bg-slide-2.jpg') }}" alt="">
+                            <div class="tp-caption rs-parallaxlevel-3" data-x="100" data-y="80" data-speed="700"
+                                data-start="1000" data-transform_in="sX:0;sY:0;s:700;"
+                                data-transform_out="sX:0;sY:0;s:700;">
+                                <img src="{{ asset('assets/image/revolution/slide-2-image-1.png') }}" alt="">
+                            </div>
 
-                    <div class="tp-caption rs-parallaxlevel-2" data-x="250" data-y="center" data-voffset="80"
-                        data-speed="700" data-start="1000" data-transform_in="sX:0;sY:0;s:700;"
-                        data-transform_out="sX:0;sY:0;s:700;">
-                        <img src="{{ asset('assets/image/revolution/slide-2-image-2.png') }}" alt="">
-                    </div>
+                            <div class="tp-caption rs-parallaxlevel-2" data-x="250" data-y="center" data-voffset="80"
+                                data-speed="700" data-start="1000" data-transform_in="sX:0;sY:0;s:700;"
+                                data-transform_out="sX:0;sY:0;s:700;">
+                                <img src="{{ asset('assets/image/revolution/slide-2-image-2.png') }}" alt="">
+                            </div>
 
-                    <div class="tp-caption rs-parallaxlevel-3" data-x="center" data-y="180" data-hoffset="200"
-                        data-speed="700" data-start="1000" data-transform_in="sX:0;sY:0;s:700;"
-                        data-transform_out="sX:0;sY:0;s:700;">
-                        <img src="{{ asset('assets/image/revolution/slide-2-image-4.png') }}" alt="">
-                    </div>
+                            <div class="tp-caption rs-parallaxlevel-3" data-x="center" data-y="180" data-hoffset="200"
+                                data-speed="700" data-start="1000" data-transform_in="sX:0;sY:0;s:700;"
+                                data-transform_out="sX:0;sY:0;s:700;">
+                                <img src="{{ asset('assets/image/revolution/slide-2-image-4.png') }}" alt="">
+                            </div>
 
-                    <div class="tp-caption rs-parallaxlevel-2" data-x="center" data-y="bottom" data-hoffset="250"
-                        data-voffset="200" data-speed="700" data-start="1000" data-transform_in="sX:0;sY:0;s:700;"
-                        data-transform_out="sX:0;sY:0;s:700;">
-                        <img src="{{ asset('assets/image/revolution/slide-2-image-4.png') }}" alt="">
-                    </div>
+                            <div class="tp-caption rs-parallaxlevel-2" data-x="center" data-y="bottom"
+                                data-hoffset="250" data-voffset="200" data-speed="700" data-start="1000"
+                                data-transform_in="sX:0;sY:0;s:700;" data-transform_out="sX:0;sY:0;s:700;">
+                                <img src="{{ asset('assets/image/revolution/slide-2-image-4.png') }}" alt="">
+                            </div>
 
-                    <div class="tp-caption rs-parallaxlevel-2" data-x="right" data-y="80" data-hoffset="100"
-                        data-speed="700" data-start="1000" data-transform_in="sX:0;sY:0;s:700;"
-                        data-transform_out="sX:0;sY:0;s:700;">
-                        <img src="{{ asset('assets/image/revolution/slide-2-image-6.png') }}" alt="">
-                    </div>
+                            <div class="tp-caption rs-parallaxlevel-2" data-x="right" data-y="80" data-hoffset="100"
+                                data-speed="700" data-start="1000" data-transform_in="sX:0;sY:0;s:700;"
+                                data-transform_out="sX:0;sY:0;s:700;">
+                                <img src="{{ asset('assets/image/revolution/slide-2-image-6.png') }}" alt="">
+                            </div>
 
-                    <div class="tp-caption rs-parallaxlevel-1" data-x="350" data-y="bottom" data-voffset="100"
-                        data-speed="700" data-start="1000" data-transform_in="sX:0;sY:0;s:700;"
-                        data-transform_out="sX:0;sY:0;s:700;">
-                        <img src="{{ asset('assets/image/revolution/slide-2-image-7.png') }}" alt="">
-                    </div>
+                            <div class="tp-caption rs-parallaxlevel-1" data-x="350" data-y="bottom" data-voffset="100"
+                                data-speed="700" data-start="1000" data-transform_in="sX:0;sY:0;s:700;"
+                                data-transform_out="sX:0;sY:0;s:700;">
+                                <img src="{{ asset('assets/image/revolution/slide-2-image-7.png') }}" alt="">
+                            </div>
 
-                    <div class="tp-caption rs-parallaxlevel-2" data-x="-150" data-y="30" data-speed="700"
-                        data-start="1000" data-transform_in="sX:0;sY:0;s:700;" data-transform_out="sX:0;sY:0;s:700;">
-                        <img src="{{ asset('assets/image/revolution/slide-2-image-8.png') }}" alt="">
-                    </div>
+                            <div class="tp-caption rs-parallaxlevel-2" data-x="-150" data-y="30" data-speed="700"
+                                data-start="1000" data-transform_in="sX:0;sY:0;s:700;"
+                                data-transform_out="sX:0;sY:0;s:700;">
+                                <img src="{{ asset('assets/image/revolution/slide-2-image-8.png') }}" alt="">
+                            </div>
 
-                    <div class="tp-caption rs-parallaxlevel-2" data-x="right" data-y="bottom" data-speed="700"
-                        data-start="1000" data-transform_in="sX:0;sY:0;s:700;" data-transform_out="sX:0;sY:0;s:700;">
-                        <img src="{{ asset('assets/image/revolution/slide-2-image-9.png') }}" alt="">
-                    </div>
+                            <div class="tp-caption rs-parallaxlevel-2" data-x="right" data-y="bottom" data-speed="700"
+                                data-start="1000" data-transform_in="sX:0;sY:0;s:700;"
+                                data-transform_out="sX:0;sY:0;s:700;">
+                                <img src="{{ asset('assets/image/revolution/slide-2-image-9.png') }}" alt="">
+                            </div>
 
-                    <div class="tp-caption letter4 rs-parallaxlevel-1" data-x="120" data-y="260" data-speed="700"
-                        data-start="1200" data-transform_in="sX:0;sY:0;s:700;" data-transform_out="sX:0;sY:0;s:700;">
-                        D
-                    </div>
+                            <div class="tp-caption letter4 rs-parallaxlevel-1" data-x="120" data-y="260"
+                                data-speed="700" data-start="1200" data-transform_in="sX:0;sY:0;s:700;"
+                                data-transform_out="sX:0;sY:0;s:700;">
+                                D
+                            </div>
 
-                    <div class="tp-caption letter4 rs-parallaxlevel-1" data-x="235" data-y="280" data-speed="700"
-                        data-start="1400" data-transform_in="sX:0;sY:0;s:700;" data-transform_out="sX:0;sY:0;s:700;">
-                        I
-                    </div>
+                            <div class="tp-caption letter4 rs-parallaxlevel-1" data-x="235" data-y="280"
+                                data-speed="700" data-start="1400" data-transform_in="sX:0;sY:0;s:700;"
+                                data-transform_out="sX:0;sY:0;s:700;">
+                                I
+                            </div>
 
-                    <div class="tp-caption letter4 rs-parallaxlevel-1" data-x="260" data-y="250" data-speed="700"
-                        data-start="1600" data-transform_in="sX:0;sY:0;s:700;" data-transform_out="sX:0;sY:0;s:700;">
-                        N
-                    </div>
+                            <div class="tp-caption letter4 rs-parallaxlevel-1" data-x="260" data-y="250"
+                                data-speed="700" data-start="1600" data-transform_in="sX:0;sY:0;s:700;"
+                                data-transform_out="sX:0;sY:0;s:700;">
+                                N
+                            </div>
 
-                    <div class="tp-caption letter2 rs-parallaxlevel-1" data-x="365" data-y="180"
-                        data-speed="700" data-start="1600" data-transform_in="sX:0;sY:0;s:700;"
-                        data-transform_out="sX:0;sY:0;s:700;">
-                        P
-                    </div>
+                            <div class="tp-caption letter2 rs-parallaxlevel-1" data-x="365" data-y="180"
+                                data-speed="700" data-start="1600" data-transform_in="sX:0;sY:0;s:700;"
+                                data-transform_out="sX:0;sY:0;s:700;">
+                                P
+                            </div>
 
-                    <div class="tp-caption letter4 rs-parallaxlevel-2" data-x="410" data-y="280"
-                        data-speed="700" data-start="1800" data-transform_in="sX:0;sY:0;s:700;"
-                        data-transform_out="sX:0;sY:0;s:700;">
-                        M
-                    </div>
+                            <div class="tp-caption letter4 rs-parallaxlevel-2" data-x="410" data-y="280"
+                                data-speed="700" data-start="1800" data-transform_in="sX:0;sY:0;s:700;"
+                                data-transform_out="sX:0;sY:0;s:700;">
+                                M
+                            </div>
 
-                    <div class="tp-caption letter rs-parallaxlevel-2" data-x="550" data-y="220" data-speed="700"
-                        data-start="1800" data-transform_in="sX:0;sY:0;s:700;" data-transform_out="sX:0;sY:0;s:700;">
-                        P
-                    </div>
-                    <div class="tp-caption letter rs-parallaxlevel-2" data-x="590" data-y="300" data-speed="700"
-                        data-start="1800" data-transform_in="sX:0;sY:0;s:700;" data-transform_out="sX:0;sY:0;s:700;">
-                        2
-                    </div>
-                    <div class="tp-caption letter rs-parallaxlevel-2" data-x="680" data-y="270" data-speed="700"
-                        data-start="1800" data-transform_in="sX:0;sY:0;s:700;" data-transform_out="sX:0;sY:0;s:700;">
-                        K
-                    </div>
+                            <div class="tp-caption letter rs-parallaxlevel-2" data-x="550" data-y="220"
+                                data-speed="700" data-start="1800" data-transform_in="sX:0;sY:0;s:700;"
+                                data-transform_out="sX:0;sY:0;s:700;">
+                                P
+                            </div>
+                            <div class="tp-caption letter rs-parallaxlevel-2" data-x="590" data-y="300"
+                                data-speed="700" data-start="1800" data-transform_in="sX:0;sY:0;s:700;"
+                                data-transform_out="sX:0;sY:0;s:700;">
+                                2
+                            </div>
+                            <div class="tp-caption letter rs-parallaxlevel-2" data-x="680" data-y="270"
+                                data-speed="700" data-start="1800" data-transform_in="sX:0;sY:0;s:700;"
+                                data-transform_out="sX:0;sY:0;s:700;">
+                                K
+                            </div>
 
-                    <div class="tp-caption letter rs-parallaxlevel-2" data-x="750" data-y="180" data-speed="700"
-                        data-start="1800" data-transform_in="sX:0;sY:0;s:700;" data-transform_out="sX:0;sY:0;s:700;">
-                        U
-                    </div>
+                            <div class="tp-caption letter rs-parallaxlevel-2" data-x="750" data-y="180"
+                                data-speed="700" data-start="1800" data-transform_in="sX:0;sY:0;s:700;"
+                                data-transform_out="sX:0;sY:0;s:700;">
+                                U
+                            </div>
 
-                    <div class="tp-caption letter rs-parallaxlevel-2" data-x="830" data-y="290" data-speed="700"
-                        data-start="1800" data-transform_in="sX:0;sY:0;s:700;" data-transform_out="sX:0;sY:0;s:700;">
-                        K
-                    </div>
-                    <div class="tp-caption letter rs-parallaxlevel-2" data-x="930" data-y="230" data-speed="700"
-                        data-start="1800" data-transform_in="sX:0;sY:0;s:700;" data-transform_out="sX:0;sY:0;s:700;">
-                        M
-                    </div>
-                    {{-- <div class="tp-caption letter rs-parallaxlevel-2" data-x="900" data-y="200" data-speed="700"
+                            <div class="tp-caption letter rs-parallaxlevel-2" data-x="830" data-y="290"
+                                data-speed="700" data-start="1800" data-transform_in="sX:0;sY:0;s:700;"
+                                data-transform_out="sX:0;sY:0;s:700;">
+                                K
+                            </div>
+                            <div class="tp-caption letter rs-parallaxlevel-2" data-x="930" data-y="230"
+                                data-speed="700" data-start="1800" data-transform_in="sX:0;sY:0;s:700;"
+                                data-transform_out="sX:0;sY:0;s:700;">
+                                M
+                            </div>
+                            {{-- <div class="tp-caption letter rs-parallaxlevel-2" data-x="900" data-y="200" data-speed="700"
                         data-start="1800" data-transform_in="sX:0;sY:0;s:700;" data-transform_out="sX:0;sY:0;s:700;">
                         K
                     </div> --}}
-                    {{-- <div class="tp-caption letter rs-parallaxlevel-2" data-x="970" data-y="220" data-speed="700"
+                            {{-- <div class="tp-caption letter rs-parallaxlevel-2" data-x="970" data-y="220" data-speed="700"
                         data-start="1800" data-transform_in="sX:0;sY:0;s:700;" data-transform_out="sX:0;sY:0;s:700;">
                         A
                     </div> --}}
-                    <div class="tp-caption text" data-x="120" data-y="center" data-voffset="20" data-speed="700"
-                        data-start="2200" data-transform_in="x:-100;s:700;" data-transform_out="x:-100;s:700;">
-                        Mall Pelayanan Publik Kabupaten Bangka
-                    </div>
+                            <div class="tp-caption text" data-x="120" data-y="center" data-voffset="20"
+                                data-speed="700" data-start="2200" data-transform_in="x:-100;s:700;"
+                                data-transform_out="x:-100;s:700;">
+                                Mall Pelayanan Publik Kabupaten Bangka
+                            </div>
 
-                    <div class="tp-caption rs-parallaxlevel-2" data-x="center" data-y="center" data-hoffset="100"
-                        data-speed="700" data-start="1000" data-transform_in="sX:0;sY:0;s:700;"
-                        data-transform_out="sX:0;sY:0;s:700;">
-                        <img src="{{ asset('assets/image/revolution/slide-2-image-3.png') }}" alt="">
-                    </div>
+                            <div class="tp-caption rs-parallaxlevel-2" data-x="center" data-y="center"
+                                data-hoffset="100" data-speed="700" data-start="1000"
+                                data-transform_in="sX:0;sY:0;s:700;" data-transform_out="sX:0;sY:0;s:700;">
+                                <img src="{{ asset('assets/image/revolution/slide-2-image-3.png') }}" alt="">
+                            </div>
 
-                    <div class="tp-caption rs-parallaxlevel-3" data-x="center" data-y="250" data-speed="700"
-                        data-start="1000" data-transform_in="sX:0;sY:0;s:700;" data-transform_out="sX:0;sY:0;s:700;">
-                        <img src="{{ asset('assets/image/revolution/slide-2-image-5.png') }}" alt="">
-                    </div>
+                            <div class="tp-caption rs-parallaxlevel-3" data-x="center" data-y="250"
+                                data-speed="700" data-start="1000" data-transform_in="sX:0;sY:0;s:700;"
+                                data-transform_out="sX:0;sY:0;s:700;">
+                                <img src="{{ asset('assets/image/revolution/slide-2-image-5.png') }}" alt="">
+                            </div>
 
-                    <div class="tp-caption rs-parallaxlevel-4" data-x="center" data-y="center" data-voffset="100"
-                        data-speed="700" data-start="1000" data-transform_in="sX:0;sY:0;s:700;"
-                        data-transform_out="sX:0;sY:0;s:700;">
-                        <img src="{{ asset('assets/image/revolution/slide-2-image-10.png') }}" alt="">
-                    </div>
+                            <div class="tp-caption rs-parallaxlevel-4" data-x="center" data-y="center"
+                                data-voffset="100" data-speed="700" data-start="1000"
+                                data-transform_in="sX:0;sY:0;s:700;" data-transform_out="sX:0;sY:0;s:700;">
+                                <img src="{{ asset('assets/image/revolution/slide-2-image-10.png') }}"
+                                    alt="">
+                            </div>
 
-                    <div class="tp-caption rs-parallaxlevel-4" data-x="right" data-y="center" data-hoffset="150"
-                        data-speed="700" data-start="1000" data-transform_in="sX:0;sY:0;s:700;"
-                        data-transform_out="sX:0;sY:0;s:700;">
-                        <img src="{{ asset('assets/image/revolution/slide-2-image-11.png') }}" alt="">
-                    </div>
+                            <div class="tp-caption rs-parallaxlevel-4" data-x="right" data-y="center"
+                                data-hoffset="150" data-speed="700" data-start="1000"
+                                data-transform_in="sX:0;sY:0;s:700;" data-transform_out="sX:0;sY:0;s:700;">
+                                <img src="{{ asset('assets/image/revolution/slide-2-image-11.png') }}"
+                                    alt="">
+                            </div>
 
-                </li>
+                        </li>
 
-                <li data-transition="fade">
+                        <li data-transition="fade">
 
-                    <img src="{{ asset('assets/image/revolution/bg-slide-3.jpg') }}" alt="">
+                            <img src="{{ asset('assets/image/revolution/bg-slide-3.jpg') }}" alt="">
 
-                    <div class="tp-caption rs-parallaxlevel-2" data-x="right" data-y="center" data-hoffset="50"
-                        data-speed="700" data-start="1000" data-transform_in="x:100;s:700;"
-                        data-transform_out="x:100;s:700;">
-                        <img src="{{ asset('assets/image/revolution/slide-3-image-1.png') }}" alt="">
-                    </div>
+                            <div class="tp-caption rs-parallaxlevel-2" data-x="right" data-y="center"
+                                data-hoffset="50" data-speed="700" data-start="1000"
+                                data-transform_in="x:100;s:700;" data-transform_out="x:100;s:700;">
+                                <img src="{{ asset('assets/image/revolution/slide-3-image-1.png') }}" alt="">
+                            </div>
 
-                    <div class="tp-caption small-title" data-x="30" data-y="220" data-speed="700"
-                        data-start="1400" data-transform_in="x:50;s:700;" data-transform_out="x:50;s:700;">
-                        Satu Pintu
-                    </div>
+                            <div class="tp-caption small-title" data-x="30" data-y="220" data-speed="700"
+                                data-start="1400" data-transform_in="x:50;s:700;" data-transform_out="x:50;s:700;">
+                                Satu Pintu
+                            </div>
 
-                    <div class="tp-caption text" data-x="630" data-y="220" data-speed="700" data-start="1500"
-                        data-transform_in="x:-50;s:700;" data-transform_out="x:-50;s:700;">
-                        untuk kemudahan
-                    </div>
+                            <div class="tp-caption text" data-x="630" data-y="220" data-speed="700"
+                                data-start="1500" data-transform_in="x:-50;s:700;" data-transform_out="x:-50;s:700;">
+                                untuk kemudahan
+                            </div>
 
-                    <div class="tp-caption title2 rs-parallaxlevel-1" data-x="135" data-y="325" data-speed="700"
-                        data-start="2000" data-transform_in="o:0;s:1000;" data-transform_out="o:0;s:1000;">
-                        7 Instansi
-                    </div>
+                            <div class="tp-caption title2 rs-parallaxlevel-1" data-x="135" data-y="325"
+                                data-speed="700" data-start="2000" data-transform_in="o:0;s:1000;"
+                                data-transform_out="o:0;s:1000;">
+                                7 Instansi
+                            </div>
 
-                    <div class="tp-caption title2-white rs-parallaxlevel-1" data-x="520" data-y="325"
-                        data-speed="700" data-start="2000" data-transform_in="o:0;s:1000;"
-                        data-transform_out="o:0;s:1000;">
-                        &nbsp; 64 Layanan
-                    </div>
+                            <div class="tp-caption title2-white rs-parallaxlevel-1" data-x="520" data-y="325"
+                                data-speed="700" data-start="2000" data-transform_in="o:0;s:1000;"
+                                data-transform_out="o:0;s:1000;">
+                                &nbsp; 64 Layanan
+                            </div>
 
-                    <div class="tp-caption text rs-parallaxlevel-3" data-x="30" data-y="150" data-speed="700"
-                        data-start="2400" data-transform_in="x:-50;s:700;" data-transform_out="x:-50;s:700;">
-                        Layanan Publik Kabupaten Bangka
-                    </div>
+                            <div class="tp-caption text rs-parallaxlevel-3" data-x="30" data-y="150"
+                                data-speed="700" data-start="2400" data-transform_in="x:-50;s:700;"
+                                data-transform_out="x:-50;s:700;">
+                                Layanan Publik Kabupaten Bangka
+                            </div>
 
-                    <div class="tp-caption rs-parallaxlevel-1" data-x="center" data-y="-50" data-hoffset="-150"
-                        data-speed="700" data-start="2600" data-transform_in="sX:0;sY:0;s:700;"
-                        data-transform_out="sX:0;sY:0;s:700;">
-                        <img src="{{ asset('assets/image/revolution/slide-3-image-2.png') }}" alt="">
-                    </div>
+                            <div class="tp-caption rs-parallaxlevel-1" data-x="center" data-y="-50"
+                                data-hoffset="-150" data-speed="700" data-start="2600"
+                                data-transform_in="sX:0;sY:0;s:700;" data-transform_out="sX:0;sY:0;s:700;">
+                                <img src="{{ asset('assets/image/revolution/slide-3-image-2.png') }}" alt="">
+                            </div>
 
 
-                    <div class="tp-caption rs-parallaxlevel-3" data-x="right" data-y="50" data-hoffset="50"
-                        data-speed="700" data-start="2600" data-transform_in="sX:0;sY:0;s:700;"
-                        data-transform_out="sX:0;sY:0;s:700;">
-                        <img src="{{ asset('assets/image/revolution/slide-3-image-4.png') }}" alt="">
-                    </div>
+                            <div class="tp-caption rs-parallaxlevel-3" data-x="right" data-y="50"
+                                data-hoffset="50" data-speed="700" data-start="2600"
+                                data-transform_in="sX:0;sY:0;s:700;" data-transform_out="sX:0;sY:0;s:700;">
+                                <img src="{{ asset('assets/image/revolution/slide-3-image-4.png') }}" alt="">
+                            </div>
 
-                    <div class="tp-caption rs-parallaxlevel-3" data-x="center" data-y="410" data-hoffset="-50"
-                        data-voffset="50" data-speed="700" data-start="2600" data-transform_in="sX:0;sY:0;s:700;"
-                        data-transform_out="sX:0;sY:0;s:700;">
-                        <img src="{{ asset('assets/image/revolution/slide-3-image-5.png') }}" alt="">
-                    </div>
+                            <div class="tp-caption rs-parallaxlevel-3" data-x="center" data-y="410"
+                                data-hoffset="-50" data-voffset="50" data-speed="700" data-start="2600"
+                                data-transform_in="sX:0;sY:0;s:700;" data-transform_out="sX:0;sY:0;s:700;">
+                                <img src="{{ asset('assets/image/revolution/slide-3-image-5.png') }}" alt="">
+                            </div>
 
-                </li>
+                        </li>
 
-                {{-- <li data-transition="fade">
+                        {{-- <li data-transition="fade">
 
                     <img src="{{ asset('assets/image/revolution/bg-slide-1.jpg') }}" alt="">
 
@@ -359,9 +379,11 @@
 
                 </li> --}}
 
-            </ul>
-        </div><!-- rev_slider -->
-    </div>
+                    </ul>
+                </div><!-- rev_slider -->
+            </div>
+        </div>
+    </section>
     <!-- END rev_slider_wrapper -->
 
 

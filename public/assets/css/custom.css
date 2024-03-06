@@ -1,0 +1,202 @@
+/* REVOLUTION SLIDER */
+.rev_slider_wrapper {
+    height: 715px;
+    margin-bottom: 10px;
+    /*margin-bottom: 100px;*/
+}
+
+.rev_slider ul,
+.rev_slider ul li {
+    overflow: visible !important;
+}
+
+
+/* ARROWS */
+.tp-leftarrow.custom,
+.tp-rightarrow.custom {
+    width: 54px;
+    height: 54px;
+    border: 2px solid #240e35;
+    background-color: transparent;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+}
+
+.tp-leftarrow.custom:hover,
+.tp-rightarrow.custom:hover {
+    background-color: transparent;
+    opacity: 0.5;
+}
+
+.tp-leftarrow.custom,
+.tp-leftarrow.custom:hover {
+    background: url(../image/revolution/prev.png)no-repeat center center;
+}
+
+.tp-rightarrow.custom,
+.tp-rightarrow.custom:hover {
+    background: url(../../assets/image/revolution/next.png) no-repeat center center;
+}
+
+.tp-leftarrow.custom:before {
+    content: none !important;
+}
+
+.tp-rightarrow.custom:before {
+    content: none !important;
+}
+
+
+/* BULLETS */
+.tp-bullets.custom .tp-bullet {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: 2px solid #240e35;
+    background-color: transparent;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+}
+
+.tp-bullets.custom .tp-bullet:hover,
+.tp-bullets.custom .tp-bullet.selected {
+    background-color: #240e35;
+}
+
+
+/* TYPOGRAPHY */
+.tp-caption.big-title-white {
+    color: #fff;
+    font-family: "Poppins", Arial, sans-serif;
+    font-size: 72px;
+    font-weight: 700;
+    text-shadow: 3px 3px 16px rgba(0, 0, 0, 0.43);
+}
+
+.tp-caption.big-title {
+    color: #240e35;
+    font-family: "Poppins", Arial, sans-serif;
+    font-size: 72px;
+    font-weight: 500;
+}
+
+.tp-caption.title {
+    color: #240e35;
+    font-family: "Poppins", Arial, sans-serif;
+    font-size: 36px;
+    font-weight: 500;
+}
+
+.tp-caption.title-white {
+    color: #fff;
+    font-family: "Poppins", Arial, sans-serif;
+    font-size: 36px;
+    font-weight: 700;
+    text-shadow: 3px 3px 16px rgba(0, 0, 0, 0.43);
+}
+
+.tp-caption.letter {
+    color: #240e35;
+    font-family: "Poppins", Arial, sans-serif;
+    font-size: 180px;
+    font-weight: 500;
+    text-shadow: 10px 20px 4px rgba(0, 0, 0, 0.15);
+}
+
+.tp-caption.letter4 {
+    color: #240e35;
+    font-family: "Poppins", Arial, sans-serif;
+    font-size: 190px;
+    font-weight: 500;
+    text-shadow: 10px 20px 4px rgba(0, 0, 0, 0.15);
+}
+
+.tp-caption.letter2 {
+    color: #240e35;
+    font-family: "Poppins", Arial, sans-serif;
+    font-size: 280px;
+    font-weight: 500;
+    text-shadow: 10px 20px 4px rgba(0, 0, 0, 0.15);
+}
+
+.tp-caption.letter3 {
+    color: #240e35;
+    font-family: "Poppins", Arial, sans-serif;
+    font-size: 250px;
+    font-weight: 500;
+    text-shadow: 10px 20px 4px rgba(0, 0, 0, 0.15);
+}
+
+.tp-caption.text {
+    font-family: "Poppins", Arial, sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.tp-caption.small-title {
+    color: #dce3e5;
+    font-family: "Poppins", Arial, sans-serif;
+    font-size: 80px;
+    font-weight: 500;
+}
+
+.tp-caption.title2 {
+    color: #240e35;
+    font-family: "Poppins", Arial, sans-serif;
+    font-size: 90px;
+    font-weight: 500;
+    text-shadow: 3px 5px 5px rgba(0, 0, 0, 0.1);
+}
+
+.tp-caption.title2-white {
+    color: #fff;
+    font-family: "Poppins", Arial, sans-serif;
+    font-size: 90px;
+    font-weight: 500;
+    text-shadow: 3px 5px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* BANNER  */
+
+.banner-button {
+    display: inline-block;
+
+
+}
+
+.image-banner {
+    width: auto;
+    /* height: 120px; */
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    /* background-color: #444; */
+    /* border: 1px solid #CCC; */
+    /* padding: 5px; */
+    border-radius: 30px;
+    margin: 20px;
+    box-shadow: 0 0 5px -1px rgba(0, 0, 0, 0.2);
+}
+
+.image-banner img {
+    /* display: block; */
+    /* border: 3px solid purple; */
+    margin: auto;
+    width: auto;
+    object-fit: contain !important;
+    height: 120px;
+    /* opacity: 0.4; */
+    padding: 10px;
+    transition: all 500ms ease;
+
+
+    /* width: 50%; */
+}
+
+.client-carousel .owl-item img:hover {
+    /* opacity: 1; */
+    background-color: var(--thm-light-bg);
+    transform: scale(1.5);
+}

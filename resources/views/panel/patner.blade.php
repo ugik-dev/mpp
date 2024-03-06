@@ -112,6 +112,12 @@
                             </div>
                         </div>
                         <div class="col-sm-12 mb-3">
+                            <label for="basicFullname" class="form-label">Warna Background:</label>
+                            <input type="color" id="bg_color" name="bg_color" class="form-control">
+                            <div class="invalid-feedback">
+                            </div>
+                        </div>
+                        <div class="col-sm-12 mb-3">
                             <label for="basicFullname" class="form-label">File:</label>
                             <input type="file" id="image" name="image_upload" accept="image/*"
                                 class="form-control">
@@ -217,6 +223,7 @@
                 'link': $('#form-bank-data').find('#link'),
                 'jenis': $('#form-bank-data').find('#jenis'),
                 'number': $('#form-bank-data').find('#number'),
+                'bg_color': $('#form-bank-data').find('#bg_color'),
                 'image': $('#form-bank-data').find('#image'),
             }
 
@@ -235,6 +242,7 @@
                 PatnerForm.link.val(decodeHTML(currentData['link']));
                 PatnerForm.number.val(currentData['number']);
                 PatnerForm.jenis.val(currentData['jenis']);
+                PatnerForm.bg_color.val(currentData['bg_color']);
             })
 
             $.ajaxSetup({

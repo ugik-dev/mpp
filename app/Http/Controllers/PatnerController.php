@@ -37,7 +37,7 @@ class PatnerController extends Controller
                 ->addColumn('link_span', function ($data) {
                     return '<a href="' . $data->link . '" alt="' . $data->link . '" target="_blank" class="btn btn-secondary"> ' . $data->link . '</a>';
                 })->addColumn('image_span', function ($data) {
-                    return '<img class="thumb-image" style="max-width: 200px" src="' . url('/storage/upload/images') . '/' . $data->image . '" alt="' . $data->image . '" />';
+                    return '<img class="thumb-image" style="max-width: 200px; ' . ($data->bg_color ? 'background-color: ' . $data->bg_color . ';' : '') . '" src="' . url('/storage/upload/images') . '/' . $data->image . '" alt="' . $data->image . '" />';
                 })->addColumn('aksi', function ($data) {
                     return '<div class="btn-group" role="group" aria-label="Basic mixed styles example">
                     <button type="button" class="edit-btn btn btn-warning" data-id="' . $data->id . '"><i class="fas fa-pencil-alt" ></i></button>
@@ -62,6 +62,7 @@ class PatnerController extends Controller
                 'link' => $request->link,
                 'description' => $request->description,
                 'number' => $request->number,
+                'bg_color' => $request->bg_color,
             ];
 
             $data = Patner::create($att);
@@ -137,6 +138,7 @@ class PatnerController extends Controller
                 'link' => $request->link,
                 'description' => $request->description,
                 'number' => $request->number,
+                'bg_color' => $request->bg_color,
             ]);
 
             if ($request->hasFile('image_upload')) {

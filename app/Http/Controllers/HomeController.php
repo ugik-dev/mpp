@@ -30,9 +30,10 @@ class HomeController extends Controller
         $sidbar_lates_content = Content::with('comment')->select('contents.*')->complete()->latest('tanggal')->limit(6)->get();
         $events = Content::with('comment')->select('contents.*')->where('ref_content_id', 5)->complete()->latest('tanggal')->limit(4)->get();
         $patners = Patner::where('jenis', 'Patner')->orderBy('number', 'asc')->get();
+        $banners = Patner::where('jenis', 'Banner')->orderBy('number', 'asc')->get();
         $surveys = Survey::latest('created_at')->limit(10)->get();
         // dd($event);
-        return view('home', compact('heroes', 'hero_icon', 'sidbar_lates_content', 'events', 'surveys', 'conf_home', 'patners'));
+        return view('home', compact('heroes', 'hero_icon', 'sidbar_lates_content', 'events', 'banners', 'surveys', 'conf_home', 'patners'));
     }
     public function portal()
     {
