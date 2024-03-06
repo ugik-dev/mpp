@@ -1,7 +1,33 @@
 @extends('homeLayout/index')
+@section('style')
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/bdg/settings.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/bdg/navigation.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/bdg/layers.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/bdg/custom.css') }}">
+    {{-- <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}"> --}}
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/revslider@5.4.201-8.6/fonts/pe-icon-7-stroke/css/helper.min.css">
+@endsection
+@section('script')
+    {{-- <script src="https://cdn.jsdelivr.net/npm/revslider@5.4.201-8.6/js/jquery.themepunch.revolution.min.js"></script> --}}
+    <script src="{{ asset('js/bdg/custom.js') }}"></script>
+
+    <script src="{{ asset('js/bdg/jquery.themepunch.tools.min.js') }}"></script>
+    <script src="{{ asset('js/bdg/jquery.themepunch.revolution.min.js') }}"></script>
+    <script src="{{ asset('js/bdg/revolution.extension.actions.min.js') }}"></script>
+    <script src="{{ asset('js/bdg/revolution.extension.carousel.min.js') }}"></script>
+    <script src="{{ asset('js/bdg/revolution.extension.kenburn.min.js') }}"></script>
+    <script src="{{ asset('js/bdg/revolution.extension.layeranimation.min.js') }}"></script>
+    <script src="{{ asset('js/bdg/revolution.extension.migration.min.js') }}"></script>
+    <script src="{{ asset('js/bdg/revolution.extension.navigation.min.js') }}"></script>
+    <script src="{{ asset('js/bdg/revolution.extension.parallax.min.js') }}"></script>
+    <script src="{{ asset('js/bdg/revolution.extension.slideanims.min.js') }}"></script>
+    <script src="{{ asset('js/bdg/revolution.extension.video.min.js') }}"></script>
+@endsection
 @section('content')
     <!--header-->
     <div class="page-wrapper">
+        @include('landingPage.revolution_slider')
         @include('landingPage.hero')
         @include('landingPage.hero_icon')
 
