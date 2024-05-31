@@ -25,7 +25,7 @@ class ContentSeeder extends Seeder
         $timestamp_awal = strtotime($tanggal_awal);
         $timestamp_akhir = strtotime($tanggal_akhir);
 
-        for ($i = 1; $i <= 100; $i++) {
+        for ($i = 1; $i <= 0; $i++) {
             $timestamp_acak = mt_rand($timestamp_awal, $timestamp_akhir);
             $tanggal_acak = date("Y-m-d", $timestamp_acak);
             $judul = $faker->unique()->realTextBetween(10, 30, 5);
@@ -33,7 +33,7 @@ class ContentSeeder extends Seeder
             Content::updateOrCreate(['agency_id' => rand(1, 3), 'tanggal' => $tanggal_acak, 'user_id' => rand(1, 4), 'ref_content_id' => rand(1, 5), 'judul' => $judul, 'content' => $faker->realTextBetween(30, 400, 5), 'slug' => $slug]);
         }
 
-        for ($i = 1; $i <= 100; $i++) {
+        for ($i = 1; $i <= 0; $i++) {
             $judul = $faker->unique()->realTextBetween(10, 30, 5);
             Survey::updateOrCreate([
                 'nama' => $faker->name(), 'alasan' => $judul, 'respon' => rand(0, 5),

@@ -127,7 +127,7 @@
                             <div class="tp-caption text" data-x="120" data-y="center" data-voffset="20"
                                 data-speed="700" data-start="2200" data-transform_in="x:-100;s:700;"
                                 data-transform_out="x:-100;s:700;">
-                                Mall Pelayanan Publik Kabupaten Bangka
+                                Mal Pelayanan Publik Kabupaten Bangka
                             </div>
 
                             <div class="tp-caption rs-parallaxlevel-2" data-x="center" data-y="center"
@@ -181,13 +181,13 @@
                             <div class="tp-caption title2 rs-parallaxlevel-1" data-x="135" data-y="325"
                                 data-speed="700" data-start="2000" data-transform_in="o:0;s:1000;"
                                 data-transform_out="o:0;s:1000;">
-                                7 Instansi
+                                13 Instansi
                             </div>
 
                             <div class="tp-caption title2-white rs-parallaxlevel-1" data-x="520" data-y="325"
                                 data-speed="700" data-start="2000" data-transform_in="o:0;s:1000;"
                                 data-transform_out="o:0;s:1000;">
-                                &nbsp; 64 Layanan
+                                &nbsp; 93 Layanan
                             </div>
 
                             <div class="tp-caption text rs-parallaxlevel-3" data-x="30" data-y="150"
