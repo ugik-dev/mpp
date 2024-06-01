@@ -37,7 +37,7 @@ jobs:
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: 8.1 # Updated PHP version
+          php-version: 8.1
           extensions: mbstring, xml, ctype, json, pdo, pdo_mysql, bcmath
 
       - name: Install Composer dependencies
