@@ -3,10 +3,10 @@ name: Laravel Test with MySQL Matrix
 on:
   push:
     branches:
-      - main
+      - alt-mysql-5.7
   pull_request:
     branches:
-      - main
+      - alt-mysql-5.7
 
 jobs:
   test:
