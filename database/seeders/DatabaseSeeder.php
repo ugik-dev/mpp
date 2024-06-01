@@ -20,5 +20,6 @@ class DatabaseSeeder extends Seeder
         $this->call(UsersSeeder::class);
         $this->call(DefaultLandingPageSeeder::class);
         $this->call(ContentSeeder::class);
+        $this->call(ConfHomeSeeder::class);
     }
 }
