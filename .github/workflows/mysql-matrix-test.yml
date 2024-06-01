@@ -61,11 +61,13 @@ jobs:
           DB_USERNAME: root
           DB_PASSWORD: root
 
+      - name: Install dockerize
+        run: |
+          curl -sSL https://github.com/jwilder/dockerize/releases/download/v0.6.1/dockerize-linux-amd64-v0.6.1.tar.gz | sudo tar -C /usr/local/bin -xzv
+
       - name: Wait for MySQL to be ready
         run: |
           dockerize -wait tcp://127.0.0.1:3306 -timeout 1m
-        env:
-          DOCKERIZE_VERSION: v0.6.1
 
       - name: Run migrations
         run: php artisan migrate --force
