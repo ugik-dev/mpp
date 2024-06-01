@@ -1,0 +1,74 @@
+name: Laravel Test with MySQL Matrix
+
+on:
+  push:
+    branches:
+      - alt-mysql-5.7
+  pull_request:
+    branches:
+      - alt-mysql-5.7
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        mysql-version: [5.7, 8.0, 8.1]
+
+    services:
+      mysql:
+        image: mysql:${{ matrix.mysql-version }}
+        ports:
+          - 3306:3306
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: laravel
+        options: >-
+          --health-cmd "mysqladmin ping --silent"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 3
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.0 # Specify the PHP version you want to use
+          extensions: mbstring, xml, ctype, json, pdo, pdo_mysql, bcmath
+
+      - name: Install Composer dependencies
+        run: composer install --prefer-dist --no-interaction --no-progress --optimize-autoloader
+
+      - name: Copy .env.example to .env
+        run: cp .env.example .env
+
+      - name: Set up application key
+        run: php artisan key:generate
+
+      - name: Configure database
+        run: |
+          php artisan config:clear
+          php artisan config:cache
+        env:
+          DB_CONNECTION: mysql
+          DB_HOST: 127.0.0.1
+          DB_PORT: 3306
+          DB_DATABASE: laravel
+          DB_USERNAME: root
+          DB_PASSWORD: root
+
+      - name: Wait for MySQL to be ready
+        run: |
+          dockerize -wait tcp://127.0.0.1:3306 -timeout 1m
+        env:
+          DOCKERIZE_VERSION: v0.6.1
+
+      - name: Run migrations
+        run: php artisan migrate --force
+
+      - name: Run tests
+        run: php artisan test
