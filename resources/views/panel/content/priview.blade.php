@@ -14,7 +14,7 @@
             <div class="card-header py-3 item-center align-items-center">
                 <div class="col-lg-12 d-flex">
                     @if (!empty($data->sampul))
-                        <img class="mb-2 mt-3 rounded mx-auto " src="{{ url('/storage/upload/content/' . $data->sampul) }}"
+                        <img class="mb-2 mt-3 rounded mx-auto " src="{{ url('/upload/content/' . $data->sampul) }}"
                             class="img-thumbnail" />
                     @endif
                 </div>
@@ -45,13 +45,13 @@
     <div class="container">
         <div class="row d-flex flex-wrap align-items-center" data-toggle="modal" data-target="#lightbox">
             <div class="col-12 col-md-6 col-lg-3 galeri-grid">
-                <img src="{{ url('/storage/upload/content/' . $data->sampul) }}" data-target="#indicators" data-slide-to="0"
+                <img src="{{ url('/upload/content/' . $data->sampul) }}" data-target="#indicators" data-slide-to="0"
                     alt="" />
             </div>
             <?php $i = 1; ?>
             @foreach ($galeriImage as $img)
                 <div class="col-12 col-md-6 col-lg-3 galeri-grid">
-                    <img src="{{ url('/storage/upload/content_image/' . $img->filename) }}" data-target="#indicators"
+                    <img src="{{ url('/upload/content_image/' . $img->filename) }}" data-target="#indicators"
                         data-slide-to="{{ $i++ }}" alt="" />
                 </div>
             @endforeach
@@ -76,13 +76,12 @@
                         <div class="carousel-inner">
 
                             <div class="carousel-item active">
-                                <img class="d-block w-100" src="{{ url('/storage/upload/content/' . $data->sampul) }}"
+                                <img class="d-block w-100" src="{{ url('/upload/content/' . $data->sampul) }}"
                                     alt="First slide">
                             </div>
                             @foreach ($galeriImage as $img)
                                 <div class="carousel-item">
-                                    <img class="d-block w-100"
-                                        src="{{ url('/storage/upload/content_image/' . $img->filename) }}"
+                                    <img class="d-block w-100" src="{{ url('/upload/content_image/' . $img->filename) }}"
                                         alt="Second slide">
                                 </div>
                             @endforeach

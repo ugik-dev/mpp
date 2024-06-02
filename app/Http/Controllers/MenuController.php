@@ -312,7 +312,7 @@ class MenuController extends Controller
                 $originalFilename;
                 MediaMenuUpload::create(['filename' => $originalFilename, "user_id" => Auth::user()->id]);
             }
-            $url = url('/') . '/storage/upload/content_image/' . $originalFilename;
+            $url = url('/') . '/upload/content_image/' . $originalFilename;
             return response()->json(['fileName' => $originalFilename, 'uploaded' => 1, 'url' => $url]);
         } catch (Exception $ex) {
             return  $this->ResponseError($ex->getMessage());

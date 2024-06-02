@@ -15,8 +15,7 @@
                     <div class="blog-card">
                         <div class="blog-card-image">
                             @if ($lp->sampul)
-                                <img src="{{ url('storage/upload/content/' . $lp->sampul) }}" class="img-fluid"
-                                    alt="img-22">
+                                <img src="{{ url('upload/content/' . $lp->sampul) }}" class="img-fluid" alt="img-22">
                             @else
                                 <img src="assets/background/bg-{{ str_pad(rand(1, 23), 2, '0', STR_PAD_LEFT) }}.jpg"
                                     class="img-fluid" alt="img-22">

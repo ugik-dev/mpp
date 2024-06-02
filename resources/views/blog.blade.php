@@ -25,7 +25,7 @@
                         <div class="news-details-box-image">
                             <div class="news-details-box-image-inner">
                                 @if ($data->sampul)
-                                    <img src="{{ url('storage/upload/content/' . $data->sampul) }}" class="img-fluid"
+                                    <img src="{{ url('upload/content/' . $data->sampul) }}" class="img-fluid"
                                         alt="{{ $data->judul }}">
                                 @endif
                                 <a href="#"

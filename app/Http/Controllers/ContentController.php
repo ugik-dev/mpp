@@ -46,7 +46,7 @@ class ContentController extends Controller
                 return $data->judul;
             })->addColumn('img', function ($data) {
                 if ($data->sampul)
-                    return '<img style="max-width:100px; max-height:80px" src="' . url('/storage/upload/content') . '/' . $data->sampul . '" alt="' . $data->judul . '" class="img-thumbnail">';
+                    return '<img style="max-width:100px; max-height:80px" src="' . url('/upload/content') . '/' . $data->sampul . '" alt="' . $data->judul . '" class="img-thumbnail">';
                 else return 'No Image';
             })->addColumn('aksi', function ($data) {
                 return '<div class="btn-group" role="group" aria-label="Basic mixed styles example">
@@ -79,9 +79,9 @@ class ContentController extends Controller
                 $originalFilename;
                 MediaUpload::create(['filename' => $originalFilename, "user_id" => Auth::user()->id]);
             }
-            $url = url('/') . '/storage/upload/content_image/' . $originalFilename;
+            $url = url('/') . '/upload/content_image/' . $originalFilename;
             return response()->json(['fileName' => $originalFilename, 'uploaded' => 1, 'url' => $url]);
-            // return $this->responseSuccess(url('/') . '/storage/upload/content_image/' . $originalFilename);
+            // return $this->responseSuccess(url('/') . '/upload/content_image/' . $originalFilename);
         } catch (Exception $ex) {
             return  $this->ResponseError($ex->getMessage());
         }
@@ -141,10 +141,6 @@ class ContentController extends Controller
             $data = Content::create($att);
             $data = Content::with('ref_content')->find($data->id);
 
-            $request->validate([
-                'file_sampul' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Add appropriate validation rules
-            ]);
-
             // Check if the request has a file
             if ($request->hasFile('file_sampul')) {
                 $photo = $request->file('file_sampul');
@@ -167,7 +163,6 @@ class ContentController extends Controller
             $img = extractImageNames($request->content);
             MediaUpload::whereIn('filename', $img)->update(['status' => 'posted', 'content_id' => $data->id]);
 
-
             $this->clearImgDraft();
 
             return  $this->responseSuccess($data);
@@ -181,6 +176,7 @@ class ContentController extends Controller
             return $this->ResponseError($ex->getMessage());
         }
     }
+
 
 
     public function show(string $slug)
@@ -227,38 +223,33 @@ class ContentController extends Controller
 
             if ($request->hasFile('file_sampul')) {
                 $photo = $request->file('file_sampul');
-                $originalFilename = time() . $photo->getClientOriginalName(); // Ambil nama asli file
-                $path = $photo->storeAs('upload/content', $originalFilename, 'public');
-                $att['sampul']  = $originalFilename;
+                $originalFilename = time() . '_' . $photo->getClientOriginalName(); // Add timestamp to avoid collisions
+
+                // Ensure the directory exists
+                $destinationPath = public_path('upload/content');
+                if (!file_exists($destinationPath)) {
+                    mkdir($destinationPath, 0755, true);
+                }
+
+                // Move the file to the public_html/upload/content directory
+                $photo->move($destinationPath, $originalFilename);
+
+                // Save the filename to the database
+                $att['sampul'] = $originalFilename;
             }
 
-            $use_img = extractImageNames($request->content);
-            $old_img = MediaUpload::where('content_id', '=', $request->id)->get();
-            $old_img_list = [];
-            $filePath = 'upload/content_image/';
-            foreach ($old_img as $ol) {
-                $old_img_list[] = $ol->filename;
-                if (!in_array($ol->filename, $use_img)) {
-                    if (Storage::disk('public')->exists($filePath . $ol->filename)) {
-                        Storage::disk('public')->delete($filePath . $ol->filename);
-                    }
-                    MediaUpload::where('id', '=', $ol->id)->delete();
-                } else {
-                    $key = array_search($ol->filename, $use_img);
-                    if ($key !== false) {
-                        unset($use_img[$key]);
-                    }
-                }
-            }
-            MediaUpload::whereIn('filename', $use_img)->update(['status' => 'posted', 'content_id' => $data->id]);
+            // Update the content with the new data
+            $data->update($att);
+
+            // Clear draft images
             $this->clearImgDraft();
 
-            $data->update($att);
             return  $this->responseSuccess($data);
         } catch (Exception $ex) {
             return  $this->ResponseError($ex->getMessage());
         }
     }
+
     function clearImgDraft()
     {
         $data = MediaUpload::where('status', '=', 'draft')->get();

@@ -18,8 +18,7 @@
             @if ($lp->sampul)
                 <a href="{{ route('blog', [$lp->prefix, $lp->slug]) }}">
                     <div class="sidebar-recent-post-img">
-                        <img class="sidebar-thumbnail" src="{{ url('storage/upload/content/' . $lp->sampul) }}"
-                            alt="">
+                        <img class="sidebar-thumbnail" src="{{ url('upload/content/' . $lp->sampul) }}" alt="">
                     </div><!-- sidebar-recent-post-img -->
                 </a>
             @endif

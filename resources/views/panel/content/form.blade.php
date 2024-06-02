@@ -98,8 +98,7 @@
                                 </div>
                                 <div class="col-sm-6">
                                     @if (!empty($dataEdit->sampul))
-                                        <img class="mb-2 mt-3"
-                                            src="{{ url('/storage/upload/content/' . $dataEdit->sampul) }}"
+                                        <img class="mb-2 mt-3" src="{{ url('/upload/content/' . $dataEdit->sampul) }}"
                                             class="img-thumbnail">
                                     @endif
                                 </div>

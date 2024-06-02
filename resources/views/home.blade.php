@@ -307,7 +307,7 @@
                                                 <div class="event-card-image-inner">
                                                     <a href="event-details.html">
                                                         @if ($event->sampul)
-                                                            <img src="{{ url('storage/upload/content/' . $event->sampul) }}"
+                                                            <img src="{{ url('upload/content/' . $event->sampul) }}"
                                                                 class="img-fluid" style="width: 250px; height: 250px"
                                                                 alt="img-22">
                                                         @else
