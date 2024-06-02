@@ -136,7 +136,7 @@ class BankDataController extends Controller
         try {
             $data = BankData::findOrFail($request->id);
             if ($request->name != $data->name || $request->tanggal_dokumen != $data->tanggal_dokumen)
-                $data->slug = BankData::createUniqueSlug($request->judul, $request->tanggal_dokumen);
+                $data->slug = BankData::createUniqueSlug($request->name, $request->tanggal_dokumen);
 
             $data->update([
                 'name' => $request->name,
