@@ -213,10 +213,9 @@
                         <i class="flaticon-search-interface-symbol"></i>
                     </a><!-- search-toggler -->
                 </div><!-- search-box -->
-                <div class="main-menu-right-button">
-                    {{-- <a href="{{ route('login') }}" class="btn btn-primary">Panel</a> --}}
+                {{-- <div class="main-menu-right-button">
                     <a href="{{ route('portal') }}" class="btn btn-primary">Portal</a>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>
