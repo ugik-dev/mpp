@@ -62,6 +62,13 @@ class GaleriController extends Controller
                     $path = $photo->storeAs('upload/gallery', $originalImage, 'public');
                     $data->image = $originalImage;
                     $data->save();
+                    $destinationPath = public_path('upload/gallery');
+                    if (!file_exists($destinationPath)) {
+                        mkdir($destinationPath, 0755, true);
+                    }
+
+                    // Move the file to the public_html/upload/content directory
+                    $photo->move($destinationPath, $originalImage);
                 } else {
                     // File is not valid, handle the error
                     $errorCode = $photo->getError(); // Get error code
@@ -128,6 +135,13 @@ class GaleriController extends Controller
                 $originalImage = time() . $photo->getClientOriginalName(); // Ambil nama asli file
                 $path = $photo->storeAs('upload/gallery', $originalImage, 'public');
                 $data->image = $originalImage;
+                $destinationPath = public_path('upload/gallery');
+                if (!file_exists($destinationPath)) {
+                    mkdir($destinationPath, 0755, true);
+                }
+
+                // Move the file to the public_html/upload/content directory
+                $photo->move($destinationPath, $originalImage);
             }
             $data->save();
 
