@@ -164,24 +164,26 @@
         <section class="portfolio-section">
             <div class="section-title-box text-center">
                 <div class="section-tagline">Galeri</div>
-                <h2 class="section-title">Beberapa Event Kami</h2>
+                <h2 class="section-title"></h2>
             </div><!-- section-title-box -->
             <div class="portfolio-content conatainer-fluid">
                 <div class="portfolio-carousel owl-carousel owl-theme">
-                    @for ($i = 1; $i <= 4; $i++)
+                    @foreach ($galeries as $galeri)
                         <div class="item">
                             <div class="portfolio-card">
-                                <img style="height: 10rem"
-                                    src="assets/background/bg-{{ str_pad(rand(1, 23), 2, '0', STR_PAD_LEFT) }}.jpg"
+                                <img style="height: 10rem" {{-- src="assets/background/bg-{{ str_pad(rand(1, 23), 2, '0', STR_PAD_LEFT) }}.jpg" --}}
+                                    src="{{ $galeri->image ? url('storage/upload/gallery/' . $galeri->image) : url('assets/image/shapes/client-1.png') }}"
                                     class="img-fluid" alt="img-9">
                                 <div class="portfolio-card-meta">
-                                    <div class="portfolio-card-text"><a href="portfolio-details.html">Places</a></div>
-                                    <div class="portfolio-card-title"><a href="portfolio-details.html">Broadway Road</a>
+                                    <div class="portfolio-card-text"><a
+                                            href="portfolio-details.html">{{ $galeri->album->name }}</a></div>
+                                    <div class="portfolio-card-title"><a
+                                            href="portfolio-details.html">{{ $galeri->name }}</a>
                                     </div>
                                 </div><!-- portfolio-card-meta -->
                             </div><!--portfolio-card-->
                         </div>
-                    @endfor
+                    @endforeach
                 </div><!--portfolio-carousel-->
             </div><!--portfolio-content-->
         </section><!--portfolio-section-->

@@ -31,6 +31,11 @@ $menus = [
         'dropdown' => false,
     ],
     [
+        'label' => 'Galeri',
+        'dropdown' => true,
+        'children' => [['label' => 'Album', 'url' => route('manage.album.index')], ['label' => 'Gambar & Video', 'url' => route('manage.galeri.index')]],
+    ],
+    [
         'label' => 'Pengaturan',
         'dropdown' => true,
         'children' => [

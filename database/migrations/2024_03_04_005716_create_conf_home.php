@@ -20,7 +20,6 @@ return new class extends Migration
             $table->json('sec_2_sidebar')->nullable();
             $table->string('sec_2_sidebar_background')->nullable();
             $table->string('sec_2_button')->default('https://www.youtube.com/watch?v=J_77mw4IMHk');
-
             $table->enum('sec_3', ['Y', 'N'])->default('Y');
             $table->json('sec_3_data')->nullable();
 

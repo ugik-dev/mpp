@@ -1,10 +1,12 @@
 <?php
 
 use App\Http\Controllers\AgencyController;
+use App\Http\Controllers\AlbumController;
 use App\Http\Controllers\BankDataController;
 use App\Http\Controllers\ConfigController;
 use App\Http\Controllers\ContentController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\GaleriController;
 use App\Http\Controllers\HeroController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
@@ -31,6 +33,18 @@ Route::middleware(['auth', 'checkRole:admin,super'])->group(function () {
         Route::post('', [UserController::class, 'create'])->name('create');
         Route::put('', [UserController::class, 'update'])->name('update');
         Route::delete('/', [UserController::class, 'delete'])->name('delete');
+    });
+    Route::prefix('manage/album')->name('manage.album.')->group(function () {
+        Route::get('/', [AlbumController::class, 'index'])->name('index');
+        Route::post('', [AlbumController::class, 'create'])->name('create');
+        Route::post('/update', [AlbumController::class, 'update'])->name('update');
+        Route::delete('/', [AlbumController::class, 'delete'])->name('delete');
+    });
+    Route::prefix('manage/galeri')->name('manage.galeri.')->group(function () {
+        Route::get('/', [GaleriController::class, 'index'])->name('index');
+        Route::post('', [GaleriController::class, 'create'])->name('create');
+        Route::post('/update', [GaleriController::class, 'update'])->name('update');
+        Route::delete('/', [GaleriController::class, 'delete'])->name('delete');
     });
     Route::prefix('manage/struktur-menu')->name('manage.menu.')->group(function () {
         Route::get('/', [MenuController::class, 'index'])->name('index');
