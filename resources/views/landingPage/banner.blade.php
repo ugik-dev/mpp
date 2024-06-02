@@ -16,7 +16,7 @@
                     <div class="image-banner"
                         style="{{ $banner->bg_color ? 'background-color: ' . $banner->bg_color . ';  border: 1px solid #CCC;' : '' }}">
                         <a class ="" href="{{ $banner->link }}" alt="{{ $banner->name }}" style="margin: auto">
-                            <img src="{{ $banner->image ? url('storage/upload/images/' . $banner->image) : url('assets/image/shapes/client-1.png') }}"
+                            <img src="{{ $banner->image ? url('upload/images/' . $banner->image) : url('assets/image/shapes/client-1.png') }}"
                                 class="img-fluid" title="{{ $banner->name }}">
                         </a>
                     </div>

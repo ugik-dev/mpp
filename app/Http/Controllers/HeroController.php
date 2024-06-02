@@ -49,7 +49,7 @@ class HeroController extends Controller
             })->addColumn('button', function ($data) {
                 return $data->button;
             })->addColumn('img', function ($data) {
-                return '<img style="max-width:100px; max-height:80px" src="' . url('/storage/upload/hero') . '/' . $data->image . '" alt="' . $data->image . '" class="img-thumbnail">';
+                return '<img style="max-width:100px; max-height:80px" src="' . url('/upload/hero') . '/' . $data->image . '" alt="' . $data->image . '" class="img-thumbnail">';
             })->addColumn('aksi', function ($data) {
                 return '<div class="btn-group" role="group" aria-label="Basic mixed styles example">
                     <button type="button" class="edit-btn btn btn-warning" data-id="' . $data->id . '"><i class="fas fa-pencil-alt" ></i></button>
@@ -84,7 +84,15 @@ class HeroController extends Controller
             if ($request->hasFile('image_hero_upload')) {
                 $photo = $request->file('image_hero_upload');
                 $originalFilename = time() . $photo->getClientOriginalName(); // Ambil nama asli file
-                $path = $photo->storeAs('upload/hero', $originalFilename, 'public');
+                // Ensure the directory exists
+                $destinationPath = public_path('upload/hero');
+                if (!file_exists($destinationPath)) {
+                    mkdir($destinationPath, 0755, true);
+                }
+
+                // Move the file to the public_html/upload/hero directory
+                $photo->move($destinationPath, $originalFilename);
+
                 $data->image = $originalFilename;
                 $data->save();
             }
@@ -119,7 +127,15 @@ class HeroController extends Controller
             if ($request->hasFile('image_hero_upload')) {
                 $photo = $request->file('image_hero_upload');
                 $originalFilename = time() . $photo->getClientOriginalName(); // Ambil nama asli file
-                $path = $photo->storeAs('upload/hero', $originalFilename, 'public');
+                // Ensure the directory exists
+                $destinationPath = public_path('upload/hero');
+                if (!file_exists($destinationPath)) {
+                    mkdir($destinationPath, 0755, true);
+                }
+
+                // Move the file to the public_html/upload/hero directory
+                $photo->move($destinationPath, $originalFilename);
+
                 $data->image = $originalFilename;
                 $data->save();
             }

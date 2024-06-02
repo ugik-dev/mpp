@@ -62,13 +62,29 @@ class ConfigController extends Controller
             if ($request->hasFile('sec_2_sidebar_background_upload')) {
                 $photo = $request->file('sec_2_sidebar_background_upload');
                 $originalFilename = time() . $photo->getClientOriginalName(); // Ambil nama asli file
-                $path = $photo->storeAs('upload/images', $originalFilename, 'public');
+                // Ensure the directory exists
+                $destinationPath = public_path('upload/images');
+                if (!file_exists($destinationPath)) {
+                    mkdir($destinationPath, 0755, true);
+                }
+
+                // Move the file to the public_html/upload/images directory
+                $photo->move($destinationPath, $originalFilename);
+
                 $data->sec_2_sidebar_background = $originalFilename;
             }
             if ($request->hasFile('sec_4_image_upload')) {
                 $photo = $request->file('sec_4_image_upload');
                 $originalFilename = time() . $photo->getClientOriginalName(); // Ambil nama asli file
-                $path = $photo->storeAs('upload/images', $originalFilename, 'public');
+                // Ensure the directory exists
+                $destinationPath = public_path('upload/images');
+                if (!file_exists($destinationPath)) {
+                    mkdir($destinationPath, 0755, true);
+                }
+
+                // Move the file to the public_html/upload/images directory
+                $photo->move($destinationPath, $originalFilename);
+
                 $data->sec_4_image = $originalFilename;
             }
 

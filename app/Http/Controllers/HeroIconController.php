@@ -49,7 +49,7 @@ class HeroIconController extends Controller
             })->addColumn('button', function ($data) {
                 return $data->button;
             })->addColumn('img', function ($data) {
-                return '<img style="max-width:100px; max-height:80px" src="' . url('/storage/upload/hero') . '/' . $data->image . '" alt="' . $data->image . '" class="img-thumbnail">';
+                return '<img style="max-width:100px; max-height:80px" src="' . url('/upload/hero') . '/' . $data->image . '" alt="' . $data->image . '" class="img-thumbnail">';
             })->addColumn('aksi', function ($data) {
                 return '<div class="btn-group" role="group" aria-label="Basic mixed styles example">
                     <button type="button" class="edit-btn btn btn-warning" data-id="' . $data->id . '"><i class="fas fa-pencil-alt" ></i></button>

@@ -35,7 +35,7 @@ class AlbumController extends Controller
                 return $data->id;
             })
                 ->addColumn('image_span', function ($data) {
-                    return '<img class="thumb-image" style="max-width: 200px; ' . ($data->bg_color ? 'background-color: ' . $data->bg_color . ';' : '') . '" src="' . url('/storage/upload/images') . '/' . $data->image . '" alt="' . $data->image . '" />';
+                    return '<img class="thumb-image" style="max-width: 200px; ' . ($data->bg_color ? 'background-color: ' . $data->bg_color . ';' : '') . '" src="' . url('/upload/images') . '/' . $data->image . '" alt="' . $data->image . '" />';
                 })->addColumn('aksi', function ($data) {
                     return '<div class="btn-group" role="group" aria-label="Basic mixed styles example">
                     <button type="button" class="edit-btn btn btn-warning" data-id="' . $data->id . '"><i class="fas fa-pencil-alt" ></i></button>

@@ -85,7 +85,7 @@
                                         class="form-control dt-full-name" />
                                 </div>
                                 <img class="thumb-image"
-                                    src="{{ url('storage/upload/images/' . $data->sec_2_sidebar_background) }}">
+                                    src="{{ url('upload/images/' . $data->sec_2_sidebar_background) }}">
                             </div>
                         </div>
                     </div>
@@ -194,7 +194,7 @@
                                 <div class="input-group">
                                     <input type="file" name="sec_4_image_upload" class="form-control dt-full-name" />
                                 </div>
-                                <img class="thumb-image" src="{{ url('storage/upload/images/' . $data->sec_4_image) }}">
+                                <img class="thumb-image" src="{{ url('upload/images/' . $data->sec_4_image) }}">
                             </div>
                         </div>
                     </div>

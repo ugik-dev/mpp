@@ -307,7 +307,15 @@ class MenuController extends Controller
             if ($request->hasFile('upload')) {
                 $photo = $request->file('upload');
                 $originalFilename = time() . $photo->getClientOriginalName(); // Ambil nama asli file
-                $path = $photo->storeAs('upload/content_image/', $originalFilename, 'public');
+                // Ensure the directory exists
+                $destinationPath = public_path('upload/content_image/');
+                if (!file_exists($destinationPath)) {
+                    mkdir($destinationPath, 0755, true);
+                }
+
+                // Move the file to the public_html/upload/content_image/ directory
+                $photo->move($destinationPath, $originalFilename);
+
                 // dd($path);
                 $originalFilename;
                 MediaMenuUpload::create(['filename' => $originalFilename, "user_id" => Auth::user()->id]);

@@ -41,7 +41,7 @@
         <div class="inside mt-5">
             <div class="panel-pane pane-custom pane-2">
                 <p><a href="https://simbg.pu.go.id/" target="_blank"><img alt=""
-                            src="{{ url('storage/upload/banner/SIMBG.png') }}" style=""></a>
+                            src="{{ url('upload/banner/SIMBG.png') }}" style=""></a>
                 </p>
             </div>
         </div>
@@ -66,7 +66,7 @@
                     </div><!--col-lg-6-->
                     <div class="col-lg-5">
                         <div class="service-card" {!! $conf_home->sec_2_sidebar_background
-                            ? 'style="background-image:url(' . url('storage/upload/images/' . $conf_home->sec_2_sidebar_background) . ')"'
+                            ? 'style="background-image:url(' . url('upload/images/' . $conf_home->sec_2_sidebar_background) . ')"'
                             : '' !!}>
                             <div class="service-card-video">
                                 <a href="{{ $conf_home->sec_2_video }}" class="video-popup">
@@ -150,7 +150,7 @@
                     <div class="col-lg-6">
                         <div class="mayor-img">
                             <img src="assets/image/shapes/shape-1.png" class="floated-image-one" alt="img-7">
-                            <img src="{{ $conf_home->sec_4_image ? url('storage/upload/images/' . $conf_home->sec_4_image) : 'assets/image/gallery/mayor-2.jpg' }}"
+                            <img src="{{ $conf_home->sec_4_image ? url('upload/images/' . $conf_home->sec_4_image) : 'assets/image/gallery/mayor-2.jpg' }}"
                                 alt="img-8">
                             <div class="mayor-name">
                                 Dian Firnandy, SE
@@ -172,7 +172,7 @@
                         <div class="item">
                             <div class="portfolio-card">
                                 <img style="height: 10rem" {{-- src="assets/background/bg-{{ str_pad(rand(1, 23), 2, '0', STR_PAD_LEFT) }}.jpg" --}}
-                                    src="{{ $galeri->image ? url('storage/upload/gallery/' . $galeri->image) : url('assets/image/shapes/client-1.png') }}"
+                                    src="{{ $galeri->image ? url('upload/gallery/' . $galeri->image) : url('assets/image/shapes/client-1.png') }}"
                                     class="img-fluid" alt="img-9">
                                 <div class="portfolio-card-meta">
                                     <div class="portfolio-card-text"><a
@@ -196,7 +196,7 @@
                         <div class="item" title="{{ $p->name }}">
                             <div class="image-item">
                                 {{-- <a href="{{ $p->link }}" alt="{{ $p->name }}"> --}}
-                                <img src="{{ $p->image ? url('storage/upload/images/' . $p->image) : url('assets/image/shapes/client-1.png') }}"
+                                <img src="{{ $p->image ? url('upload/images/' . $p->image) : url('assets/image/shapes/client-1.png') }}"
                                     class="img-fluid" title="{{ $p->name }}">
                                 {{-- </a> --}}
                             </div>

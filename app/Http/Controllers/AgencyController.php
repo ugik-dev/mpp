@@ -48,9 +48,9 @@ class AgencyController extends Controller
                 ->addColumn('website_link', function ($data) {
                     return '<a href="' . $data->website . '" >' . $data->website . '</a>';
                 })->addColumn('img', function ($data) {
-                    return '<img style="max-width:100px; max-height:80px" src="' . url('/storage/upload/agency_image') . '/' . $data->image . '" alt="' . $data->image . '" class="img-thumbnail">';
+                    return '<img style="max-width:100px; max-height:80px" src="' . url('/upload/agency_image') . '/' . $data->image . '" alt="' . $data->image . '" class="img-thumbnail">';
                 })->addColumn('logo_span', function ($data) {
-                    return '<img style="max-width:100px; max-height:80px" src="' . url('/storage/upload/agency') . '/' . $data->logo . '" alt="' . $data->image . '" class="img-thumbnail">';
+                    return '<img style="max-width:100px; max-height:80px" src="' . url('/upload/agency') . '/' . $data->logo . '" alt="' . $data->image . '" class="img-thumbnail">';
                 })->addColumn('aksi', function ($data) {
                     return '<div class="btn-group" role="group" aria-label="Basic mixed styles example">
                     <phone type="phone" class="edit-btn btn btn-warning" data-id="' . $data->id . '"><i class="fas fa-pencil-alt" ></i></phone>
@@ -91,7 +91,15 @@ class AgencyController extends Controller
             if ($request->hasFile('logo_agency_upload')) {
                 $photo = $request->file('logo_agency_upload');
                 $originalFilename = time() . $photo->getClientOriginalName(); // Ambil nama asli file
-                $path = $photo->storeAs('upload/agency', $originalFilename, 'public');
+                // Ensure the directory exists
+                $destinationPath = public_path('upload/agency');
+                if (!file_exists($destinationPath)) {
+                    mkdir($destinationPath, 0755, true);
+                }
+
+                // Move the file to the public_html/upload/content directory
+                $photo->move($destinationPath, $originalFilename);
+
                 $data->logo = $originalFilename;
                 $data->save();
             }
@@ -99,7 +107,15 @@ class AgencyController extends Controller
             if ($request->hasFile('image_agency_upload')) {
                 $photo = $request->file('image_agency_upload');
                 $originalFilename = time() . $photo->getClientOriginalName(); // Ambil nama asli file
-                $path = $photo->storeAs('upload/agency_image', $originalFilename, 'public');
+                // Ensure the directory exists
+                $destinationPath = public_path('upload/agency_image');
+                if (!file_exists($destinationPath)) {
+                    mkdir($destinationPath, 0755, true);
+                }
+
+                // Move the file to the public_html/upload/agency_image directory
+                $photo->move($destinationPath, $originalFilename);
+
                 $data->image = $originalFilename;
                 $data->save();
             }
@@ -135,7 +151,15 @@ class AgencyController extends Controller
             if ($request->hasFile('logo_agency_upload')) {
                 $photo = $request->file('logo_agency_upload');
                 $originalFilename = time() . $photo->getClientOriginalName(); // Ambil nama asli file
-                $path = $photo->storeAs('upload/agency', $originalFilename, 'public');
+                // Ensure the directory exists
+                $destinationPath = public_path('upload/agency');
+                if (!file_exists($destinationPath)) {
+                    mkdir($destinationPath, 0755, true);
+                }
+
+                // Move the file to the public_html/upload/content directory
+                $photo->move($destinationPath, $originalFilename);
+
                 $data->logo = $originalFilename;
                 $data->save();
             }
@@ -143,7 +167,15 @@ class AgencyController extends Controller
             if ($request->hasFile('image_agency_upload')) {
                 $photo = $request->file('image_agency_upload');
                 $originalFilename = time() . $photo->getClientOriginalName(); // Ambil nama asli file
-                $path = $photo->storeAs('upload/agency_image', $originalFilename, 'public');
+                // Ensure the directory exists
+                $destinationPath = public_path('upload/agency_image');
+                if (!file_exists($destinationPath)) {
+                    mkdir($destinationPath, 0755, true);
+                }
+
+                // Move the file to the public_html/upload/agency_image directory
+                $photo->move($destinationPath, $originalFilename);
+
                 $data->image = $originalFilename;
                 $data->save();
             }

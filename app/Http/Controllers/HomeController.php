@@ -155,7 +155,7 @@ class HomeController extends Controller
     {
         $data =  BankData::select('bank_data.*')->where('slug', $slug)->complete()->firstOrFail();
         $data->increment('view');
-        $filePath = 'storage/upload/bankdata/' . $data->filename;
+        $filePath = 'upload/bankdata/' . $data->filename;
         return response()->file($filePath);
     }
 }

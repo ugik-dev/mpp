@@ -31,7 +31,7 @@ class BankDataController extends Controller
                 ->addColumn('public_span', function ($data) {
                     return $data->public == 'Y' ? 'Terbuka' : 'Tertutup';
                 })->addColumn('filename_span', function ($data) {
-                    return '<a href="' . url('/storage/upload/bankdata') . '/' . $data->filename . '" alt="' . $data->image . '" target="_blank" class="btn btn-secondary"><i class="fa fa-eye"></i> ' . $data->filename . '</a>';
+                    return '<a href="' . url('/upload/bankdata') . '/' . $data->filename . '" alt="' . $data->image . '" target="_blank" class="btn btn-secondary"><i class="fa fa-eye"></i> ' . $data->filename . '</a>';
                 })->addColumn('aksi', function ($data) {
                     return '<div class="btn-group" role="group" aria-label="Basic mixed styles example">
                     <button type="button" class="edit-btn btn btn-warning" data-id="' . $data->id . '"><i class="fas fa-pencil-alt" ></i></button>
@@ -77,7 +77,15 @@ class BankDataController extends Controller
                 if ($photo->isValid()) {
                     // File is valid, proceed with upload
                     $originalFilename = time() . $photo->getClientOriginalName();
-                    $path = $photo->storeAs('upload/bankdata', $originalFilename, 'public');
+                    // Ensure the directory exists
+                    $destinationPath = public_path('upload/bankdata');
+                    if (!file_exists($destinationPath)) {
+                        mkdir($destinationPath, 0755, true);
+                    }
+
+                    // Move the file to the public_html/upload/bankdata directory
+                    $photo->move($destinationPath, $originalFilename);
+
                     $data->filename = $originalFilename;
                     $data->fileextension = $photo->getClientOriginalExtension();
                     $data->save();
@@ -152,7 +160,15 @@ class BankDataController extends Controller
             if ($request->hasFile('file_bank_data_upload')) {
                 $photo = $request->file('file_bank_data_upload');
                 $originalFilename = time() . $photo->getClientOriginalName(); // Ambil nama asli file
-                $path = $photo->storeAs('upload/bankdata', $originalFilename, 'public');
+                // Ensure the directory exists
+                $destinationPath = public_path('upload/bankdata');
+                if (!file_exists($destinationPath)) {
+                    mkdir($destinationPath, 0755, true);
+                }
+
+                // Move the file to the public_html/upload/bankdata directory
+                $photo->move($destinationPath, $originalFilename);
+
                 $data->filename = $originalFilename;
                 $data->fileextension = $photo->getClientOriginalExtension();
             }
