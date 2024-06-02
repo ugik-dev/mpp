@@ -66,29 +66,26 @@ class ContentController extends Controller
     public function store_image_quill(Request $request)
     {
         try {
-            // Validate the file
+
             $request->validate([
                 'file' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Add appropriate validation rules
             ]);
 
-            // Check if the request has a file
             if ($request->hasFile('upload')) {
                 $photo = $request->file('upload');
-                $originalFilename = time() . '_' . $photo->getClientOriginalName(); // Add timestamp to avoid collisions
-                // Store the file in the 'public/upload/content_image/' directory
-                $path = $photo->storeAs('upload/content_image', $originalFilename, 'public');
-                // Save the file information to the database
+                $originalFilename = time() . $photo->getClientOriginalName(); // Ambil nama asli file
+                $path = $photo->storeAs('upload/content_image/', $originalFilename, 'public');
+                // dd($path);
+                $originalFilename;
                 MediaUpload::create(['filename' => $originalFilename, "user_id" => Auth::user()->id]);
             }
-
-            // Generate the public URL for the uploaded file
-            $url = url('/upload/content_image/' . $originalFilename);
+            $url = url('/') . '/storage/upload/content_image/' . $originalFilename;
             return response()->json(['fileName' => $originalFilename, 'uploaded' => 1, 'url' => $url]);
+            // return $this->responseSuccess(url('/') . '/storage/upload/content_image/' . $originalFilename);
         } catch (Exception $ex) {
-            return response()->json(['uploaded' => 0, 'error' => ['message' => $ex->getMessage()]]);
+            return  $this->ResponseError($ex->getMessage());
         }
     }
-
     public function preview(Request $request)
 
     {
