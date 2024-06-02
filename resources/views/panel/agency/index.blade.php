@@ -80,6 +80,11 @@
                             <input type="text" id="name" class="form-control" name="name" placeholder=""
                                 required>
                         </div>
+                        <div class="col-sm-12 mb-3">
+                            <label for="basicFullname" class="form-label">Singkatan Instansi:</label>
+                            <input type="text" id="name_sort" class="form-control" name="name_sort" placeholder=""
+                                required>
+                        </div>
                         <div class="col-md-12 mb-3">
                             <label for="basicFullname" class="form-label">Alamat:</label>
                             <input type="text" id="alamat" class="form-control" name="alamat" placeholder=""
@@ -104,7 +109,8 @@
                                 </div>
                                 <div class="col-sm-12 mb-3">
                                     <label for="basicFullname" class="form-label">Website :</label>
-                                    <input type="text" id="website" class="form-control" name="website" placeholder="">
+                                    <input type="text" id="website" class="form-control" name="website"
+                                        placeholder="">
                                     <div class="invalid-feedback">
                                     </div>
                                 </div>
@@ -234,6 +240,7 @@
                 'updateBtn': $('#form-agency').find('#updateBtn'),
                 'id': $('#form-agency').find('#id'),
                 'name': $('#form-agency').find('#name'),
+                'name_sort': $('#form-agency').find('#name_sort'),
                 'alamat': $('#form-agency').find('#alamat'),
                 'whatsapp': $('#form-agency').find('#whatsapp'),
                 'website': $('#form-agency').find('#website'),
@@ -255,6 +262,7 @@
                 AgencyForm.modal.modal('show');
                 AgencyForm.id.val(currentData['id']);
                 AgencyForm.name.val(decodeHTML(currentData['name']));
+                AgencyForm.name_sort.val(decodeHTML(currentData['name_sort']));
                 AgencyForm.alamat.val(decodeHTML(currentData['alamat']));
                 AgencyForm.phone.val(currentData['phone']);
                 AgencyForm.whatsapp.val(currentData['whatsapp']);

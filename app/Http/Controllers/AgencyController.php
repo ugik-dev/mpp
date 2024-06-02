@@ -73,6 +73,7 @@ class AgencyController extends Controller
         try {
             $att = [
                 'name' => $request->name,
+                'name_sort' => $request->name_sort,
                 'alamat' => $request->alamat,
                 'phone' => $request->phone,
                 'website' => $request->website,
@@ -121,6 +122,7 @@ class AgencyController extends Controller
             $data = Agency::findOrFail($request->id);
             $data->update([
                 'name' => $request->name,
+                'name_sort' => $request->name_sort,
                 'alamat' => $request->alamat,
                 'website' => $request->website,
                 'phone' => $request->phone,

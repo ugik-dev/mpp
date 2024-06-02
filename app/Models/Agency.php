@@ -9,7 +9,7 @@ use Illuminate\Support\Str;
 class Agency extends Model
 {
     use HasFactory;
-    protected $fillable = ['name', 'alamat', 'phone', 'whatsapp', 'email', 'website', 'logo', 'image', 'agency_id'];
+    protected $fillable = ['name', 'name_sort', 'alamat', 'phone', 'whatsapp', 'email', 'website', 'logo', 'image', 'agency_id'];
 
     public function menus()
     {
