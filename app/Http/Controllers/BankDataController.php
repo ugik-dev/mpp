@@ -2,20 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Helpers\DataStructure;
 use App\Models\Agency;
-use App\Models\Content;
 use App\Models\BankData;
-use App\Models\Menu;
 use App\Models\RefBankData;
 use Exception;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
-use Spatie\Permission\Models\Role;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 class BankDataController extends Controller
 {
@@ -58,7 +52,7 @@ class BankDataController extends Controller
     public function create(Request $request)
     {
         try {
-            $slug = Content::createUniqueSlug($request->name, $request->tanggal_dokumen);
+            $slug = BankData::createUniqueSlug($request->name, $request->tanggal_dokumen);
 
             $att = [
                 'name' => $request->name,
@@ -142,7 +136,7 @@ class BankDataController extends Controller
         try {
             $data = BankData::findOrFail($request->id);
             if ($request->name != $data->name || $request->tanggal_dokumen != $data->tanggal_dokumen)
-                $data->slug = Content::createUniqueSlug($request->judul, $request->tanggal_dokumen);
+                $data->slug = BankData::createUniqueSlug($request->judul, $request->tanggal_dokumen);
 
             $data->update([
                 'name' => $request->name,
