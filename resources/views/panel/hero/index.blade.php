@@ -71,7 +71,7 @@
                     </div>
                     <div class="modal-body">
                         @csrf
-                        <input type="text" id="id" class="" name="id" />
+                        <input type="hidden" id="id" class="" name="id" />
                         <div class="col-sm-12 mb-3">
                             <label for="basicFullname" class="form-label">Text 1:</label>
                             <input type="text" id="text_1" class="form-control" name="text_1" placeholder=""
@@ -105,7 +105,11 @@
                                     <select id="button_type" name="button_type" class="form-control" required>
                                         <option value="">--</option>
                                         @php
-                                            $jenis = ['link' => 'Link', 'page' => 'Page', 'content' => 'Konten Berita/Informasi/Pengumuman'];
+                                            $jenis = [
+                                                'link' => 'Link',
+                                                'page' => 'Page',
+                                                'content' => 'Konten Berita/Informasi/Pengumuman',
+                                            ];
                                         @endphp
                                         @foreach ($jenis as $key => $rd)
                                             <option value="{{ $key }}">{{ $rd }}</option>
