@@ -34,6 +34,7 @@ $menus = [
         'label' => 'Pengaturan',
         'dropdown' => true,
         'children' => [
+            ['label' => 'Instansi', 'url' => route('manage.agency.index')],
             [
                 'label' => 'Hero',
                 'url' => route('manage.hero.index'),
@@ -44,11 +45,11 @@ $menus = [
             ['label' => 'Patner dan Banner', 'url' => route('manage.patner.index')],
         ],
     ],
-    [
-        'label' => 'Pengaturan',
-        'dropdown' => true,
-        'children' => [['label' => 'Instansi', 'url' => route('manage.agency.index')], ['label' => 'Hero2', 'url' => route('manage.hero.index')], ['label' => 'Hero3', 'url' => route('manage.hero.index')]],
-    ],
+    // [
+    //     'label' => 'Pengaturan',
+    //     'dropdown' => true,
+    //     'children' => [['label' => 'Instansi', 'url' => route('manage.agency.index')], ['label' => 'Hero2', 'url' => route('manage.hero.index')], ['label' => 'Hero3', 'url' => route('manage.hero.index')]],
+    // ],
 ];
 ?>
 @include('panel.layout.datamenu.index')

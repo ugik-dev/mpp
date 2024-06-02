@@ -72,7 +72,7 @@
                     </div>
                     <div class="modal-body">
                         @csrf
-                        <input type="text" id="id" class="" name="id" />
+                        <input type="hidden" id="id" class="" name="id" />
                         <div class="col-sm-12 mb-3">
                             <label for="basicFullname" class="form-label">Nama:</label>
                             <input type="text" id="name" class="form-control" name="name" placeholder=""
