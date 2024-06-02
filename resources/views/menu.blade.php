@@ -1,5 +1,11 @@
 @extends('homeLayout/index')
 @section('content')
+    <style>
+        #contentLayout img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
     <div class="page-wrapper">
         <section class="page-banner"
             style="background-image:   linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url({{ asset('assets/image/bg/gedungmall.jpg') }})
@@ -46,12 +52,12 @@
                         <div class="department-details-content-box">
                             <h4 class="department-details-title">{{ $data->name }}</h4>
                         </div>
-                        <div class="department-details-box">
+                        <div class="department-details-box" id="contentLayout">
                             {!! $data->content !!}
-                            <div class="department-details-policy">
+                            {{-- <div class="department-details-policy">
                                 <span>We stand for quality, safety & credibility, so you could be trust us fully about
                                     private jet charters and our working process.</span><!-- span -->
-                            </div>
+                            </div> --}}
                         </div>
                         <div class="department-details-benefits-inner-box">
                             <div class="row row-gutter-30">
