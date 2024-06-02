@@ -145,14 +145,25 @@ class ContentController extends Controller
                 'file_sampul' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Add appropriate validation rules
             ]);
 
+            // Check if the request has a file
             if ($request->hasFile('file_sampul')) {
                 $photo = $request->file('file_sampul');
-                $originalFilename = time() . $photo->getClientOriginalName(); // Ambil nama asli file
-                $path = $photo->storeAs('upload/content', $originalFilename, 'public');
-                // dd($path);
+                $originalFilename = time() . '_' . $photo->getClientOriginalName(); // Add timestamp to avoid collisions
+
+                // Ensure the directory exists
+                $destinationPath = public_path('upload/content');
+                if (!file_exists($destinationPath)) {
+                    mkdir($destinationPath, 0755, true);
+                }
+
+                // Move the file to the public_html/upload/content directory
+                $photo->move($destinationPath, $originalFilename);
+
+                // Save the filename to the database
                 $data->sampul = $originalFilename;
                 $data->save();
             }
+
             $img = extractImageNames($request->content);
             MediaUpload::whereIn('filename', $img)->update(['status' => 'posted', 'content_id' => $data->id]);
 
