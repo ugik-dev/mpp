@@ -103,15 +103,15 @@
         <ul class="mobile-nav-contact list-unstyled">
             <li>
                 <i class="fa-solid fa-phone"></i>
-                <a href="tel:+8898006802">+ 88 ( 9800 ) 6802</a>
+                <a href="tel:{{ $profile->telephone }}">{{ $profile->telephone }}</a>
             </li><!-- li -->
             <li>
                 <i class="fa-solid fa-envelope"></i>
-                <a href="mailto:needhelp@company.com">needhelp@company.com</a>
+                <a href="mailto:{{ $profile->email }}">{{ $profile->email }}</a>
             </li><!-- li -->
             <li>
                 <i class="fa-solid fa-map-marker-alt"></i>
-                88 Broklyn Golden Road Street <br> New York. USA
+                {!! $profile->address !!}
             </li><!-- li -->
         </ul><!-- mobile-nav-contact -->
         <ul class="mobile-nav-social list-unstyled">
