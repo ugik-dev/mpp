@@ -22,7 +22,7 @@ $env = $app->detectEnvironment(function () {
 
 // Conditionally set the public path based on the environment
 if ($env === 'production') {
-    // $app->usePublicPath($app->basePath('../public_html'));
+    $app->usePublicPath($app->basePath('../public_html'));
 }
 /*
 |--------------------------------------------------------------------------
