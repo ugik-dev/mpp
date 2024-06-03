@@ -10,7 +10,7 @@
     <title>MPP Bangka</title>
     @include('homeLayout.style')
     @yield('style')
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/custom.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/custom.css') }}?v=0.1">
 
 </head>
 
