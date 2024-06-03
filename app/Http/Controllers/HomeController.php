@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Agency;
+use App\Models\Album;
 use App\Models\BankData;
 use App\Models\Comment;
 use App\Models\ConfHome;
@@ -157,5 +158,17 @@ class HomeController extends Controller
         $data->increment('view');
         $filePath = 'upload/bankdata/' . $data->filename;
         return response()->file($filePath);
+    }
+
+    public function album(Album $album, Request $request)
+    {
+        $galeries = Gallery::where('album_id', '=', $album->id)->latest('created_at')->paginate(
+            10
+        )->withQueryString();
+        $albums = Album::where('id', '<>', $album->id)->get();
+        return view(
+            'album',
+            compact('galeries', 'album', 'albums')
+        );
     }
 }

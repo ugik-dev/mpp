@@ -45,6 +45,7 @@ class GaleriController extends Controller
             $att = [
                 'name' => $request->name,
                 'jenis' => $request->jenis,
+                'link' => $request->link,
                 'album_id' => $request->album_id,
                 'description' => $request->description,
                 'number' => $request->number,
@@ -124,6 +125,7 @@ class GaleriController extends Controller
             $data->update([
                 'name' => $request->name,
                 'jenis' => $request->jenis,
+                'link' => $request->link,
                 'album_id' => $request->album_id,
                 'description' => $request->description,
                 'number' => $request->number,

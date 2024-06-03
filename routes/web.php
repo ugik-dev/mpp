@@ -31,6 +31,7 @@ Route::get('/blog/{jenis}/{slug?}', [HomeController::class, 'blog'])->name('blog
 Route::get('/page/{slug1?}/{slug2?}/{slug3?}', [HomeController::class, 'menus'])->name('pages');
 Route::get('/e-survey', [SurveyController::class, 'index'])->name('survey');
 Route::get('/kontak', [HomeController::class, 'contact'])->name('contact');
+Route::get('/album/{album}', [HomeController::class, 'album'])->name('album');
 Route::get('/bank-data', [HomeController::class, 'bank_data'])->name('bank-data');
 Route::get('/bank-data/{id}', [HomeController::class, 'bank_data_download'])->name('bank-data-download');
 Route::post('/e-survey', [SurveyController::class, 'post'])->name('survey-post');

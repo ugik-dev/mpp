@@ -171,16 +171,20 @@
                     @foreach ($galeries as $galeri)
                         <div class="item">
                             <div class="portfolio-card">
-                                <img style="height: 10rem" {{-- src="assets/background/bg-{{ str_pad(rand(1, 23), 2, '0', STR_PAD_LEFT) }}.jpg" --}}
-                                    src="{{ $galeri->image ? url('upload/gallery/' . $galeri->image) : url('assets/image/shapes/client-1.png') }}"
-                                    class="img-fluid" alt="img-9">
-                                <div class="portfolio-card-meta">
-                                    <div class="portfolio-card-text"><a
-                                            href="portfolio-details.html">{{ $galeri->album->name }}</a></div>
-                                    <div class="portfolio-card-title"><a
-                                            href="portfolio-details.html">{{ $galeri->name }}</a>
-                                    </div>
-                                </div><!-- portfolio-card-meta -->
+                                <a href="{{ $galeri->jenis == 'vid' ? $galeri->link : ($galeri->image ? url('upload/gallery/' . $galeri->image) : url('assets/image/shapes/client-1.png')) }}"
+                                    class="video-popup">
+                                    <img style="height: 10rem" {{-- src="assets/background/bg-{{ str_pad(rand(1, 23), 2, '0', STR_PAD_LEFT) }}.jpg" --}}
+                                        src="{{ $galeri->image ? url('upload/gallery/' . $galeri->image) : url('assets/image/shapes/client-1.png') }}"
+                                        class="img-fluid" alt="img-9">
+                                    <div class="portfolio-card-meta">
+                                        <div class="portfolio-card-text"><a
+                                                href="{{ route('album', $galeri->album_id) }}">{{ $galeri->album->name }}</a>
+                                        </div>
+                                        <div class="portfolio-card-title"><a
+                                                href="{{ route('album', $galeri->album_id) }}">{{ $galeri->name }}</a>
+                                        </div>
+                                    </div><!-- portfolio-card-meta -->
+                                </a>
                             </div><!--portfolio-card-->
                         </div>
                     @endforeach
@@ -193,15 +197,17 @@
             <div class="container">
                 <div class="client-carousel owl-carousel owl-theme">
                     @foreach ($patners as $p)
-                        <div class="item" title="{{ $p->name }}">
-                            <div class="image-item">
-                                {{-- <a href="{{ $p->link }}" alt="{{ $p->name }}"> --}}
-                                <img src="{{ $p->image ? url('upload/images/' . $p->image) : url('assets/image/shapes/client-1.png') }}"
-                                    class="img-fluid" title="{{ $p->name }}">
-                                {{-- </a> --}}
+                        <a href="{{ $p->link }}">
+                            <div class="item" title="{{ $p->name }}">
+                                <div class="image-item">
+                                    {{-- <a href="{{ $p->link }}" alt="{{ $p->name }}"> --}}
+                                    <img src="{{ $p->image ? url('upload/images/' . $p->image) : url('assets/image/shapes/client-1.png') }}"
+                                        class="img-fluid" title="{{ $p->name }}">
+                                    {{-- </a> --}}
+                                </div>
+                                <h6 class="text-center">{{ $p->name }}</h6>
                             </div>
-                            <h6 class="text-center">{{ $p->name }}</h6>
-                        </div>
+                        </a>
                     @endforeach
                 </div><!--client-carousel owl-carousel owl-theme-->
             </div><!--container-->
