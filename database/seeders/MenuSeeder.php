@@ -20,8 +20,9 @@ class MenuSeeder extends Seeder
         $id_layanan = Menu::create(['id' => 8, 'number' => 3, 'jenis' => 'N', 'slug' => 'layanan',  'name' => 'Layanan', 'deletable' => 'N', 'editable' => 'N'])->id;
         $id_informasi =     Menu::create(['id' => 17, 'number' => 4, 'jenis' => 'N', 'slug' => 'informasi', 'name' => 'Informasi', 'deletable' => 'N', 'editable' => 'N'])->id;
         Menu::create(['id' => 4, 'number' => 9, 'jenis' => 'route', 'slug' => 'bank-data', 'name' => 'Bank Data', 'deletable' => 'N', 'editable' => 'N']);
-        Menu::create(['jenis' => 'route', 'parent_id' => $id_informasi, 'slug' => 'survey', 'name' => 'e-Survey', 'deletable' => 'N', 'editable' => 'N']);
-        Menu::create(['jenis' => 'N', 'parent_id' => $id_informasi, 'slug' => 'pengaduan', 'name' => 'Pengaduan', 'deletable' => 'N', 'editable' => 'N']);
+        Menu::create(['jenis' => 'route', 'parent_id' => $id_informasi, 'slug' => 'survey', 'name' => 'e-Survey SKM', 'deletable' => 'N', 'editable' => 'N']);
+        Menu::create(['jenis' => 'route', 'parent_id' => $id_informasi, 'slug' => 'survey-kpk', 'name' => 'e-Survey KPK', 'deletable' => 'N', 'editable' => 'N']);
+        Menu::create(['jenis' => 'route', 'parent_id' => $id_informasi, 'slug' => 'pengaduan', 'name' => 'e-Pengaduan', 'deletable' => 'N', 'editable' => 'N']);
         Menu::create(['jenis' => 'page',  'slug' => 'moto', 'name' => 'Moto', 'parent_id' => $id_tentang, 'deletable' => 'N', 'editable' => 'Y']);
         Menu::create(['jenis' => 'page',  'slug' => 'sambutan', 'name' => 'Sambutan Kepala Dinas', 'parent_id' => $id_tentang, 'deletable' => 'N', 'editable' => 'Y']);
         Menu::create(['jenis' => 'page',  'slug' => 'visi-misi', 'name' => 'Visi dan Misi', 'parent_id' => $id_tentang, 'deletable' => 'N', 'editable' => 'Y']);
