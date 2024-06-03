@@ -145,7 +145,7 @@
     font-family: "Poppins", Arial, sans-serif;
     font-size: 90px;
     font-weight: 500;
-    text-shadow: 3px 5px 5px rgba(0, 0, 0, 0.1);
+    text-shadow: 10px 20px 4px rgba(0, 0, 0, 0.2);
 }
 
 .tp-caption.title2-white {
@@ -153,7 +153,7 @@
     font-family: "Poppins", Arial, sans-serif;
     font-size: 90px;
     font-weight: 500;
-    text-shadow: 3px 5px 5px rgba(0, 0, 0, 0.1);
+    text-shadow: 10px 20px 4px rgba(0, 0, 0, 0.2);
 }
 
 /* BANNER  */

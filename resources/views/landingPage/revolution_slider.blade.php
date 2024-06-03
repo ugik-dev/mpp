@@ -6,7 +6,7 @@
                     <ul>
                         <li data-transition="fade">
                             <img src="{{ asset('assets/image/revolution/bg-slide-2.jpg') }}" alt="">
-                            <div class="tp-caption rs-parallaxlevel-3" data-x="100" data-y="80" data-speed="700"
+                            <div class="tp-caption rs-parallaxlevel-3" data-x="20" data-y="20" data-speed="700"
                                 data-start="1000" data-transform_in="sX:0;sY:0;s:700;"
                                 data-transform_out="sX:0;sY:0;s:700;">
                                 <img src="{{ asset('assets/image/revolution/slide-2-image-1.png') }}" alt="">
@@ -186,10 +186,9 @@
 
                             <div class="tp-caption title2-white rs-parallaxlevel-1" data-x="520" data-y="325"
                                 data-speed="700" data-start="2000" data-transform_in="o:0;s:1000;"
-                                data-transform_out="o:0;s:1000;">
+                                data-transform_out="o:0;s:1000;" {{-- data-transform_in="sX:0;sY:0;s:700;" data-transform_out="sX:0;sY:0;s:700;" --}}>
                                 &nbsp; 93 Layanan
                             </div>
-
                             <div class="tp-caption text rs-parallaxlevel-3" data-x="30" data-y="150"
                                 data-speed="700" data-start="2400" data-transform_in="x:-50;s:700;"
                                 data-transform_out="x:-50;s:700;">
