@@ -13,7 +13,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        if ($this->app->environment('production')) {
+        if ($this->app->environment() == 'production') {
+            dd("4");
             $this->app->bind('path.public', function () {
                 return realpath(base_path() . '/../public_html');
             });

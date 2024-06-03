@@ -171,8 +171,8 @@
                     @foreach ($galeries as $galeri)
                         <div class="item">
                             <div class="portfolio-card">
-                                <a href="{{ $galeri->jenis == 'vid' ? $galeri->link : ($galeri->image ? url('upload/gallery/' . $galeri->image) : url('assets/image/shapes/client-1.png')) }}"
-                                    class="video-popup">
+                                <a href="{{ $galeri->jenis == 'vid' ? $galeri->link : route('album', $galeri->album_id) }}"
+                                    class="{{ $galeri->jenis == 'vid' ? 'video-popup' : '' }} ">
                                     <img style="height: 10rem" {{-- src="assets/background/bg-{{ str_pad(rand(1, 23), 2, '0', STR_PAD_LEFT) }}.jpg" --}}
                                         src="{{ $galeri->image ? url('upload/gallery/' . $galeri->image) : url('assets/image/shapes/client-1.png') }}"
                                         class="img-fluid" alt="img-9">

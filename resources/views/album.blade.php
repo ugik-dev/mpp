@@ -56,9 +56,9 @@
         }
 
         /* .blog-card-image img {
-                                        margin-top: 0px;
-                                        height: 120px;
-                                    } */
+                                                margin-top: 0px;
+                                                height: 120px;
+                                            } */
     </style>
     <style>
         .gslide-description {
@@ -135,7 +135,7 @@
                                     <div class="blog-card">
                                         <div class="blog-card-image">
                                             @if ($item->image)
-                                                <img src="{{ url('upload/content/' . $item->image) }}"
+                                                <img src="{{ url('upload/gallery/' . $item->image) }}"
                                                     class="glightbox img-fluid img-search" data-title="{{ $item->name }}"
                                                     data-description="{{ $item->description }}"
                                                     alt="{{ $item->description }}">

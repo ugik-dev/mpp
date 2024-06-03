@@ -49,26 +49,5 @@ class UsersSeeder extends Seeder
             );
             $user->assignRole($r_admin);
         }
-        // $sqlFilePath = database_path('seeders/sql/dumy_user.sql');
-        // if (file_exists($sqlFilePath)) {
-        //     $sqlContent = file_get_contents($sqlFilePath);
-        //     DB::unprepared($sqlContent);
-        // } else {
-        //     echo "SQL file not found at $sqlFilePath\n";
-        // }
-
-        for ($i = 0; $i < 1000; $i++) {
-            User::create([
-                'name' => fake()->name(),
-                'phone' => fake()->phoneNumber(),
-                'alamat' => fake()->streetAddress(),
-                'username' => fake()->unique()->userName(),
-                'email' => fake()->unique()->safeEmail(),
-                'email_verified_at' => now(),
-                'role_id' => 99,
-                'password' => $pwd,
-                'remember_token' => Str::random(10),
-            ]);
-        }
     }
 }
