@@ -113,6 +113,7 @@ Route::middleware(['auth', 'checkRole:admin,super'])->group(function () {
     Route::get('/panel/users', [DashboardController::class, 'index'])->name('panel.admin.index');
 
     Route::get('/panel/monitoring/survey', [MonitoringController::class, 'survey'])->name('panel.monitoring.survey');
+    Route::get('/panel/monitoring/survey-kpk', [MonitoringController::class, 'surveyKpk'])->name('panel.monitoring.survey-kpk');
     Route::get('/panel/monitoring/pengaduan', [MonitoringController::class, 'pengaduan'])->name('panel.monitoring.pengaduan');
 });
 

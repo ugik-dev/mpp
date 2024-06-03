@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Content;
 use App\Models\Menu;
+use App\Models\Pengaduan;
 use App\Models\Survey;
+use App\Models\SurveyKPK;
 use Exception;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
@@ -19,6 +21,19 @@ class SurveyController extends Controller
         $sidbar_lates_content = Content::select('contents.*')->complete()->latest('tanggal')->take(5)->get();
 
         return view('survey', compact('sidbar_lates_content', 'layanan'));
+    }
+    public function kpk()
+    {
+        $layanan = Menu::with('childrens')->where('id', 8)->get()->first()->childrens;
+        $sidbar_lates_content = Content::select('contents.*')->complete()->latest('tanggal')->take(5)->get();
+        return view('survey-kpk', compact('sidbar_lates_content', 'layanan'));
+    }
+
+    public function pengaduan()
+    {
+        $layanan = Menu::with('childrens')->where('id', 8)->get()->first()->childrens;
+        $sidbar_lates_content = Content::select('contents.*')->complete()->latest('tanggal')->take(5)->get();
+        return view('survey-pengaduan', compact('sidbar_lates_content', 'layanan'));
     }
 
     public function post(Request $request)
@@ -48,6 +63,36 @@ class SurveyController extends Controller
             ]);
             $data =    Survey::create($request->input());
             // dd($data);
+            return $this->responseSuccess($data, 'Survey submitted successfully');
+        } catch (QueryException $ex) {
+            if ($errorMessage = getDbException($ex->errorInfo)) {
+                return $this->ResponseError($errorMessage);
+            } else {
+                return $this->ResponseError($ex->getMessage());
+            }
+        } catch (Exception $ex) {
+            return $this->ResponseError($ex->getMessage());
+        }
+    }
+    public function postKpk(Request $request)
+    {
+        try {
+            $data =    SurveyKPK::create($request->input());
+            return $this->responseSuccess($data, 'Survey submitted successfully');
+        } catch (QueryException $ex) {
+            if ($errorMessage = getDbException($ex->errorInfo)) {
+                return $this->ResponseError($errorMessage);
+            } else {
+                return $this->ResponseError($ex->getMessage());
+            }
+        } catch (Exception $ex) {
+            return $this->ResponseError($ex->getMessage());
+        }
+    }
+    public function postPengaduan(Request $request)
+    {
+        try {
+            $data =    Pengaduan::create($request->input());
             return $this->responseSuccess($data, 'Survey submitted successfully');
         } catch (QueryException $ex) {
             if ($errorMessage = getDbException($ex->errorInfo)) {

@@ -26,6 +26,16 @@ $menus = [
         'dropdown' => false,
     ],
     [
+        'label' => 'e-Survey KPK',
+        'url' => route('panel.monitoring.survey-kpk'),
+        'dropdown' => false,
+    ],
+    [
+        'label' => 'e-Pengaduan',
+        'url' => route('panel.monitoring.pengaduan'),
+        'dropdown' => false,
+    ],
+    [
         'label' => 'Pengaduan',
         'url' => route('panel.monitoring.pengaduan'),
         'dropdown' => false,
