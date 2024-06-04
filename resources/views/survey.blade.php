@@ -1,19 +1,35 @@
 @extends('homeLayout/index')
+@section('style')
+    <style>
+        .captcha {
+            width: 50%;
+        }
+
+        .captcha img {
+            width: 75%;
+            height: auto;
+        }
+
+        .captcha button {
+            width: 25%;
+        }
+    </style>
+@endsection
 @section('content')
     <style>
         /* .form-icon>i {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                position: absolute;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                top: 50%;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                right: 45px;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                -webkit-transform: translateY(-50%);
-                                                                                                                                                                                                                                                                                                                                                                                                                                                -ms-transform: translateY(-50%);
-                                                                                                                                                                                                                                                                                                                                                                                                                                                transform: translateY(-50%);
-                                                                                                                                                                                                                                                                                                                                                                                                                                                opacity: 0.8;
-                                                                                                                                                                                                                                                                                                                                                                                                                                            }
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                    position: absolute;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                    top: 50%;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                    right: 45px;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                    -webkit-transform: translateY(-50%);
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                    -ms-transform: translateY(-50%);
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                    transform: translateY(-50%);
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                    opacity: 0.8;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                }
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                            form .message-box .form-icon>i {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                top: 15%;
-                                                                                                                                                                                                                                                                                                                                                                                                                                            } */
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                form .message-box .form-icon>i {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                    top: 15%;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                } */
     </style>
     <div class="page-wrapper">
         <section class="page-banner"
@@ -510,6 +526,18 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-12 col-lg-12 captcha d-flex justify-content-between align-items-center">
+                                {!! captcha_img() !!}
+                                <button type="button" class="ml-4 btn btn-danger" style="margin-left: 0.65rem"
+                                    id="reload">
+                                    &#x21bb;
+                                </button>
+                            </div>
+
+                            <div class="col-12 col-lg-12">
+                                <input id="captcha" type="text" class="input-text" placeholder="Masukkan Captcha"
+                                    name="captcha">
+                            </div>
                             <div class="send-message text-center">
                                 <div class="form-inline">
                                     @csrf
@@ -580,6 +608,10 @@
                             icon: 'error',
                             title: 'Oops...',
                             text: res['message'],
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                $('#reload').click();
+                            }
                         });
                     } else {
                         let timerInterval
@@ -595,5 +627,16 @@
                 }
             });
         })
+        $('#reload').click(function() {
+            $.ajax({
+                type: 'GET',
+                url: '{{ route('reloadCaptcha') }}',
+                success: function(data) {
+                    $('.captcha img').fadeOut('slow', function() {
+                        $(this).replaceWith(data.captcha).fadeIn('slow');
+                    });
+                }
+            });
+        });
     </script>
 @endsection

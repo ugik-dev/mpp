@@ -1,4 +1,20 @@
 @extends('homeLayout/index')
+@section('style')
+    <style>
+        .captcha {
+            width: 50%;
+        }
+
+        .captcha img {
+            width: 75%;
+            height: auto;
+        }
+
+        .captcha button {
+            width: 25%;
+        }
+    </style>
+@endsection
 @section('content')
     <div class="page-wrapper">
         <section class="page-banner"
@@ -108,7 +124,7 @@
                         </div><!-- news-details-comment-list-box -->
                         <div class="news-details-comment-form">
                             <h3>Tinggalkan komentar</h3>
-                            <form class="contact-form contact-form-validated" id="form_comment">
+                            <form class="contact-form contact-form-validated" id="form_comment" autocomplete="off">
                                 @csrf
                                 <div class="row row-gutter-10">
                                     <div class="col-12" id="replylayout">
@@ -116,17 +132,33 @@
                                     <div class="col-12 col-lg-6">
                                         <input type="text" class="input-text" placeholder="Nama Anda" name="name"
                                             aria-required="true">
-                                    </div><!-- col-12 col-lg-6 -->
+                                    </div>
+                                    <!-- col-12 col-lg-6 -->
                                     <div class="col-12 col-lg-6">
                                         <input type="email" class="input-text" placeholder="Email" name="email"
                                             aria-required="true">
-                                    </div><!-- col-12 col-lg-6 -->
+                                    </div>
+                                    <!-- col-12 col-lg-6 -->
                                     <div class="col-12 col-lg-12">
                                         <textarea name="message" placeholder="Tulis komentar disini" class="input-text " aria-required="true"></textarea>
-                                    </div><!-- col-12 col-lg-12 -->
+                                    </div>
+                                    <div class="col-12 col-lg-12 captcha d-flex justify-content-between align-items-center">
+                                        {!! captcha_img() !!}
+                                        <button type="button" class="ml-4 btn btn-danger" style="margin-left: 0.65rem"
+                                            id="reload">
+                                            &#x21bb;
+                                        </button>
+                                    </div>
+
+                                    <div class="col-12 col-lg-12">
+                                        <input id="captcha" type="text" class="input-text"
+                                            placeholder="Masukkan Captcha" name="captcha">
+                                    </div>
+                                    <!-- col-12 col-lg-12 -->
                                     <div class="col-12 col-lg-12">
                                         <button class="btn btn-primary" type="submit">Kirim</button>
-                                    </div><!-- col-12 col-lg-12 -->
+                                    </div>
+                                    <!-- col-12 col-lg-12 -->
                                 </div>
                             </form>
                         </div>
@@ -153,31 +185,23 @@
                 'form': $('#form_comment'),
                 'replylayout': $('#form_comment').find('#replylayout'),
             }
-
-
-            dataKomentar = <?= json_encode($data->comment) ?>;
-            console.log(dataKomentar);
+            var dataKomentar = {!! json_encode($data->comment) !!};
 
             $('.reply-btn').on('click', function() {
-                console.log('reply', $(this).data('id'))
                 FormComment.replylayout.html('Balas Untuk')
             })
             FormComment.form.on('submit', (ev) => {
                 ev.preventDefault();
                 s = FormComment.form.validate();
-                console.log('kirim', s)
                 Swal.fire({
                     title: "Konfirmasi",
                     icon: 'question',
-                    text: "Apakah anda yakin akan mengirimkan komentr ini ?",
+                    text: "Apakah anda yakin akan mengirimkan komentar ini ?",
                     allowOutsideClick: false,
 
                     showCancelButton: true,
                     confirmButtonText: "Ya !!",
-                    // showLoaderOnConfirm: true,
-                    // customClass: {
-                    //     confirmButton: "btn btn-primary me-3 waves-effect waves-light",
-                    //     cancelButton: "btn btn-outline-danger waves-effect",
+
                 }, ).then((result) => {
                     if (!result.isConfirmed) {
                         return;
@@ -210,7 +234,12 @@
                                         confirmButton: `btn btn-primary waves-effect waves-light`,
                                     },
                                     buttonsStyling: false,
+                                }).then((result) => {
+                                    if (result.isConfirmed) {
+                                        $('#reload').click();
+                                    }
                                 });
+
                                 return;
                             }
                             let timerInterval;
@@ -249,6 +278,17 @@
                 });
                 // return;
             })
+            $('#reload').click(function() {
+                $.ajax({
+                    type: 'GET',
+                    url: '{{ route('reloadCaptcha') }}',
+                    success: function(data) {
+                        $('.captcha img').fadeOut('slow', function() {
+                            $(this).replaceWith(data.captcha).fadeIn('slow');
+                        });
+                    }
+                });
+            });
         })
     </script>
 @endsection

@@ -40,6 +40,7 @@ class SurveyController extends Controller
     {
         try {
             $validatedData = $request->validate([
+                'captcha' => 'required|captcha',
                 // 'respon' => 'required|integer|min:1|max:5', // Assuming response is within 1 to 5
                 'alasan' => 'string',
                 // 'nama' => 'required|string|max:255',
@@ -77,7 +78,10 @@ class SurveyController extends Controller
     public function postKpk(Request $request)
     {
         try {
-            $data =    SurveyKPK::create($request->input());
+            $request->validate([
+                'captcha' => 'required|captcha',
+            ]);
+            $data = SurveyKPK::create($request->input());
             return $this->responseSuccess($data, 'Survey submitted successfully');
         } catch (QueryException $ex) {
             if ($errorMessage = getDbException($ex->errorInfo)) {
@@ -92,6 +96,9 @@ class SurveyController extends Controller
     public function postPengaduan(Request $request)
     {
         try {
+            $request->validate([
+                'captcha' => 'required|captcha',
+            ]);
             $data =    Pengaduan::create($request->input());
             return $this->responseSuccess($data, 'Survey submitted successfully');
         } catch (QueryException $ex) {

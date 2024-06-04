@@ -42,3 +42,6 @@ Route::post('/e-survey-kpk', [SurveyController::class, 'postKpk'])->name('survey
 Route::post('/e-pengaduan', [SurveyController::class, 'postPengaduan'])->name('pengaduan-post');
 Route::post('/e-like-dislike', [SurveyController::class, 'postLikeDislike'])->name('like-dislike-post');
 Route::post('blog/{id_content}', [HomeController::class, 'blog_comment'])->name('blog-comment');
+Route::get('/reload-captcha', function () {
+    return response()->json(['captcha' => captcha_img()]);
+})->name('reloadCaptcha');

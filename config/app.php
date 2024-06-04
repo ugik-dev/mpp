@@ -171,6 +171,7 @@ return [
         Spatie\Permission\PermissionServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
         Yajra\DataTables\DataTablesServiceProvider::class,
+        Mews\Captcha\CaptchaServiceProvider::class,
         // Barryvdh\DomPDF\ServiceProvider::class
 
     ])->toArray(),
@@ -187,7 +188,8 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
-        'DataStructur' =>         App\Helpers\DataStructure::class,
+        'DataStructur' => App\Helpers\DataStructure::class,
+        'Captcha' => Mews\Captcha\Facades\Captcha::class,
         // 'Helper' => App\Helpers\Helpers::class,
     ])->toArray(),
 

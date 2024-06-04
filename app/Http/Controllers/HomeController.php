@@ -104,6 +104,13 @@ class HomeController extends Controller
     public function blog_comment(Request $request, $id_content)
     {
         try {
+            $validatedData = $request->validate([
+                'name' => 'required|string',
+                'email' => 'nullable|email',
+                'phone' => 'nullable|string',
+                'message' => 'required|max:1000',
+                'captcha' => 'required|captcha'
+            ]);
 
             $att = [
                 'name' => $request->name,
@@ -114,7 +121,7 @@ class HomeController extends Controller
                 'content_id' => $id_content,
             ];
             $data = Comment::create($att);
-            return $this->responseSuccess($data, 'Survey submitted successfully');
+            return $this->responseSuccess($data, 'Komentar berhasil dibuat!');
         } catch (QueryException $ex) {
             if ($errorMessage = getDbException($ex->errorInfo)) {
                 return $this->ResponseError($errorMessage);
