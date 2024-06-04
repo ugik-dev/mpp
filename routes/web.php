@@ -35,6 +35,7 @@ Route::get('/e-pengaduan', [SurveyController::class, 'pengaduan'])->name('pengad
 Route::get('/like-dislike', [SurveyController::class, 'like_dislike'])->name('like-dislike');
 Route::get('/kontak', [HomeController::class, 'contact'])->name('contact');
 Route::get('/album/{album}', [HomeController::class, 'album'])->name('album');
+Route::get('/album', [HomeController::class, 'albums'])->name('albums');
 Route::get('/bank-data', [HomeController::class, 'bank_data'])->name('bank-data');
 Route::get('/bank-data/{id}', [HomeController::class, 'bank_data_download'])->name('bank-data-download');
 Route::post('/e-survey', [SurveyController::class, 'post'])->name('survey-post');

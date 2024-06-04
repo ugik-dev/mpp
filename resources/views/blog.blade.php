@@ -13,6 +13,10 @@
         .captcha button {
             width: 25%;
         }
+
+        .content-area img {
+            max-width: 100%
+        }
     </style>
 @endsection
 @section('content')
