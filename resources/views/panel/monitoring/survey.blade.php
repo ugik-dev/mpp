@@ -1,13 +1,57 @@
 @extends('panel/layout/userLayout')
 @section('vendor-style')
-    <public href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <public href="{{ asset('admin/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="{{ asset('admin/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/buttons/1.2.4/css/buttons.bootstrap4.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/select/1.3.1/css/select.dataTables.css" rel="stylesheet" type="text/css" />
+
     <style>
         .select2-container--bootstrap {
             border: 1px solid #d1d3e2 !important;
             padding: 0.375rem 0.75rem;
             border-radius: 0.35rem;
             width: 100%
+        }
+
+        .dataTables_filter {
+            display: flex;
+            justify-content: end;
+        }
+
+        .dataTables_length>label {
+            display: flex;
+            justify-content: space-between;
+            width: 50%;
+            gap: 2px;
+            margin-bottom: 0;
+        }
+
+        .dataTables_length>label>select {
+            width: 50%;
+        }
+
+        div.dataTables_wrapper>.row:nth-child(2) {
+            margin-top: 0.875rem;
+            margin-bottom: 0.875rem;
+        }
+
+        div.dataTables_wrapper>.row:first-child {
+            align-items: center;
+            overflow-x: scroll;
+        }
+
+        div.dataTables_wrapper>.row:first-child * {
+            overflow-x: scroll;
+        }
+
+        .visibility-btn>span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .dataTables_wrapper {
+            overflow-x: scroll;
         }
     </style>
 @endsection
@@ -22,18 +66,10 @@
 @section('content')
     <div class="container-fluid">
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Management Bank Data</h1>
+            <h1 class="h3 mb-0 text-gray-800">Kelola e-Survei / SKM</h1>
         </div>
         <div class="card shadow mb-4">
-            <div class="card-header py-3 d-flex justify-content-between align-items-center">
-                <h6 class="m-2 font-weight-bold text-primary">DataTables Example</h6>
-                <button id="addBtn" class="btn btn-secondary btn-icon-split font-weight-bold float-end">
-                    <span class="icon text-white-50">
-                        <i class="fas fa-plus"></i>
-                    </span>
-                    <span class="text">Tambah Bank Data</span>
-                </button>
-            </div>
+
             <div class="card-body">
                 <div class="table-responsive">
                     <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
@@ -42,20 +78,21 @@
                                 <table id="datatable" class="table table-bordered" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>ID</th>
+                                            <th></th>
                                             <th>Waktu</th>
                                             <th>Nama</th>
                                             <th>Pesan</th>
                                             <th>Respon</th>
-                                            <th>kesesuaian</th>
-                                            <th>kemudahan</th>
-                                            <th>kecepatan</th>
-                                            <th>tarif</th>
-                                            <th>sop</th>
-                                            <th>kompetensi</th>
-                                            <th>prilaku</th>
-                                            <th>sarpras</th>
-                                            <th>pengaduan</th>
+                                            <th>Kesesuaian</th>
+                                            <th>Kemudahan</th>
+                                            <th>Kecepatan</th>
+                                            <th>Tarif</th>
+                                            <th>SOP</th>
+                                            <th>Kompetensi</th>
+                                            <th>Prilaku</th>
+                                            <th>Sarpras</th>
+                                            <th>Pengaduan</th>
+                                            <th>Visibilitas Publik</th>
                                         </tr>
                                     </thead>
                                 </table>
@@ -145,15 +182,30 @@
 @push('scripts')
     <script src="{{ asset('admin/vendor/datatables/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('admin/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.2.4/js/dataTables.buttons.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.2.4/js/buttons.bootstrap4.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.2.4/js/buttons.colVis.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.2.4/js/buttons.flash.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.2.4/js/buttons.html5.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.2.4/js/buttons.print.js"></script>
+    <script src="https://cdn.datatables.net/select/1.3.1/js/dataTables.select.js"></script>
+    <script src="https://cdn.datatables.net/select/1.3.1/js/select.dataTables.js"></script>
+    <script src="https://cdn.datatables.net/colvis/1.1.0/js/dataTables.colVis.js"></script>
+
+
     <script>
         $(document).ready(function() {
-
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                }
+            });
             var dataRow = [];
             var status_slect2 = false;
             datatable = $('#datatable').DataTable({
                 processing: true,
-                paggination: true,
-                responsive: false,
+                pagination: true,
+                responsive: true,
                 serverSide: true,
                 searching: true,
                 ordering: true,
@@ -171,50 +223,158 @@
                         return response.data;
                     }
                 },
+
+                select: {
+                    style: 'os',
+                    selector: 'td:first-child'
+                },
                 columns: [{
-                    data: "id",
-                    name: "id"
-                }, {
-                    data: "created_at",
-                    name: "created_at"
-                }, {
-                    data: "nama",
-                    name: "nama"
-                }, {
-                    data: "alasan",
-                    name: "alasan"
-                }, {
-                    data: "respon",
-                    name: "respon"
-                }, {
-                    data: "kesesuaian",
-                    name: "kesesuaian"
-                }, {
-                    data: "kemudahan",
-                    name: "kemudahan"
-                }, {
-                    data: "kecepatan",
-                    name: "kecepatan"
-                }, {
-                    data: "tarif",
-                    name: "tarif"
-                }, {
-                    data: "sop",
-                    name: "sop"
-                }, {
-                    data: "kompetensi",
-                    name: "kompetensi"
-                }, {
-                    data: "prilaku",
-                    name: "prilaku"
-                }, {
-                    data: "sarpras",
-                    name: "sarpras"
-                }, {
-                    data: "pengaduan",
-                    name: "pengaduan"
-                }]
+                        'targets': 0,
+                        'searchable': false,
+                        'orderable': false,
+                        'className': 'dt-body-center',
+                        'render': function(data, type, rowData, meta) {
+                            return '<input type="checkbox" name="id[]" value="' + $('<div/>').text(
+                                rowData.id).html() + '">';
+                        }
+                    },
+                    {
+                        data: "created_at",
+                        name: "created_at"
+                    }, {
+                        data: "nama",
+                        name: "nama"
+                    }, {
+                        data: "alasan",
+                        name: "alasan"
+                    }, {
+                        data: "respon",
+                        name: "respon"
+                    }, {
+                        data: "kesesuaian",
+                        name: "kesesuaian"
+                    }, {
+                        data: "kemudahan",
+                        name: "kemudahan"
+                    }, {
+                        data: "kecepatan",
+                        name: "kecepatan"
+                    }, {
+                        data: "tarif",
+                        name: "tarif"
+                    }, {
+                        data: "sop",
+                        name: "sop"
+                    }, {
+                        data: "kompetensi",
+                        name: "kompetensi"
+                    }, {
+                        data: "prilaku",
+                        name: "prilaku"
+                    }, {
+                        data: "sarpras",
+                        name: "sarpras"
+                    }, {
+                        data: "pengaduan",
+                        name: "pengaduan"
+                    }, {
+                        data: function(colData) {
+                            return colData['show_public'] === 'N' ? 'Tidak' : 'Ya';
+                        },
+                        name: "show_public"
+                    }
+                ],
+                dom: "<'row'<'col-sm-6 col-lg-4'l><'col-sm-6 col-lg-4'B><'col-sm-6 col-lg-4'f>>" +
+                    "<'row'<'col-sm-12'tr>>" +
+                    "<'row'<'col-sm-12'p>>",
+                buttons: {
+                    buttons: [{
+                            className: 'btn btn-primary visibility-btn',
+                            text: '<i class="far fa-eye"></i> Visibilitas Publik',
+                            action: function() {
+                                let selectedRows = $("input[name='id[]']:checked").map(function() {
+                                    return this.value;
+                                }).get();
+                                if (selectedRows.length === 0) {
+                                    swalError('Pilih atau Centang data terlebih dahulu.',
+                                        "Data tidak ada yang dipilih!");
+                                    return;
+                                }
+                                Swal.fire({
+                                    title: 'Tampilkan ke Publik?',
+                                    showDenyButton: true,
+                                    showCancelButton: true,
+                                    confirmButtonText: 'Ya',
+                                    denyButtonText: 'Tidak',
+                                    cancelButtonText: 'Batalkan',
+                                    html: "Pilih Ya atau Tidak <br/>untuk menampilkan data tanggapan yang <br> dipilih/dicentang ke publik"
+                                }).then((result) => {
+                                    let url =
+                                        '{{ route('panel.monitoring.toggle-public-visibility-survey') }}';
+                                    if (result.isConfirmed) {
+                                        $.ajax({
+                                            url: url,
+                                            'type': "POST",
+                                            data: {
+                                                showPublic: 'Y',
+                                                ids: selectedRows
+                                            },
+
+                                            success: function(data) {
+                                                if (data['error']) {
+                                                    swalError(data['message'],
+                                                        "Simpan Gagal !!");
+                                                    return;
+                                                }
+                                                // swalBerhasil();
+                                                datatable.ajax.reload(null,
+                                                    false);
+                                            },
+                                            error: function(e) {
+                                                // console.log(e)
+                                            }
+                                        });
+                                    } else if (result.isDenied) {
+                                        $.ajax({
+                                            url: url,
+                                            'type': "POST",
+                                            data: {
+                                                showPublic: 'N',
+                                                ids: selectedRows
+                                            },
+
+                                            success: function(data) {
+                                                if (data['error']) {
+                                                    swalError(data['message'],
+                                                        "Simpan Gagal !!");
+                                                    return;
+                                                }
+                                                // swalBerhasil();
+                                                datatable.ajax.reload(null,
+                                                    false);
+                                            },
+                                            error: function(e) {
+                                                // console.log(e)
+                                            }
+                                        });
+                                    }
+                                })
+                            }
+                        },
+                        {
+                            extend: 'copy',
+                            text: '<i class="far fa-copy"></i> Salin Baris Data',
+                            className: 'btn btn-success'
+                        },
+                    ],
+                    dom: {
+                        button: {
+                            className: 'btn'
+                        }
+                    }
+                }
             });
+
             var activeBtn;
             var validationRules = {
                 name: {
@@ -268,13 +428,6 @@
                 BankDataForm.public.val(currentData['public']);
                 BankDataForm.email.val(currentData['email']);
             })
-
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': "{{ csrf_token() }}"
-                }
-            });
-
 
 
             datatable.on('click', '.delete-btn', function(ev) {

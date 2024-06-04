@@ -33,6 +33,7 @@ class Survey extends Model
         'prilaku',
         'sarpras',
         'pengaduan',
+        'show_public'
     ];
 
     public function scopeComplete($query)

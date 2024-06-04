@@ -34,7 +34,7 @@ class HomeController extends Controller
         $galeries = Gallery::with('album')->latest()->limit(10)->get();
         $patners = Patner::where('jenis', 'Patner')->orderBy('number', 'asc')->get();
         $banners = Patner::where('jenis', 'Banner')->orderBy('number', 'asc')->get();
-        $surveys = Survey::latest('created_at')->limit(10)->get();
+        $surveys = Survey::latest('created_at')->where('show_public', '=', 'Y')->limit(10)->get();
         // dd($event);
         return view('home', compact('heroes', 'galeries', 'hero_icon', 'sidbar_lates_content', 'events', 'banners', 'surveys', 'conf_home', 'patners'));
     }
