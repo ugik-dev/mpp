@@ -8,7 +8,7 @@
 
 
     <li class="nav-item active">
-        <a class="nav-link" href="{{ route('home') }}">
+        <a class="nav-link" href="{{ route('home') }}" target="_blank">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Landing Page</span></a>
     </li>
