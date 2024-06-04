@@ -56,9 +56,9 @@
         }
 
         /* .blog-card-image img {
-                                                                                                margin-top: 0px;
-                                                                                                height: 120px;
-                                                                                            } */
+                                                                                                    margin-top: 0px;
+                                                                                                    height: 120px;
+                                                                                                } */
     </style>
     <style>
         .gslide-description {
@@ -136,7 +136,7 @@
                                 <div class="blog-card">
                                     <div class="blog-card-image">
                                         @if ($item->image)
-                                            <img src="{{ url('upload/gallery/' . $item->image) }}"
+                                            <img src="{{ url('upload/content/' . $item->image) }}"
                                                 class=" img-fluid img-search" alt="{{ $item->description }}">
                                         @else
                                             <img src="{{ url('assets/background') }}/bg-{{ str_pad(rand(1, 23), 2, '0', STR_PAD_LEFT) }}.jpg"
