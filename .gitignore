@@ -103,3 +103,4 @@ public/images/
 yarn-error.log
 ids.json
 /public/upload/*
+docker-compose.dev.yml

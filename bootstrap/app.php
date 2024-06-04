@@ -17,8 +17,9 @@ $app = new Illuminate\Foundation\Application(
 
 // Determine the application environment
 $env = $app->detectEnvironment(function () {
-    return $_ENV['APP_ENV'] ?? 'production'; // Default to 'production' if not set
+    return getenv('APP_ENV') ?: 'production'; // Use getenv() to retrieve environment variables
 });
+
 
 // Conditionally set the public path based on the environment
 if ($env === 'production') {
