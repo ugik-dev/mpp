@@ -58,6 +58,8 @@ class BankDataController extends Controller
                 'name' => $request->name,
                 'ref_id' => $request->ref_id,
                 'agency_id' => $request->agency_id,
+                'metode' => $request->metode,
+                'link' => $request->link,
                 'public' => $request->public,
                 'description' => $request->description,
                 'tanggal_dokumen' => $request->tanggal_dokumen,
@@ -71,59 +73,60 @@ class BankDataController extends Controller
             // ]);
 
             // dd($request);
-            if ($request->hasFile('file_bank_data_upload')) {
-                $photo = $request->file('file_bank_data_upload');
+            if ($request->metode == 'upload')
+                if ($request->hasFile('file_bank_data_upload')) {
+                    $photo = $request->file('file_bank_data_upload');
 
-                if ($photo->isValid()) {
-                    // File is valid, proceed with upload
-                    $originalFilename = time() . $photo->getClientOriginalName();
-                    // Ensure the directory exists
-                    $destinationPath = public_path('upload/bankdata');
-                    if (!file_exists($destinationPath)) {
-                        mkdir($destinationPath, 0755, true);
+                    if ($photo->isValid()) {
+                        // File is valid, proceed with upload
+                        $originalFilename = time() . $photo->getClientOriginalName();
+                        // Ensure the directory exists
+                        $destinationPath = public_path('upload/bankdata');
+                        if (!file_exists($destinationPath)) {
+                            mkdir($destinationPath, 0755, true);
+                        }
+
+                        // Move the file to the public_html/upload/bankdata directory
+                        $photo->move($destinationPath, $originalFilename);
+
+                        $data->filename = $originalFilename;
+                        $data->fileextension = $photo->getClientOriginalExtension();
+                        $data->save();
+                    } else {
+                        // File is not valid, handle the error
+                        $errorCode = $photo->getError(); // Get error code
+
+                        // Handle error based on error code
+                        switch ($errorCode) {
+                            case UPLOAD_ERR_INI_SIZE:
+                                // Handle error for exceeded upload_max_filesize directive in php.ini
+                                break;
+                            case UPLOAD_ERR_FORM_SIZE:
+                                // Handle error for exceeded MAX_FILE_SIZE directive that was specified in the HTML form
+                                break;
+                            case UPLOAD_ERR_PARTIAL:
+                                // Handle error for partially uploaded file
+                                break;
+                            case UPLOAD_ERR_NO_FILE:
+                                // Handle error for no file was uploaded
+                                break;
+                            case UPLOAD_ERR_NO_TMP_DIR:
+                                // Handle error for missing temporary folder
+                                break;
+                            case UPLOAD_ERR_CANT_WRITE:
+                                // Handle error for failed to write file to disk
+                                break;
+                            case UPLOAD_ERR_EXTENSION:
+                                // Handle error for PHP extension stopped the file upload
+                                break;
+                            default:
+                                // Handle other errors
+                                break;
+                        }
                     }
-
-                    // Move the file to the public_html/upload/bankdata directory
-                    $photo->move($destinationPath, $originalFilename);
-
-                    $data->filename = $originalFilename;
-                    $data->fileextension = $photo->getClientOriginalExtension();
-                    $data->save();
                 } else {
-                    // File is not valid, handle the error
-                    $errorCode = $photo->getError(); // Get error code
-
-                    // Handle error based on error code
-                    switch ($errorCode) {
-                        case UPLOAD_ERR_INI_SIZE:
-                            // Handle error for exceeded upload_max_filesize directive in php.ini
-                            break;
-                        case UPLOAD_ERR_FORM_SIZE:
-                            // Handle error for exceeded MAX_FILE_SIZE directive that was specified in the HTML form
-                            break;
-                        case UPLOAD_ERR_PARTIAL:
-                            // Handle error for partially uploaded file
-                            break;
-                        case UPLOAD_ERR_NO_FILE:
-                            // Handle error for no file was uploaded
-                            break;
-                        case UPLOAD_ERR_NO_TMP_DIR:
-                            // Handle error for missing temporary folder
-                            break;
-                        case UPLOAD_ERR_CANT_WRITE:
-                            // Handle error for failed to write file to disk
-                            break;
-                        case UPLOAD_ERR_EXTENSION:
-                            // Handle error for PHP extension stopped the file upload
-                            break;
-                        default:
-                            // Handle other errors
-                            break;
-                    }
+                    throw new Exception("Wajib Melampirkan File.");
                 }
-            } else {
-                throw new Exception("Wajib Melampirkan File.");
-            }
 
 
 
@@ -150,28 +153,29 @@ class BankDataController extends Controller
                 'name' => $request->name,
                 'ref_id' => $request->ref_id,
                 'public' => $request->public,
+                'metode' => $request->metode,
+                'link' => $request->link,
                 'agency_id' => $request->agency_id,
                 'description' => $request->description,
                 'tanggal_dokumen' => $request->tanggal_dokumen,
                 'user_id' => Auth::user()->id
             ]);
 
+            if ($request->metode == 'upload')
+                if ($request->hasFile('file_bank_data_upload')) {
+                    $photo = $request->file('file_bank_data_upload');
+                    $originalFilename = time() . $photo->getClientOriginalName(); // Ambil nama asli file
+                    // Ensure the directory exists
+                    $destinationPath = public_path('upload/bankdata');
+                    if (!file_exists($destinationPath)) {
+                        mkdir($destinationPath, 0755, true);
+                    }
+                    // Move the file to the public_html/upload/bankdata directory
+                    $photo->move($destinationPath, $originalFilename);
 
-            if ($request->hasFile('file_bank_data_upload')) {
-                $photo = $request->file('file_bank_data_upload');
-                $originalFilename = time() . $photo->getClientOriginalName(); // Ambil nama asli file
-                // Ensure the directory exists
-                $destinationPath = public_path('upload/bankdata');
-                if (!file_exists($destinationPath)) {
-                    mkdir($destinationPath, 0755, true);
+                    $data->filename = $originalFilename;
+                    $data->fileextension = $photo->getClientOriginalExtension();
                 }
-
-                // Move the file to the public_html/upload/bankdata directory
-                $photo->move($destinationPath, $originalFilename);
-
-                $data->filename = $originalFilename;
-                $data->fileextension = $photo->getClientOriginalExtension();
-            }
             $data->save();
 
             return  $this->responseSuccess($data, 'Success Updated');

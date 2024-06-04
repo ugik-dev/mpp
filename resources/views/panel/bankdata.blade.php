@@ -94,8 +94,6 @@
                             <div class="invalid-feedback">
                             </div>
                         </div>
-
-
                         <div class="col-md-12 mb-3">
                             <label for="basicFullname" class="form-label">Jenis:</label>
                             <select type="text" id="ref_id" class="form-control" name="ref_id">
@@ -129,6 +127,22 @@
                             <div class="invalid-feedback">
                             </div>
                         </div>
+                        <div class="col-md-12 mb-3">
+                            <label for="basicFullname" class="form-label">Metode :</label>
+                            <select type="text" id="metode" class="form-control" name="metode">
+                                <option value="">-</option>
+                                <option value="upload">Upload File</option>
+                                <option value="link">Link (Grive dll..)</option>
+                            </select>
+                            <div class="invalid-feedback">
+                            </div>
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <label for="basicFullname" class="form-label">Link :</label>
+                            <input type="text" id="link" class="form-control" name="link" placeholder="">
+                            <div class="invalid-feedback">
+                            </div>
+                        </div>
                         <div class="col-sm-12 mb-3">
                             <label for="basicFullname" class="form-label">File:</label>
                             <input type="file" id="file_bank_data" name="file_bank_data_upload"
@@ -136,6 +150,7 @@
                             <div class="invalid-feedback">
                             </div>
                         </div>
+
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary data-submit me-sm-3 me-1 text-white" id="insertBtn"
@@ -240,6 +255,8 @@
                 'tanggal_dokumen': $('#form-bank-data').find('#tanggal_dokumen'),
                 'agency_id': $('#form-bank-data').find('#agency_id'),
                 'public': $('#form-bank-data').find('#public'),
+                'metode': $('#form-bank-data').find('#metode'),
+                'link': $('#form-bank-data').find('#link'),
                 'email': $('#form-bank-data').find('#email'),
                 'ref_id': $('#form-bank-data').find('#ref_id'),
                 'file_bank_data': $('#form-bank-data').find('#file_bank_data'),
@@ -262,6 +279,8 @@
                 BankDataForm.agency_id.val(currentData['agency_id']);
                 BankDataForm.public.val(currentData['public']);
                 BankDataForm.email.val(currentData['email']);
+                BankDataForm.metode.val(currentData['metode']).trigger('change');
+                BankDataForm.link.val(currentData['link']);
             })
 
             $.ajaxSetup({
@@ -271,6 +290,17 @@
             });
 
 
+            BankDataForm.metode.on('change', function(ev) {
+                console.log('ch')
+                console.log(BankDataForm.metode.val())
+                if (BankDataForm.metode.val() == 'link') {
+                    BankDataForm.link.prop('disabled', false);
+                    BankDataForm.file_bank_data.prop('disabled', true);
+                } else {
+                    BankDataForm.link.prop('disabled', true);
+                    BankDataForm.file_bank_data.prop('disabled', false);
+                }
+            })
 
             datatable.on('click', '.delete-btn', function(ev) {
                 event.preventDefault();

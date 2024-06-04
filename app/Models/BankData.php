@@ -9,7 +9,7 @@ use Illuminate\Support\Str;
 class BankData extends Model
 {
     use HasFactory;
-    protected $fillable = ['name', 'ref_id', 'tanggal_dokumen', 'slug', 'description', 'agency_id', 'user_id', 'view', 'filename', 'public', 'fileextension'];
+    protected $fillable = ['name', 'ref_id', 'tanggal_dokumen', 'metode', 'link', 'slug', 'description', 'agency_id', 'user_id', 'view', 'filename', 'public', 'fileextension'];
 
     public function scopeComplete($query)
     {

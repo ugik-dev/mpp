@@ -163,6 +163,9 @@ class HomeController extends Controller
     {
         $data =  BankData::select('bank_data.*')->where('slug', $slug)->complete()->firstOrFail();
         $data->increment('view');
+        if ($data->metode == 'link') {
+            return redirect($data->link);
+        }
         $filePath = 'upload/bankdata/' . $data->filename;
         return response()->file($filePath);
     }
@@ -176,6 +179,18 @@ class HomeController extends Controller
         return view(
             'album',
             compact('galeries', 'album', 'albums')
+        );
+    }
+
+    public function albums(Request $request)
+    {
+        // $galeries = Gallery::where('album_id', '=', $album->id)->latest('created_at')->paginate(
+        //     10
+        // )->withQueryString();
+        $albums = Album::all();
+        return view(
+            'albums',
+            compact('albums', 'albums')
         );
     }
 }
