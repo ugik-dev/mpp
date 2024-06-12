@@ -37,22 +37,13 @@
 
         div.dataTables_wrapper>.row:first-child {
             align-items: center;
-            overflow-x: scroll;
-        }
 
-        /*
-            div.dataTables_wrapper>.row:first-child * {
-                overflow-x: scroll;
-            } */
+        }
 
         .visibility-btn>span {
             display: flex;
             align-items: center;
             gap: 5px;
-        }
-
-        .dataTables_wrapper {
-            overflow-x: scroll;
         }
     </style>
 @endsection
