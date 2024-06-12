@@ -24,10 +24,12 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/panel/dashboard', [DashboardController::class, 'index'])->name('panel.dashboard');
     Route::get('/logout', function () {
         Auth::logout();
-        return redirect('/home');
+        return redirect('/');
     })->name('logout');
 });
 Route::middleware(['auth', 'checkRole:admin,super'])->group(function () {
+    Route::get('user/profile', [UserController::class, 'profile'])->name('user.profile');
+    Route::patch('user/profile/{user}', [UserController::class, 'updateProfile'])->name('user.update-profile');
     Route::prefix('manage/user')->name('manage.user.')->group(function () {
         Route::get('/', [UserController::class, 'index'])->name('index');
         Route::post('', [UserController::class, 'create'])->name('create');
@@ -81,7 +83,6 @@ Route::middleware(['auth', 'checkRole:admin,super'])->group(function () {
         Route::post('update', [AgencyController::class, 'update'])->name('update');
         Route::delete('/', [AgencyController::class, 'delete'])->name('delete');
     });
-
 
     Route::prefix('manage/bank-data')->name('manage.bank-data.')->group(function () {
         Route::get('/', [BankDataController::class, 'index'])->name('index');

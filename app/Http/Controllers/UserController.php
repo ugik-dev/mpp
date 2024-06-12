@@ -11,6 +11,9 @@ use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -135,6 +138,48 @@ class UserController extends Controller
             return  $this->responseSuccess($data);
         } catch (Exception $ex) {
             return  $this->ResponseError($ex->getMessage());
+        }
+    }
+
+    public function profile(Request $request)
+    {
+        $user = auth()->user();
+        return view('panel.user.profile', compact('user'));
+    }
+
+
+    public function updateProfile(Request $request, User $user)
+    {
+        try {
+            $request->validate([
+                'name' => 'required|string|max:255',
+                'username' => [
+                    'required',
+                    Rule::unique('users')->ignore($request->user->id),
+                ],
+                'email' => [
+                    'required',
+                    Rule::unique('users')->ignore($request->user->id),
+                ],
+                'alamat' => 'nullable|string|max:255',
+                'phone' => 'nullable|string|max:20',
+                'password' => 'nullable|string|confirmed',
+            ]);
+            Log::debug($user);
+
+            $user->update([
+                'name' => $request->name,
+                'username' => $request->username,
+                'email' => $request->email,
+                'alamat' => $request->alamat,
+                'phone' => $request->phone,
+                'password' => $request->password ? Hash::make($request->password) : $user->password,
+            ]);
+
+            return redirect()->back()->with('success', 'Berhasil memperbaharui data user');
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+            return redirect()->back()->with('error', 'Terjadi kesalahan saat memperbaharui data user.');
         }
     }
 }

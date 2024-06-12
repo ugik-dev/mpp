@@ -49,9 +49,6 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
-    public static $rules = [
-        'username' => 'required|regex:/^[a-z0-9]+$/|unique:users',
-    ];
     public function scopeWithRole($query)
     {
         return $query->selectRaw('roles.title as role_title')->leftJoin('roles', 'roles.id', '=', 'users.role_id');
