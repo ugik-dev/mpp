@@ -26,7 +26,7 @@
         </div>
         <div class="card shadow mb-4">
             <div class="card-header py-3 d-flex justify-content-between align-items-center">
-                <h6 class="m-2 font-weight-bold text-primary">DataTables Example</h6>
+
                 <button id="addBtn" class="btn btn-secondary btn-icon-split font-weight-bold float-end">
                     <span class="icon text-white-50">
                         <i class="fas fa-plus"></i>
@@ -109,8 +109,7 @@
                                 </div>
                                 <div class="col-sm-12 mb-3">
                                     <label for="basicFullname" class="form-label">Website :</label>
-                                    <input type="text" id="website" class="form-control" name="website"
-                                        placeholder="">
+                                    <input type="text" id="website" class="form-control" name="website" placeholder="">
                                     <div class="invalid-feedback">
                                     </div>
                                 </div>
