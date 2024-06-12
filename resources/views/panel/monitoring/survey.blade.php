@@ -4,7 +4,7 @@
     <link href="{{ asset('admin/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet" />
     <link href="https://cdn.datatables.net/buttons/1.2.4/css/buttons.bootstrap4.css" rel="stylesheet" />
     <link href="https://cdn.datatables.net/select/1.3.1/css/select.dataTables.css" rel="stylesheet" type="text/css" />
-
+    <!-- TODO: FIX THE OVERFLOW-SCROLL (X) -->
     <style>
         .select2-container--bootstrap {
             border: 1px solid #d1d3e2 !important;
@@ -40,9 +40,10 @@
             overflow-x: scroll;
         }
 
-        div.dataTables_wrapper>.row:first-child * {
-            overflow-x: scroll;
-        }
+        /*
+            div.dataTables_wrapper>.row:first-child * {
+                overflow-x: scroll;
+            } */
 
         .visibility-btn>span {
             display: flex;
@@ -75,7 +76,8 @@
                     <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
                         <div class="row">
                             <div class="col-sm-12">
-                                <table id="datatable" class="table table-bordered" width="100%" cellspacing="0">
+                                <table id="datatable" class="table table-bordered"
+                                    style="width: 100%;border-spacing:0;border-collapse:collapse;">
                                     <thead>
                                         <tr>
                                             <th></th>
@@ -130,15 +132,14 @@
                         </div>
                         <div class="col-md-12 mb-3">
                             <label for="basicFullname" class="form-label">Tanggal Dokumen:</label>
-                            <input type="date" id="tanggal_dokumen" class="form-control" name="tanggal_dokumen"
-                                placeholder="" required>
+                            <input type="date" id="tanggal_dokumen" class="form-control" name="tanggal_dokumen" required>
                             <div class="invalid-feedback">
                             </div>
                         </div>
 
                         <div class="col-sm-12 mb-3">
                             <label for="basicFullname" class="form-label">Instansi :</label>
-                            <select type="text" id="agency_id" class="form-control" name="agency_id">
+                            <select id="agency_id" class="form-control" name="agency_id">
                                 <option value="">-</option>
                                 @foreach ($refAgency as $ref)
                                     <option value="{{ $ref->id }}">{{ $ref->name }}</option>
@@ -149,7 +150,7 @@
                         </div>
                         <div class="col-sm-12 mb-3">
                             <label for="basicFullname" class="form-label">Publik Aksess :</label>
-                            <select type="text" id="public" class="form-control" name="public">
+                            <select id="public" class="form-control" name="public">
                                 <option value="">-</option>
                                 <option value="Y">Tampilkan</option>
                                 <option value="N">Tutup</option>
