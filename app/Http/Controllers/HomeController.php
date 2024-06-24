@@ -68,6 +68,10 @@ class HomeController extends Controller
     {
         return $this->menus('layanan', $slug2, $slug3);
     }
+    public function informasi($slug2 = null, $slug3 = null)
+    {
+        return $this->menus('informasi', $slug2, $slug3);
+    }
 
     public function menus($slug1 = null, $slug2 = null, $slug3 = null)
     {
