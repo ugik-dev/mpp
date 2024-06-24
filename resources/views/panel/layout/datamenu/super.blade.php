@@ -21,24 +21,25 @@ $menus = [
         'dropdown' => false,
     ],
     [
-        'label' => 'e-Survey / SKM',
-        'url' => route('panel.monitoring.survey'),
-        'dropdown' => false,
-    ],
-    [
-        'label' => 'e-Survey KPK',
-        'url' => route('panel.monitoring.survey-kpk'),
-        'dropdown' => false,
-    ],
-    [
-        'label' => 'e-Pengaduan',
-        'url' => route('panel.monitoring.pengaduan'),
-        'dropdown' => false,
-    ],
-    [
-        'label' => 'Pengaduan',
-        'url' => route('panel.monitoring.pengaduan'),
-        'dropdown' => false,
+        'label' => 'Monitoring',
+        'dropdown' => true,
+        'children' => [
+            [
+                'label' => 'e-Survey / SKM',
+                'url' => route('panel.monitoring.survey'),
+                'dropdown' => false,
+            ],
+            [
+                'label' => 'e-Survey KPK',
+                'url' => route('panel.monitoring.survey-kpk'),
+                'dropdown' => false,
+            ],
+            [
+                'label' => 'e-Pengaduan',
+                'url' => route('panel.monitoring.pengaduan'),
+                'dropdown' => false,
+            ],
+        ],
     ],
     [
         'label' => 'Galeri',
@@ -60,11 +61,11 @@ $menus = [
             ['label' => 'Patner dan Banner', 'url' => route('manage.patner.index')],
         ],
     ],
-    // [
-    //     'label' => 'Pengaturan',
-    //     'dropdown' => true,
-    //     'children' => [['label' => 'Instansi', 'url' => route('manage.agency.index')], ['label' => 'Hero2', 'url' => route('manage.hero.index')], ['label' => 'Hero3', 'url' => route('manage.hero.index')]],
-    // ],
+    [
+        'label' => 'Pengaturan',
+        'dropdown' => true,
+        'children' => [['label' => 'Instansi', 'url' => route('manage.agency.index')], ['label' => 'Hero2', 'url' => route('manage.hero.index')], ['label' => 'Hero3', 'url' => route('manage.hero.index')]],
+    ],
 ];
 ?>
 @include('panel.layout.datamenu.index')
