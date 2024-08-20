@@ -14,17 +14,15 @@
 $app = new Illuminate\Foundation\Application(
     $_ENV['APP_BASE_PATH'] ?? dirname(__DIR__)
 );
-
 // Determine the application environment
-$env = $app->detectEnvironment(function () {
-    return getenv('APP_ENV') ?: 'production'; // Use getenv() to retrieve environment variables
-});
+$env = getenv('APP_ENV') !== 'local' ? getenv('APP_ENV') : 'production';
 
 
 // Conditionally set the public path based on the environment
 if ($env === 'production') {
     $app->usePublicPath($app->basePath('../public_html'));
 }
+
 /*
 |--------------------------------------------------------------------------
 | Bind Important Interfaces
