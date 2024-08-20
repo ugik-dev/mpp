@@ -1,4 +1,4 @@
-@extends('panel/layout/homeLayout');
+@extends('panel/layout/homeLayout')
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
@@ -8,7 +8,7 @@
                         <!-- Nested Row within Card Body -->
                         <div class="row">
                             <div class="col-lg-6 d-none d-lg-block bg-login-image"
-                                style="background-image: url({{ asset('assets/image/logo.PNG') }}) ;;background-repeat:no-repeat; background-position: center center !important;">
+                                style="background-image: url({{ asset('assets/image/logo.PNG') }}); background-repeat:no-repeat; background-position: center center !important;">
                             </div>
                             <div class="col-lg-6">
                                 <div class="p-5">
