@@ -1,0 +1,425 @@
+#
+# Apache/PHP/Drupal settings:
+#
+
+# Protect files and directories from prying eyes.
+<FilesMatch "\.(engine|inc|info|install|make|module|profile|test|po|sh|.*sql|theme|tpl(\.php)?|xtmpl)(~|\.sw[op]|\.bak|\.orig|\.save)?$|^(\.(?!well-known).*|Entries.*|Repository|Root|Tag|Template|composer\.(json|lock))$|^#.*#$|\.php(~|\.sw[op]|\.bak|\.orig\.save)$">
+  <IfModule mod_authz_core.c>
+    Require all denied
+  </IfModule>
+  <IfModule !mod_authz_core.c>
+    Order allow,deny
+  </IfModule>
+</FilesMatch>
+
+# Don't show directory listings for URLs which map to a directory.
+Options -Indexes
+
+# Follow symbolic links in this directory.
+Options +FollowSymLinks
+
+# Make Drupal handle any 404 errors.
+ErrorDocument 404 /index.php
+
+# Set the default handler.
+DirectoryIndex index.php index.html index.htm
+
+# Override PHP settings that cannot be changed at runtime. See
+# sites/default/default.settings.php and drupal_environment_initialize() in
+# includes/bootstrap.inc for settings that can be changed at runtime.
+
+# PHP 5, Apache 1 and 2.
+<IfModule mod_php5.c>
+  php_flag magic_quotes_gpc                 off
+  php_flag magic_quotes_sybase              off
+  php_flag register_globals                 off
+  php_flag session.auto_start               off
+  php_value mbstring.http_input             pass
+  php_value mbstring.http_output            pass
+  php_flag mbstring.encoding_translation    off
+</IfModule>
+
+# Requires mod_expires to be enabled.
+<IfModule mod_expires.c>
+  # Enable expirations.
+  ExpiresActive On
+
+  # Cache all files for 2 weeks after access (A).
+  ExpiresDefault A1209600
+
+  <FilesMatch \.php$>
+    # Do not allow PHP scripts to be cached unless they explicitly send cache
+    # headers themselves. Otherwise all scripts would have to overwrite the
+    # headers set by mod_expires if they want another caching behavior. This may
+    # fail if an error occurs early in the bootstrap process, and it may cause
+    # problems if a non-Drupal PHP file is installed in a subdirectory.
+    ExpiresActive Off
+  </FilesMatch>
+</IfModule>
+
+# Various rewrite rules.
+<IfModule mod_rewrite.c>
+  RewriteEngine on
+
+  # Set "protossl" to "s" if we were accessed via https://.  This is used later
+  # if you enable "www." stripping or enforcement, in order to ensure that
+  # you don't bounce between http and https.
+  RewriteRule ^ - [E=protossl]
+  RewriteCond %{HTTPS} on
+  RewriteRule ^ - [E=protossl:s]
+
+  # Make sure Authorization HTTP header is available to PHP
+  # even when running as CGI or FastCGI.
+  RewriteRule ^ - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+  # Block access to "hidden" directories whose names begin with a period. This
+  # includes directories used by version control systems such as Subversion or
+  # Git to store control files. Files whose names begin with a period, as well
+  # as the control files used by CVS, are protected by the FilesMatch directive
+  # above.
+  #
+  # NOTE: This only works when mod_rewrite is loaded. Without mod_rewrite, it is
+  # not possible to block access to entire directories from .htaccess, because
+  # <DirectoryMatch> is not allowed here.
+  #
+  # If you do not have mod_rewrite installed, you should remove these
+  # directories from your webroot or otherwise protect them from being
+  # downloaded.
+  RewriteRule "/\.|^\.(?!well-known/)" - [F]
+
+  # If your site can be accessed both with and without the 'www.' prefix, you
+  # can use one of the following settings to redirect users to your preferred
+  # URL, either WITH or WITHOUT the 'www.' prefix. Choose ONLY one option:
+  #
+  # To redirect all users to access the site WITH the 'www.' prefix,
+  # (http://example.com/... will be redirected to http://www.example.com/...)
+  # uncomment the following:
+  # RewriteCond %{HTTP_HOST} .
+  # RewriteCond %{HTTP_HOST} !^www\. [NC]
+  # RewriteRule ^ http%{ENV:protossl}://www.%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+  #
+  # To redirect all users to access the site WITHOUT the 'www.' prefix,
+  # (http://www.example.com/... will be redirected to http://example.com/...)
+  # uncomment the following:
+  # RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+  # RewriteRule ^ http%{ENV:protossl}://%1%{REQUEST_URI} [L,R=301]
+
+  # Modify the RewriteBase if you are using Drupal in a subdirectory or in a
+  # VirtualDocumentRoot and the rewrite rules are not working properly.
+  # For example if your site is at http://example.com/drupal uncomment and
+  # modify the following line:
+  # RewriteBase /drupal
+  #
+  # If your site is running in a VirtualDocumentRoot at http://example.com/,
+  # uncomment the following line:
+  # RewriteBase /
+
+  # Pass all requests not referring directly to files in the filesystem to
+  # index.php. Clean URLs are handled in drupal_environment_initialize().
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_URI} !=/favicon.ico
+  RewriteRule ^ index.php [L]
+
+  # Rules to correctly serve gzip compressed CSS and JS files.
+  # Requires both mod_rewrite and mod_headers to be enabled.
+  <IfModule mod_headers.c>
+    # Serve gzip compressed CSS files if they exist and the client accepts gzip.
+    RewriteCond %{HTTP:Accept-encoding} gzip
+    RewriteCond %{REQUEST_FILENAME}\.gz -s
+    RewriteRule ^(.*)\.css $1\.css\.gz [QSA]
+
+    # Serve gzip compressed JS files if they exist and the client accepts gzip.
+    RewriteCond %{HTTP:Accept-encoding} gzip
+    RewriteCond %{REQUEST_FILENAME}\.gz -s
+    RewriteRule ^(.*)\.js $1\.js\.gz [QSA]
+
+    # Serve correct content types, and prevent mod_deflate double gzip.
+    RewriteRule \.css\.gz$ - [T=text/css,E=no-gzip:1]
+    RewriteRule \.js\.gz$ - [T=text/javascript,E=no-gzip:1]
+
+    <FilesMatch "(\.js\.gz|\.css\.gz)$">
+      # Serve correct encoding type.
+      Header set Content-Encoding gzip
+      # Force proxies to cache gzipped & non-gzipped css/js files separately.
+      Header append Vary Accept-Encoding
+    </FilesMatch>
+  </IfModule>
+</IfModule>
+
+# Add headers to all responses.
+<IfModule mod_headers.c>
+  # Disable content sniffing, since it's an attack vector.
+  Header always set X-Content-Type-Options nosniff
+</IfModule>
+
+RewriteCond %{HTTP_REFERER} !^http://bappeda.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://bappeda.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://bkd.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://bkd.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://bp2rd.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://bp2rd.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://dekranasda.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://dekranasda.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://dinkes.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://dinkes.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://dinparpora.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://dinparpora.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://dinpmp2kukm.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://dinpmp2kukm.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://dp2kbp3a.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://dp2kbp3a.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://dukcapil.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://dukcapil.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://hibahbansos.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://hibahbansos.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://infocorona.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://infocorona.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://jdih.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://jdih.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://kencana.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://kencana.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://nakkeswan.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://nakkeswan.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://nyube.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://nyube.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://pangan.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://pangan.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://pkk.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://pkk.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://rebo-village.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://rebo-village.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://sehati.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://sehati.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://sidikjari.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://sidikjari.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://sidora.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://sidora.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://sipoter.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://sipoter.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://sipu.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://sipu.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://siresticikar.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://siresticikar.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://siurat.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://siurat.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://smartcity.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://smartcity.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://smata.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://smata.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://spgdt.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://spgdt.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://www.bappeda.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://www.bappeda.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://www.bkd.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://www.bkd.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://www.bp2rd.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://www.bp2rd.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://www.dekranasda.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://www.dekranasda.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://www.dinkes.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://www.dinkes.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://www.dinparpora.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://www.dinparpora.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://www.dinpmp2kukm.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://www.dinpmp2kukm.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://www.dp2kbp3a.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://www.dp2kbp3a.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://www.dukcapil.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://www.dukcapil.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://www.hibahbansos.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://www.hibahbansos.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://www.infocorona.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://www.infocorona.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://www.jdih.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://www.jdih.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://www.kencana.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://www.kencana.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://www.nakkeswan.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://www.nakkeswan.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://www.nyube.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://www.nyube.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://www.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://www.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://www.pangan.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://www.pangan.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://www.pkk.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://www.pkk.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://www.rebo-village.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://www.rebo-village.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://www.sehati.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://www.sehati.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://www.sidikjari.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://www.sidikjari.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://www.sidora.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://www.sidora.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://www.sipoter.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://www.sipoter.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://www.sipu.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://www.sipu.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://www.siresticikar.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://www.siresticikar.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://www.siurat.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://www.siurat.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://www.smartcity.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://www.smartcity.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://www.smata.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://www.smata.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://www.spgdt.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://www.spgdt.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://bappeda.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://bappeda.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://bkd.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://bkd.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://bp2rd.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://bp2rd.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://dekranasda.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://dekranasda.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://dinkes.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://dinkes.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://dinparpora.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://dinparpora.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://dinpmp2kukm.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://dinpmp2kukm.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://dp2kbp3a.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://dp2kbp3a.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://dukcapil.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://dukcapil.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://hibahbansos.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://hibahbansos.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://infocorona.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://infocorona.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://jdih.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://jdih.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://kencana.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://kencana.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://nakkeswan.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://nakkeswan.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://nyube.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://nyube.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://pangan.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://pangan.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://pkk.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://pkk.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://rebo-village.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://rebo-village.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://sehati.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://sehati.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://sidikjari.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://sidikjari.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://sidora.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://sidora.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://sipoter.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://sipoter.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://sipu.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://sipu.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://siresticikar.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://siresticikar.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://siurat.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://siurat.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://smartcity.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://smartcity.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://smata.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://smata.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://spgdt.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://spgdt.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://www.bappeda.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://www.bappeda.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://www.bkd.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://www.bkd.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://www.bp2rd.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://www.bp2rd.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://www.dekranasda.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://www.dekranasda.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://www.dinkes.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://www.dinkes.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://www.dinparpora.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://www.dinparpora.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://www.dinpmp2kukm.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://www.dinpmp2kukm.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://www.dp2kbp3a.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://www.dp2kbp3a.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://www.dukcapil.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://www.dukcapil.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://www.hibahbansos.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://www.hibahbansos.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://www.infocorona.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://www.infocorona.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://www.jdih.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://www.jdih.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://www.kencana.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://www.kencana.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://www.nakkeswan.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://www.nakkeswan.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://www.nyube.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://www.nyube.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://www.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://www.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://www.pangan.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://www.pangan.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://www.pkk.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://www.pkk.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://www.rebo-village.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://www.rebo-village.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://www.sehati.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://www.sehati.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://www.sidikjari.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://www.sidikjari.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://www.sidora.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://www.sidora.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://www.sipoter.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://www.sipoter.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://www.sipu.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://www.sipu.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://www.siresticikar.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://www.siresticikar.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://www.siurat.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://www.siurat.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://www.smartcity.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://www.smartcity.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://www.smata.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://www.smata.bangka.go.id$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://www.spgdt.bangka.go.id/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://www.spgdt.bangka.go.id$      [NC]
+RewriteRule .*\.(jpg|jpeg|gif|png|bmp)$ - [F,NC]
+
+# BEGIN cPanel-generated php ini directives, do not edit
+# Manual editing of this file may result in unexpected behavior.
+# To make changes to this file, use the cPanel MultiPHP INI Editor (Home >> Software >> MultiPHP INI Editor)
+# For more information, read our documentation (https://go.cpanel.net/EA4ModifyINI)
+<IfModule php7_module>
+   php_flag display_errors Off
+   php_value max_execution_time 180
+   php_value max_input_time 180
+   php_value max_input_vars 1000
+   php_value memory_limit 128M
+   php_value post_max_size 300M
+   php_value session.gc_maxlifetime 1440
+   php_value session.save_path "/var/cpanel/php/sessions/ea-php72"
+   php_value upload_max_filesize 250M
+   php_flag zlib.output_compression Off
+</IfModule>
+<IfModule lsapi_module>
+   php_flag display_errors Off
+   php_value max_execution_time 180
+   php_value max_input_time 180
+   php_value max_input_vars 1000
+   php_value memory_limit 128M
+   php_value post_max_size 300M
+   php_value session.gc_maxlifetime 1440
+   php_value session.save_path "/var/cpanel/php/sessions/ea-php72"
+   php_value upload_max_filesize 250M
+   php_flag zlib.output_compression Off
+</IfModule>
+# END cPanel-generated php ini directives, do not edit
+
+# php -- BEGIN cPanel-generated handler, do not edit
+# Set the “ea-php83” package as the default “PHP” programming language.
+<IfModule mime_module>
+  AddHandler application/x-httpd-ea-php83 .php .php8 .phtml
+</IfModule>
+# php -- END cPanel-generated handler, do not edit

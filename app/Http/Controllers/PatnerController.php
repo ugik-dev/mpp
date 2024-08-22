@@ -82,6 +82,7 @@ class PatnerController extends Controller
                     $data->save();
 
                     $destinationPath = public_path('upload/images');
+                    dd($destinationPath);
                     if (!file_exists($destinationPath)) {
                         mkdir($destinationPath, 0755, true);
                     }
@@ -156,6 +157,8 @@ class PatnerController extends Controller
                 $data->image = $originalImage;
 
                 $destinationPath = public_path('upload/images');
+                dd($destinationPath);
+
                 if (!file_exists($destinationPath)) {
                     mkdir($destinationPath, 0755, true);
                 }
